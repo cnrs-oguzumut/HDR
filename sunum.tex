@@ -445,11 +445,11 @@
     
     % --- Custom TikZ Infographic for Deformation ---
     \begin{center}
-        \begin{tikzpicture}[>=stealth]
+        \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape}]
             % Reference configuration
             \draw[fill=AcademicNavy!5, draw=AcademicNavy, thick] (0,0) rectangle (2,2);
-            \node at (1,1) {$X$};
-            \node[font=\footnotesize, AcademicNavy] at (1,-0.4) {$I$};
+            \node at (1,1) {$\mathbf{X}$};
+            \node[font=\footnotesize, AcademicNavy] at (1,-0.4) {$\mathbf{I}$};
             
             % Mapping Arrow
             \draw[->, thick, AcademicNavy] (2.8,1) -- (4.2,1);
@@ -457,38 +457,37 @@
             % Deformed configuration
             \begin{scope}[shift={(5.0,0.2)}]
                 \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0.5) (1,0) (2.5,0.5) (2.8,1.5) (1.5,2.2) (0.2,1.5)};
-                \node at (1.4,1.1) {$Y(X)$};
-                \node[font=\footnotesize, SecondaryTitle] at (1.4,-0.6) {$F$};
+                \node at (1.4,1.1) {$\mathbf{Y}(\mathbf{X})$};
+                \node[font=\footnotesize, SecondaryTitle] at (1.4,-0.6) {$\mathbf{F}$};
             \end{scope}
         \end{tikzpicture}
     \end{center}
     
-    \vspace{0.2cm}
+    \vspace{-0.2cm}
     
     % --- Equations and Text ---
+    \small
     \begin{itemize}
         \item \textbf{\color{AcademicNavy} Deformed state:}
         \begin{itemize}
-            \normalsize
-            \item Displacement field: \hspace{0.5cm} $u(X) = Y(X) - X$
-            \item Deformation gradient: \hspace{0.25cm} $F = \nabla Y$
+            \item Displacement field: \hspace{0.5cm} $\mathbf{u}(\mathbf{X}) = \mathbf{Y}(\mathbf{X}) - \mathbf{X}$
+            \item Deformation gradient: \hspace{0.25cm} $\mathbf{F} = \nabla \mathbf{Y}$
         \end{itemize}
         
-        \vspace{0.4cm}
+        \vspace{0.2cm}
         \item \textbf{\color{AcademicNavy} Strain energy defined in terms of strain tensor:}
         \vspace{-0.1cm}
         \begin{itemize}
-            \normalsize
             \item Geometrically nonlinear strain tensor:
-            \vspace{-0.2cm}
+            \vspace{-0.15cm}
             \begin{equation*}
-                \epsilon_{ij}^{NL} = \frac{1}{2}(F^T F - I) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \sum_k \frac{\partial u_k}{\partial x_i} \frac{\partial u_k}{\partial x_j} \right)
+                \epsilon_{ij}^{NL} = \frac{1}{2}(\mathbf{F}^T \mathbf{F} - \mathbf{I}) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \sum_k \frac{\partial u_k}{\partial x_i} \frac{\partial u_k}{\partial x_j} \right)
             \end{equation*}
-            \vspace{-0.2cm}
+            \vspace{-0.3cm}
             \item Geometrically linear strain tensor:
-            \vspace{-0.2cm}
+            \vspace{-0.15cm}
             \begin{equation*}
-                \epsilon_{ij}^{L} = \frac{1}{2}(F^T + F - 2I) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)
+                \epsilon_{ij}^{L} = \frac{1}{2}(\mathbf{F}^T + \mathbf{F} - 2\mathbf{I}) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)
             \end{equation*}
         \end{itemize}
     \end{itemize}
