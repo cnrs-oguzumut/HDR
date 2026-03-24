@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} 
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
 \setbeamercolor{titlelike}{fg=AcademicNavy}
@@ -109,28 +110,53 @@
 % Slide 3
 \begin{frame}{Non-linear phenomena}
     \vspace{-0.2cm}
-    % --- TOP ROW: Crystals ---
-    \begin{block}{Crystals}
-        \begin{columns}[c]
-            \column{0.48\textwidth}
-                \centering\includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/crystal.pdf}
-            \column{0.48\textwidth}
-                \centering\includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/amorphous.pdf}
+    % --- TOP ROW: Crystals & Transitions ---
+    \begin{block}{Crystal Transitions and Disorder}
+        \begin{columns}[c, onlytextwidth]
+            % Left Column: Crystalline
+            \begin{column}{0.32\textwidth}
+                \centering
+                \textbf{\small Crystalline}\\[0.1cm]
+                \includegraphics[width=\textwidth,height=2.8cm,keepaspectratio]{Figures/crystal.pdf}
+            \end{column}
+
+            % Middle Column: Arrows and Labels
+            \begin{column}{0.32\textwidth}
+                \centering
+                {\tiny \textbf{Stronger disorder}}\\[-0.1cm]
+                \begin{tikzpicture}
+                    \draw[AcademicNavy, ultra thick, -{Stealth[scale=1.5]}] (0,0) -- (1.5,0);
+                \end{tikzpicture}
+                \\[0.2cm]
+                \begin{tikzpicture}
+                    \draw[AcademicNavy, ultra thick, {Stealth[scale=1.5]}-] (0,0) -- (1.5,0);
+                \end{tikzpicture}
+                \\[-0.1cm]
+                {\tiny \textbf{Weak disorder}}
+            \end{column}
+
+            % Right Column: Amorphous
+            \begin{column}{0.32\textwidth}
+                \centering
+                \textbf{\small Amorphous}\\[0.1cm]
+                \includegraphics[width=\textwidth,height=2.8cm,keepaspectratio]{Figures/amorphous.pdf}
+            \end{column}
         \end{columns}
     \end{block}
 
-    \vspace{0.4cm}
+    \vspace{0.2cm}
 
     % --- BOTTOM ROW: Meta-materials ---
     \begin{block}{Meta-materials}
-        \begin{columns}[c]
+        \begin{columns}[c, onlytextwidth]
             \column{0.48\textwidth}
                 \centering\includegraphics[width=\textwidth,height=1.5cm,keepaspectratio]{Figures/Page3_Fig1.png}
             \column{0.48\textwidth}
-                \centering\includegraphics[width=\textwidth,height=2.2cm,keepaspectratio]{Figures/Page5_Fig1.png}
+                \centering\includegraphics[width=\textwidth,height=2.0cm,keepaspectratio]{Figures/Page5_Fig1.png}
         \end{columns}
     \end{block}
 \end{frame}
+
 
 
 
