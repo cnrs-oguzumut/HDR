@@ -494,4 +494,61 @@
     \end{itemize}
 \end{frame}
 
+% Slide 13: Geometrically Nonlinear and Linear Elasticity
+\begin{frame}{Modeling: geometrically nonlinear and linear elasticity}
+    
+    % --- Custom TikZ Infographic ---
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.85, every node/.style={transform shape}]
+            % Reference configuration
+            \draw[fill=AcademicNavy!5, draw=AcademicNavy, thick] (0, -0.5) rectangle (2, 1.5);
+            \node at (1, 0.5) {$\mathbf{I}$};
+            
+            % Top Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.3, 0.8) -- (3.8, 1.8);
+            
+            % Top Deformed configuration F
+            \begin{scope}[shift={(4.5, 1.3)}]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0) (1,-0.5) (2.5,-0.2) (2.8,1) (1.5,1.2) (0.2,0.8)};
+                \node at (1.4, 0.4) {$\mathbf{F}$};
+            \end{scope}
+
+            % Bottom Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.3, 0.2) -- (3.8, -0.8);
+            
+            % Bottom Deformed configuration RF (rotated)
+            \begin{scope}[shift={(5.2, -1.0)}, rotate=-45]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0) (1,-0.5) (2.5,-0.2) (2.8,1) (1.5,1.2) (0.2,0.8)};
+                \node[rotate=45] at (1.4, 0.4) {$\mathbf{R}\mathbf{F}$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.4cm}
+    
+    % --- Equations and Text ---
+    \begin{itemize}
+        \item nonlinear:
+        \vspace{-0.2cm}
+        \begin{equation*}
+            \epsilon_{ij}^{NL} = \frac{1}{2} \left[ (\mathbf{R}\mathbf{F})^T (\mathbf{R}\mathbf{F}) - \mathbf{I} \right] = \frac{1}{2} (\mathbf{F}^T \mathbf{F} - \mathbf{I})
+        \end{equation*}
+        
+        \vspace{-0.2cm}
+        \item linear:
+        \vspace{-0.2cm}
+        \begin{equation*}
+            \epsilon_{ij}^{L} = \frac{1}{2} \left[ (\mathbf{R}\mathbf{F})^T + (\mathbf{R}\mathbf{F}) - 2\mathbf{I} \right] \neq \frac{1}{2} (\mathbf{F}^T + \mathbf{F} - 2\mathbf{I})
+        \end{equation*}
+        
+        \vspace{-0.1cm}
+        \item Strain energy defined in terms of $\epsilon_{ij}^{NL}$ or $\epsilon_{ij}^{L}$ strain tensor
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \begin{center}
+        {\large \color{SecondaryTitle} $\rightarrow$} \textbf{\large In linear modeling, energy is not invariant under rotation!!!}
+    \end{center}
+\end{frame}
+
 \end{document}
