@@ -8,7 +8,7 @@
 \usepackage{booktabs} 
 \usepackage{tikz}
 \usepackage{amsmath, amssymb, mathtools}
-\usepackage{multimedia} % Added for mp4 video embedding
+\usepackage{animate} % Added for native sequence animations
 \usetikzlibrary{arrows.meta}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
@@ -622,12 +622,10 @@
 \begin{frame}{Phase Field Evolution Simulation}
     \begin{center}
         \vspace{0.2cm}
-        % Beamer built-in multimedia video player
-        \movie[width=12cm, height=6.75cm, poster, showcontrols]{}{n400_compressed.mp4}
+        \animategraphics[autoplay,loop,width=10.5cm]{3}{fps_frames/frame_}{001}{243}
         
         \vspace{0.4cm}
-        % Failsafe fallback 
-        {\footnotesize \color{gray} \href{n400_compressed.mp4}{(If video does not play automatically, click here to open in external player)}}
+        {\footnotesize \color{gray} \textit{(Requires Adobe Acrobat Reader or Okular to animate)}}
     \end{center}
 \end{frame}
 
