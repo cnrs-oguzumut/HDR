@@ -14,6 +14,16 @@
 \setbeamercolor{structure}{fg=AcademicNavy}
 \setbeamercolor{block title}{fg=SecondaryTitle}
 
+% --- Footer & Page Numbering ---
+\setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+\setbeamerfont{footline}{size=\fontsize{6}{7}\selectfont}
+\setbeamercolor{footline}{fg=AcademicNavy!60}
+\setbeamertemplate{footline}{
+    \hfill
+    \insertframenumber / \inserttotalframenumber
+    \hspace{0.5cm}\vspace{0.1cm}
+}
+
 % --- Custom Title Page Design ---
 \setbeamertemplate{title page}{
     \vspace*{0.5cm}
