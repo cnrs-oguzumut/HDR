@@ -68,7 +68,7 @@
         \begin{column}{0.48\textwidth}
             {\tiny \color{AcademicNavy}\textbf{Examinateurs}\\[0.1cm]
             \begin{tabular}{@{}p{3.0cm} l@{}}
-                Mme Véronique LAZARUS & \textit{Professeures, ENSTA Paris} \\
+                Mme Véronique LAZARUS & \textit{Professure, ENSTA Paris} \\
                 M. Nicolas AUFFRAY & \textit{Professeur, Sorbonne Université} \\
                 M. Denis GRATIAS & \textit{DR émérite CNRS, IRCP} \\
                 M. Damien FAURIE & \textit{Professeur, USPN} \\
@@ -324,46 +324,45 @@
     {\centering \fontsize{5}{6}\selectfont \textit{Bridging the gap between material design and structural performance.}\par}
 \end{frame}
 
-% Slide 10: Landau Theory of Phase Transitions (NEW LAST POSITION)
+% Slide 10: Landau Theory of Phase Transitions
 \begin{frame}{Landau Theory of Phase Transitions}
-    \vspace{0.5cm}
-    \vspace{0.1cm}
-    % --- TOP ROW ---
-    \begin{columns}[c, onlytextwidth]
+    \vspace{0.2cm}
+    \begin{columns}[T, onlytextwidth]
+        % --- Left Column: Figures and Bullets ---
         \begin{column}{0.48\textwidth}
             \centering
-            {\scriptsize \color{AcademicNavy} \textbf{Non-convex Energy Density}} \\[0.1cm]
-            \includegraphics[height=2.8cm,keepaspectratio]{Figures/doublewell.pdf}
+            {\scriptsize \color{red} \textbf{Double well potential}} \\[0.1cm]
+            \includegraphics[height=2.5cm,keepaspectratio]{Figures/doublewell.pdf}
+            
+            \vspace{0.4cm}
+            \raggedright
+            \begin{itemize}
+                \item {\tiny Landau theory consists of constructing a \textbf{mesoscopic} free energy respecting the symmetry of the physical system using an order parameter}
+                \item {\tiny The easiest polynomial reproducing equilibrium thermodynamics}
+                \item {\tiny Add the Ginzburg term to have a smooth interface}
+            \end{itemize}
         \end{column}
-        \hfill
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\scriptsize \color{AcademicNavy} \textbf{Phase Field Regularization}} \\[0.1cm]
-            \includegraphics[height=2.8cm,keepaspectratio]{Figures/pf.pdf}
-        \end{column}
-    \end{columns}
-    
-    \vspace{0.6cm}
 
-    % --- BOTTOM ROW ---
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\scriptsize \color{AcademicNavy} \textbf{Interface Kinetics}} \\[0.1cm]
-            \includegraphics[height=2.5cm,angle=90,keepaspectratio]{Figures/pf2.pdf}
-        \end{column}
         \hfill
+
+        % --- Right Column: Figures and Equations ---
         \begin{column}{0.48\textwidth}
             \centering
-            % Space reserved for equation
-            \vspace{2.6cm}
+            {\scriptsize \color{red} \textbf{Solid-liquid}} \\[0.1cm]
+            \includegraphics[height=1.8cm,keepaspectratio]{Figures/pf.pdf}
+            \\[0.1cm]
+            \includegraphics[height=1.8cm,angle=90,keepaspectratio]{Figures/pf2.pdf}
+            
+            \vspace{0.4cm}
+            {\small
+            \begin{equation*}
+                E = -\phi^2 + \phi^4 + \beta |\nabla \phi|^2 / 2
+            \end{equation*}
+            \begin{equation*}
+                \dot{\phi} = - \frac{\delta E(\phi, \nabla \phi)}{\delta \phi}
+            \end{equation*}}
         \end{column}
     \end{columns}
-    
-    \vfill
-    \begin{block}{Energy-based Modeling}
-        \centering \small \textit{Symmetry breaking and the emergence of microstructures.}
-    \end{block}
 \end{frame}
 
 \end{document}
