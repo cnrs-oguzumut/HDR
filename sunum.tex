@@ -389,7 +389,7 @@
     \vspace{0.2cm}
     \begin{columns}[T, onlytextwidth]
         % -- Phase Transitions --
-        \begin{column}{0.32\textwidth}
+        \begin{column}{0.31\textwidth}
             \begin{block}{Phase Transitions}
                 \scriptsize
                 \raggedright
@@ -402,20 +402,20 @@
         \end{column}
         
         % -- Fracture --
-        \begin{column}{0.32\textwidth}
+        \begin{column}{0.29\textwidth}
             \begin{block}{Fracture}
                 \scriptsize
                 \raggedright
                 \begin{itemize}
                     \item Francfort \& Marigo (1998) \textit{JMPS}
-                    \item Bourdin, Francfort \& Marigo (2000) \textit{JMPS}
+                    \item Bourdin et al. (2000) \textit{JMPS}
                     \item Miehe et al. (2010) \textit{IJNME}
                 \end{itemize}
             \end{block}
         \end{column}
         
         % -- Plasticity --
-        \begin{column}{0.32\textwidth}
+        \begin{column}{0.38\textwidth}
             \begin{block}{Plasticity \& Dislocations}
                 \scriptsize
                 \raggedright
@@ -438,6 +438,60 @@
         }}
         \endgroup
     \end{center}
+\end{frame}
+
+% Slide 12: Deformation Gradient and Strain Tensor
+\begin{frame}{Modeling: Deformation Gradient and Strain Tensor}
+    
+    % --- Custom TikZ Infographic for Deformation ---
+    \begin{center}
+        \begin{tikzpicture}[>=stealth]
+            % Reference configuration
+            \draw[fill=AcademicNavy!5, draw=AcademicNavy, thick] (0,0) rectangle (2,2);
+            \node at (1,1) {$X$};
+            \node[font=\footnotesize, AcademicNavy] at (1,-0.4) {$I$};
+            
+            % Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.8,1) -- (4.2,1);
+            
+            % Deformed configuration
+            \begin{scope}[shift={(5.0,0.2)}]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0.5) (1,0) (2.5,0.5) (2.8,1.5) (1.5,2.2) (0.2,1.5)};
+                \node at (1.4,1.1) {$Y(X)$};
+                \node[font=\footnotesize, SecondaryTitle] at (1.4,-0.6) {$F$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.2cm}
+    
+    % --- Equations and Text ---
+    \begin{itemize}
+        \item \textbf{\color{AcademicNavy} Deformed state:}
+        \begin{itemize}
+            \normalsize
+            \item Displacement field: \hspace{0.5cm} $u(X) = Y(X) - X$
+            \item Deformation gradient: \hspace{0.25cm} $F = \nabla Y$
+        \end{itemize}
+        
+        \vspace{0.4cm}
+        \item \textbf{\color{AcademicNavy} Strain energy defined in terms of strain tensor:}
+        \vspace{-0.1cm}
+        \begin{itemize}
+            \normalsize
+            \item Geometrically nonlinear strain tensor:
+            \vspace{-0.2cm}
+            \begin{equation*}
+                \epsilon_{ij}^{NL} = \frac{1}{2}(F^T F - I) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \sum_k \frac{\partial u_k}{\partial x_i} \frac{\partial u_k}{\partial x_j} \right)
+            \end{equation*}
+            \vspace{-0.2cm}
+            \item Geometrically linear strain tensor:
+            \vspace{-0.2cm}
+            \begin{equation*}
+                \epsilon_{ij}^{L} = \frac{1}{2}(F^T + F - 2I) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \end{document}
