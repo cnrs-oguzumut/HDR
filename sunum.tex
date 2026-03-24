@@ -8,6 +8,7 @@
 \usepackage{booktabs} 
 \usepackage{tikz}
 \usepackage{amsmath, amssymb, mathtools}
+\usepackage{multimedia} % Added for mp4 video embedding
 \usetikzlibrary{arrows.meta}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
@@ -615,7 +616,19 @@
         \textbf{\color{AcademicNavy} \small Deformation gradient:}\\[0.1cm]
         {\Large $\displaystyle \mathbf{F}_i = \mathbf{Q}_i \mathbf{U}_i$}
     \end{center}
-    
+\end{frame}
+
+% Slide 15: Phase Field Evolution Simulation
+\begin{frame}{Phase Field Evolution Simulation}
+    \begin{center}
+        \vspace{0.2cm}
+        % Beamer built-in multimedia video player
+        \movie[width=12cm, height=6.75cm, poster, showcontrols]{}{n400_compressed.mp4}
+        
+        \vspace{0.4cm}
+        % Failsafe fallback 
+        {\footnotesize \color{gray} \href{run:n400_compressed.mp4}{(If video does not play automatically, click here to open in external player)}}
+    \end{center}
 \end{frame}
 
 \end{document}
