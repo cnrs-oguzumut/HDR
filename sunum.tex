@@ -6,13 +6,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} 
 \usepackage{tikz}
+\usepackage{amsmath, amssymb, mathtools}
 \usetikzlibrary{arrows.meta}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
-\definecolor{SecondaryTitle}{RGB}{102, 51, 0} % Nice professional brown/gold
+\definecolor{SecondaryTitle}{RGB}{153, 0, 0} % Professional Dark Red
 \setbeamercolor{titlelike}{fg=AcademicNavy}
 \setbeamercolor{structure}{fg=AcademicNavy}
 \setbeamercolor{block title}{fg=SecondaryTitle}
+
+% --- Font Settings ---
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
 
 % --- Footer & Page Numbering ---
 \setbeamertemplate{navigation symbols}{} % Remove navigation symbols
@@ -23,6 +28,7 @@
     \insertframenumber / \inserttotalframenumber
     \hspace{0.5cm}\vspace{0.1cm}
 }
+\setbeamertemplate{itemize items}[circle] % Unify bullet points globally
 
 % --- Custom Title Page Design ---
 \setbeamertemplate{title page}{
@@ -142,11 +148,11 @@
             \column{0.48\textwidth}
                 \centering 
                 {\scriptsize \color{AcademicNavy} \textbf{spring-chain}} \\[0.2cm]
-                \includegraphics[width=\textwidth,height=1.5cm,keepaspectratio]{Figures/Page3_Fig1.png}
+                \includegraphics[width=\textwidth,height=2.2cm,keepaspectratio]{Figures/Page3_Fig1.png}
             \column{0.48\textwidth}
                 \centering
                 {\scriptsize \color{AcademicNavy} \textbf{spring-chain system embedded into a pantograph}} \\[0.2cm]
-                \includegraphics[width=\textwidth,height=2.0cm,keepaspectratio]{Figures/Page5_Fig1.png}
+                \includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/Page5_Fig1.png}
         \end{columns}
     \end{block}
 \end{frame}
@@ -168,6 +174,8 @@
         \end{itemize}
     \end{block}
 
+    \vfill
+    {\centering\color{AcademicNavy!30}\rule{0.6\textwidth}{0.4pt}\par}
     \vfill
 
     \begin{center}
@@ -326,16 +334,15 @@
 
 % Slide 10: Landau Theory of Phase Transitions
 \begin{frame}{Landau Theory of Phase Transitions}
-    \setbeamertemplate{itemize item}{$\bullet$} % Force circular bullets
-    \vspace{0.1cm}
+    \vspace{-0.1cm}
     \begin{columns}[T, onlytextwidth]
         % --- Left Column: Figures and Bullets ---
         \begin{column}{0.45\textwidth}
             \centering
-            {\scriptsize \color{red} \textbf{Double well potential}} \\[0.1cm]
-            \includegraphics[height=1.8cm,keepaspectratio]{Figures/doublewell.pdf}
-            
-            \vspace{0.3cm}
+            {\scriptsize \color{AcademicNavy} \textbf{Double well potential}} \\[0.1cm]
+            \includegraphics[height=1.6cm,keepaspectratio]{Figures/doublewell.pdf}
+
+            \vspace{0.2cm}
             \raggedright
             \begin{itemize}
                 \item {\small Landau theory consists of constructing a \textbf{mesoscopic} free energy respecting symmetry using an order parameter.}
@@ -346,27 +353,91 @@
 
         \hfill
 
-        % --- Right Column: Figures and Equations ---
+        % --- Right Column: Figures side by side + Equations below ---
         \begin{column}{0.52\textwidth}
             \centering
-            {\scriptsize \color{red} \textbf{Solid-liquid}} \\[0.1cm]
-            \includegraphics[width=0.85\textwidth,height=2.0cm,keepaspectratio]{Figures/pf.pdf}
-            \\[0.1cm]
-            \includegraphics[width=0.9\textwidth,height=1.8cm,keepaspectratio]{Figures/pf2.pdf}
-            
+            {\scriptsize \color{AcademicNavy} \textbf{Solid-liquid}} \\[0.1cm]
+            \begin{columns}[c]
+                \begin{column}{0.42\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/pf.pdf}
+                \end{column}
+                \begin{column}{0.55\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth,height=3.0cm,keepaspectratio]{Figures/pf2.pdf}
+                \end{column}
+            \end{columns}
+
             \vspace{0.2cm}
-            \begin{block}{Phase Field Model}
+            \begingroup
+            \setlength{\fboxrule}{0.8pt}
+            \setlength{\fboxsep}{8pt}
+            \fcolorbox{AcademicNavy}{AcademicNavy!3}{\parbox{0.88\textwidth}{%
                 \centering
-                \small
-                \begin{equation*}
-                    E = -\phi^2 + \phi^4 + \beta |\nabla \phi|^2 / 2
-                \end{equation*}
-                \begin{equation*}
-                    \dot{\phi} = - \frac{\delta E(\phi, \nabla \phi)}{\delta \phi}
-                \end{equation*}
+                \textbf{\small\color{SecondaryTitle} Phase Field Equations}\\[0.15cm]
+                $\displaystyle E[\phi] = -\phi^2 + \phi^4 + \frac{\beta}{2}\,|\nabla \phi|^2$\\[0.25cm]
+                $\displaystyle \dot{\phi} = -\,\dfrac{\delta E}{\delta \phi}$
+                \vspace{0.05cm}
+            }}
+            \endgroup
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 11: Phase-Field Literature
+\begin{frame}{Phase-Field Models across Solid Mechanics}
+    \vspace{0.2cm}
+    \begin{columns}[T, onlytextwidth]
+        % -- Phase Transitions --
+        \begin{column}{0.32\textwidth}
+            \begin{block}{Phase Transitions}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Cahn \& Hilliard (1958) \textit{J. Chem. Phys.}
+                    \item Allen \& Cahn (1979) \textit{Acta Metall.}
+                    \item Wang \& Khachaturyan (1997) \textit{Acta Mater.} 
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        % -- Fracture --
+        \begin{column}{0.32\textwidth}
+            \begin{block}{Fracture}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Francfort \& Marigo (1998) \textit{JMPS}
+                    \item Bourdin, Francfort \& Marigo (2000) \textit{JMPS}
+                    \item Miehe et al. (2010) \textit{IJNME}
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        % -- Plasticity --
+        \begin{column}{0.32\textwidth}
+            \begin{block}{Plasticity \& Dislocations}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Wang et al. (2001) \textit{Acta Mater.}
+                    \item Koslowski, Cuitiño \& Ortiz (2002) \textit{JMPS}
+                    \item Levitas (2013) \textit{JMPS}
+                \end{itemize}
             \end{block}
         \end{column}
     \end{columns}
+    
+    \vspace{0.6cm}
+    \begin{center}
+        \begingroup
+        \setlength{\fboxrule}{0.8pt}
+        \setlength{\fboxsep}{8pt}
+        \fcolorbox{AcademicNavy}{AcademicNavy!3}{\parbox{0.85\textwidth}{%
+            \centering \small \color{AcademicNavy} \textit{The phase-field framework acts as a powerful unified mathematical tool for tracking moving internal boundaries across different physical mechanisms.}
+        }}
+        \endgroup
+    \end{center}
 \end{frame}
 
 \end{document}
