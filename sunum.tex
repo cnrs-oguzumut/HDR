@@ -1017,7 +1017,7 @@
     \end{center}
 \end{frame}
 
-% Slide 26: Numerical implementation
+% Slide 27: Numerical implementation
 \begin{frame}{Numerical implementation}
     \begin{columns}[c, onlytextwidth]
         % --- Left Column: Mesh and Stress ---
@@ -1102,7 +1102,101 @@
 \end{frame}
 
 
-% Slide 27: Numerical results: Dislocation dipole
+% Slide 28: Yield surface in perfect crystal under shear load
+\begin{frame}{Yield surface in perfect crystal under shear load}
+    \vspace{-0.3cm}
+    \begin{columns}[t, onlytextwidth]
+        \begin{column}{0.31\textwidth}
+            {\footnotesize \color{red!80!black} \textbf{Strain-energy density:}} \\
+            \vspace{0.1cm}
+            \colorbox{gray!20}{
+                \rule[-0.2cm]{0pt}{0.6cm} $\phi(\mathbf{C}) \equiv \phi_0(\tilde{\mathbf{C}})$
+            }
+        \end{column}
+        
+        \begin{column}{0.31\textwidth}
+            \centering
+            {\footnotesize \color{red!80!black} \textbf{Loading:}} \\
+            \vspace{0.1cm}
+            \colorbox{gray!20}{
+                \rule[-0.2cm]{0pt}{0.6cm} $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$
+            }
+        \end{column}
+        
+        \begin{column}{0.35\textwidth}
+            \raggedleft
+            {\footnotesize \color{gray} For incremental displacement} \\
+            {\large $\mathbf{u} = \boldsymbol{\eta} e^{i k \boldsymbol{\zeta} \cdot \mathbf{x}}$}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.4cm}
+    {\footnotesize \color{red!80!black} \textbf{Linearisation of the mechanical eq:}} \\
+    \vspace{0.1cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.35\textwidth}
+            \centering
+            \colorbox{gray!20}{
+                \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{A}_{piqj} u_{j,pq} = 0,$
+            } 
+        \end{column}
+        \begin{column}{0.1\textwidth}
+            \centering {\color{AcademicNavy} \Huge $\Rightarrow$}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \centering
+            \colorbox{gray!20}{
+                \rule[-0.4cm]{0pt}{1.0cm} \Large $[\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta} = 0,$
+            }
+        \end{column}
+    \end{columns}
+
+    \vspace{0.4cm}
+    \begin{columns}[t, onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            {\footnotesize \color{red!80!black} \textbf{Acoustic tensor:}} \\
+            \vspace{0.1cm}
+            \colorbox{gray!20}{
+                \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$
+            }
+        \end{column}
+        
+        \begin{column}{0.45\textwidth}
+            \raggedleft
+            {\footnotesize \color{red!80!black} \textbf{Solve:}} \\
+            \vspace{0.1cm}
+            \colorbox{gray!20}{
+                \rule[-0.4cm]{0pt}{1.0cm} \Large $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0.$
+            }
+            \\[0.1cm]
+            {\scriptsize $\boldsymbol{\zeta} = (\cos(\xi), \sin(\xi))$}
+        \end{column}
+    \end{columns}
+
+    \vfill
+    \begin{columns}[t, onlytextwidth]
+        \begin{column}{0.43\textwidth}
+            \colorbox{gray!20}{
+                \begin{minipage}{\textwidth}
+                    \tiny 
+                    $\mathcal{A}_{rsij} = m_{pk}m_{nl}(m_{ac}m_{bd}H_{klcd}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{pnij}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{abrs} + A_{kl}\left[\frac{\partial^2\mathbf{C}}{\partial\mathbf{F}\partial\mathbf{F}}\right]_{pnrsij})$
+                \end{minipage}
+            }
+        \end{column}
+        \hfill
+        \begin{column}{0.54\textwidth}
+            \colorbox{gray!20}{
+                \begin{minipage}{\textwidth}
+                    \tiny 
+                    $\mathbf{H} = \left[\frac{\partial^2\phi_0}{\partial\tilde{\mathbf{C}}\partial\tilde{\mathbf{C}}}\right] = \dots$ (Double-well potential Hessian)
+                \end{minipage}
+            }
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+% Slide 29: Numerical results: Dislocation dipole
 \begin{frame}{Numerical results: Dislocation dipole}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.55\textwidth}
@@ -1145,7 +1239,7 @@
     \end{columns}
 \end{frame}
 
-% Slide 28: Comparison with literature
+% Slide 30: Comparison with literature
 \begin{frame}{Numerical results: Comparison with literature}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.5\textwidth}
@@ -1180,21 +1274,21 @@
     \end{columns}
 \end{frame}
 
-% Slide 29: Numerical results: Shear banding and localization
+% Slide 31: Numerical results: Shear banding and localization
 \begin{frame}{Numerical results: Shear banding and localization}
     \begin{center}
         \includegraphics[width=0.85\textwidth, keepaspectratio]{Figures/Fig3.pdf}
     \end{center}
 \end{frame}
 
-% Slide 30: Numerical results: Stress-strain response
+% Slide 32: Numerical results: Stress-strain response
 \begin{frame}{Numerical results: Stress-strain response}
     \begin{center}
         \includegraphics[width=\textwidth, keepaspectratio]{Figures/Fig4.pdf}
     \end{center}
 \end{frame}
 
-% Slide 31: Critical exponents and finite size scaling
+% Slide 33: Critical exponents and finite size scaling
 \begin{frame}{Critical exponents and finite size scaling}
     \begin{columns}[c]
         % --- Left: Figures Grid ---
@@ -1239,7 +1333,7 @@
     \end{columns}
 \end{frame}
 
-% Slide 32: Mesh Effect in Lagrangian Description
+% Slide 34: Mesh Effect in Lagrangian Description
 \begin{frame}{Mesh Effect in Lagrangian Description}
     \begin{center}
         \includegraphics[width=0.85\textwidth, height=0.45\textheight, keepaspectratio]{Figures/Fig7_zoom.pdf}
@@ -1252,7 +1346,7 @@
     \end{center}
 \end{frame}
 
-% Slide 33: Extension: Iterative Rebonding Algorithm
+% Slide 35: Extension: Iterative Rebonding Algorithm
 \begin{frame}{Extension: Iterative Rebonding Algorithm}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.62\textwidth}
@@ -1301,7 +1395,7 @@
     \end{columns}
 \end{frame}
 
-% Slide 34: Numerical Results: Post-Rebonding Relaxation
+% Slide 36: Numerical Results: Post-Rebonding Relaxation
 \begin{frame}{Numerical Results: Post-Rebonding Relaxation}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
@@ -1324,7 +1418,7 @@
     \end{center}
 \end{frame}
 
-% Slide 35: Phase Field Evolution Simulation
+% Slide 37: Phase Field Evolution Simulation
 \begin{frame}{Phase Field Evolution Simulation}
     \begin{center}
         \vspace{0.2cm}
