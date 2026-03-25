@@ -1103,50 +1103,72 @@
 
 
 % Slide 28: Yield surface in perfect crystal under shear load
-\begin{frame}{Yield surface in perfect crystal under shear load}
-    \vspace{0.4cm}
+\begin{frame}{Stability Loss in Perfect Crystals}
+    \centering
+    \vspace{-0.2cm}
+    
+    % --- Box 1: Baseline State ---
+    \begin{beamercolorbox}[wd=0.88\textwidth, rounded=true, shadow=true, center]{title}
+        \centering \rule{0pt}{0.5cm}
+        {\footnotesize \textbf{Homogeneous State:} \quad $\phi(\mathbf{C}) = \phi_0(\tilde{\mathbf{C}})$} \qquad 
+        \vline \qquad
+        {\footnotesize \textbf{Shear Loading:} \quad $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
+        \rule[-0.4cm]{0pt}{0.5cm}
+    \end{beamercolorbox}
+
+    \vspace{0.65cm}
+    % --- Physics: Perturbation ---
+    {\small \color{gray} We introduce an incremental displacement perturbation:} \\
+    \vspace{0.15cm}
+    {\large $\mathbf{u}(\mathbf{x}) = \boldsymbol{\eta} \exp(i k \boldsymbol{\zeta} \cdot \mathbf{x})$}
+
+    \vspace{0.8cm}
+    % --- Step 2: Mechanical Response ---
     \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.65\textwidth}
-            {\footnotesize \color{red!80!black} \textbf{Strain-energy density:}} \hfill {\footnotesize \color{red!80!black} \textbf{Loading:}} \\
-            \colorbox{gray!10}{\rule[-0.2cm]{0pt}{0.65cm} $\phi(\mathbf{C}) \equiv \phi_0(\tilde{\mathbf{C}})$} \hfill
-            \colorbox{gray!10}{\rule[-0.2cm]{0pt}{0.65cm} $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
+        \begin{column}{0.44\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{
+                \begin{minipage}{0.95\linewidth}
+                    \centering \rule{0pt}{0.4cm}
+                    \textbf{\color{red!80!black} Linearization} \\
+                    \vspace{0.25cm}
+                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \quad \rightarrow \quad [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta}=0$
+                    \rule[-0.35cm]{0pt}{0.4cm}
+                \end{minipage}
+            }
         \end{column}
         
-        \begin{column}{0.31\textwidth}
-            \raggedleft
-            {\footnotesize \color{gray} Incr. displacement:} \\
-            {\large $\mathbf{u} = \boldsymbol{\eta} e^{i k \boldsymbol{\zeta} \cdot \mathbf{x}}$}
+        \begin{column}{0.06\textwidth}
+            \centering \Huge \color{AcademicNavy} $\Rightarrow$
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{
+                \begin{minipage}{0.95\linewidth}
+                    \centering \rule{0pt}{0.4cm}
+                    \textbf{\color{red!80!black} Acoustic Tensor} \\
+                    \vspace{0.25cm}
+                    $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$
+                    \rule[-0.35cm]{0pt}{0.4cm}
+                \end{minipage}
+            }
         \end{column}
     \end{columns}
-
-    \vspace{1.0cm}
-    \centering
-    {\small \color{red!80!black} \textbf{Linearisation of mechanical eq.}} \\
-    \vspace{0.2cm}
-    \colorbox{gray!10}{
-        \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{A}_{piqj} u_{j,pq} = 0$
-    } 
-    \\[0.2cm] {\LARGE \color{AcademicNavy} $\Downarrow$} \\[0.2cm]
-    \colorbox{gray!10}{
-        \rule[-0.4cm]{0pt}{1.0cm} \Large $[\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta} = 0$
-    }
 
     \vfill
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            {\footnotesize \color{red!80!black} \textbf{Acoustic tensor:}} \\
-            \colorbox{gray!10}{\rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$}
-        \end{column}
-        \begin{column}{0.48\textwidth}
-            \raggedleft
-            {\footnotesize \color{red!80!black} \textbf{Solve Condition:}} \\
-            \colorbox{gray!10}{\rule[-0.4cm]{0pt}{1.0cm} \Large $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$}
-            \\[0.1cm]
-            {\scriptsize $\boldsymbol{\zeta} = (\cos(\xi), \sin(\xi))$}
-        \end{column}
-    \end{columns}
-    \vspace{0.4cm}
+    % --- Final Result: The Yield Point ---
+    \begin{beamercolorbox}[wd=0.65\textwidth, rounded=true, shadow=true, center]{block title}
+        \centering \rule{0pt}{0.5cm}
+        \textbf{\Large Stability Limit (Yield Surface)} \\
+        \vspace{0.3cm}
+        \LARGE $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$
+        \rule[-0.5cm]{0pt}{0.5cm}
+    \end{beamercolorbox}
+    \vspace{0.1cm}
+    {\scriptsize Critical orientation $\boldsymbol{\zeta} = (\cos \xi, \sin \xi)$ for loss of convexity.}
 \end{frame}
+
 
 
 % Slide 29: Numerical results: Dislocation dipole
