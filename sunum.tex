@@ -1103,11 +1103,48 @@
     \end{columns}
 \end{frame}
 
+
 % Slide 27: Numerical results: Dislocation dipole
 \begin{frame}{Numerical results: Dislocation dipole}
-    \begin{center}
-        \includegraphics[width=0.8\textwidth, keepaspectratio]{Figures/dipole.pdf}
-    \end{center}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \centering
+            \colorbox{gray!10}{
+                \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/dipole.pdf}
+            }
+        \end{column}
+        
+        \begin{column}{0.42\textwidth}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} Configuration:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Periodic boundary conditions \\
+                        $\bullet$ Dislocation pair $\pm \mathbf{b}$ \\
+                        $\bullet$ Energy-minimized lattice
+                    \end{minipage}
+                }
+                
+                \vspace{0.8cm}
+                \textbf{\color{red!80!black} Model parameters:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Order parameter $\mathbf{m}(\mathbf{C})$ \\
+                        $\bullet$ Linear finite elements \\
+                        $\bullet$ L-BFGS minimization
+                    \end{minipage}
+                }
+                
+                \vspace{0.8cm}
+                \centering
+                \textbf{\large Stable dipole configuration}
+            \end{flushleft}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \end{document}
