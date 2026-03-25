@@ -704,4 +704,48 @@
     \end{center}
 \end{frame}
 
+% Slide 17: Lattice symmetry
+\begin{frame}{Lattice symmetry}
+    
+    \vspace{0.2cm}
+    \begin{center}
+    \begin{tabular}{p{4.2cm} l}
+        \textbf{\color{SecondaryTitle} Bravais lattice:} & $\displaystyle \mathcal{L}(\mathbf{e}_I) = \left\{ \mathbf{x} \in \mathbb{R}^2, \mathbf{x} = v_I \mathbf{e}_I, v_I \in \mathbb{Z} \right\}$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Lattice metric:} & $\displaystyle C_{IJ} = C_{JI} = \mathbf{e}_I \cdot \mathbf{e}_J$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Non-uniqueness:} & $\displaystyle \bar{\mathbf{e}}_J = m_{IJ} \mathbf{e}_I, \quad \mathbf{m} \in GL(2,\mathbb{Z})$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} General linear group:} & $\displaystyle GL(2,\mathbb{Z}) = \left\{ \mathbf{m}, m_{IJ} \in \mathbb{Z}, \det(\mathbf{m}) = \pm 1 \right\}$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Lattice metric:} & $\displaystyle \bar{\mathbf{C}} = \mathbf{m}^T \mathbf{C} \mathbf{m}$
+    \end{tabular}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.9, every node/.style={transform shape}]
+            
+            % 8x4 Grid of atoms (using the rich 3D shading)
+            \foreach \x in {0,...,7} {
+                \foreach \y in {0,...,3} {
+                    \shade[ball color=AcademicNavy] (\x,\y) circle (0.18);
+                }
+            }
+            
+            % Basis 1: standard square orthogonal cell
+            \draw[->, thick] (0,1) -- (1,1) node[midway, below=1pt] {$\mathbf{e}_1$};
+            \draw[->, thick] (0,1) -- (0,2) node[midway, left=1pt] {$\mathbf{e}_2$};
+            \node[text=brown!90!black, font=\bfseries] at (0.4, 1.4) {1};
+            
+            % Basis 2: slanted cell (det = 1)
+            \draw[->, thick] (3,1) -- (4,1) node[midway, below=1pt] {$\mathbf{e}_1'$};
+            \draw[->, thick] (3,1) -- (4,2) node[midway, left=3pt] {$\mathbf{e}_2'$};
+            \node[text=brown!90!black, font=\bfseries] at (3.7, 1.25) {2};
+            
+            % Basis 3: extremely slanted cell (det = 1)
+            \draw[->, thick] (5,1) -- (6,1) node[midway, below=1pt] {$\mathbf{e}_1''$};
+            \draw[->, thick] (5,1) -- (7,2) node[midway, above left=-1pt] {$\mathbf{e}_2''$};
+            \node[text=brown!90!black, font=\bfseries] at (6.35, 1.25) {3};
+            
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
 \end{document}
