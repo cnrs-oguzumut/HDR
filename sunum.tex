@@ -643,7 +643,7 @@
             
             % --- LJ Curve (Left) ---
             \begin{scope}[shift={(-2.8, 0.5)}]
-                \clip (-0.7, -2.2) rectangle (3.2, 2.5); 
+                \clip (-0.7, -2.2) rectangle (3.2, 2.9); 
                 \draw[->, thick] (0, -1.8) -- (0, 2.2) node[above] {$V(r)$};
                 \draw[->, thick] (-0.2, 0) -- (2.8, 0) node[right] {$r$};
                 % LJ Curve: V(r) = e*( (1/r)^12 - 2*(1/r)^6 ) -> min at r=1, V=-e
@@ -653,25 +653,25 @@
                 \draw[dashed, thick] (1, 0) -- (1, -1.5);
                 \fill[SecondaryTitle] (1, -1.5) circle (3pt) node[below=3pt, font=\small, text=black] {$r_{eq}$};
                 
-                % Two interacting atoms illustration (shifted right to avoid V-axis)
+                % Two interacting atoms illustration (shifted right to avoid V-axis and LJ curve)
                 \def\atomradius{0.18}
                 \def\cloudradius{0.38}
                 
                 % Electron clouds (transparent overlapping)
-                \fill[AcademicNavy, opacity=0.15] (0.8, 1.7) circle (\cloudradius);
-                \fill[AcademicNavy, opacity=0.15] (1.8, 1.7) circle (\cloudradius);
+                \fill[AcademicNavy, opacity=0.15] (1.3, 1.7) circle (\cloudradius);
+                \fill[AcademicNavy, opacity=0.15] (2.3, 1.7) circle (\cloudradius);
                 
                 % Atoms (Shiny 3D balls)
-                \shade[ball color=AcademicNavy] (0.8, 1.7) circle (\atomradius);
-                \shade[ball color=AcademicNavy] (1.8, 1.7) circle (\atomradius);
+                \shade[ball color=AcademicNavy] (1.3, 1.7) circle (\atomradius);
+                \shade[ball color=AcademicNavy] (2.3, 1.7) circle (\atomradius);
                 
-                \draw[<->, thick] (0.98, 1.7) -- (1.62, 1.7) node[midway, below=1pt, font=\footnotesize] {$r$};
+                \draw[<->, thick] (1.48, 1.7) -- (2.12, 1.7) node[midway, below=1pt, font=\footnotesize] {$r$};
             \end{scope}
 
-            % --- Amorphous State (Center) ---
+            % --- Initial State (Center) ---
             \begin{scope}[shift={(1.8, -1)}]
                 \draw[ultra thick] (0,0) rectangle (3,3);
-                \node[above] at (1.5, 3) {\textbf{Amorphous State}};
+                \node[above] at (1.5, 3) {\textbf{Initial State}};
                 
                 % 16 random coordinates loosely matching the user's screenshot
                 \foreach \p in {(0.4, 0.5), (1.2, 0.4), (2.6, 0.7), (0.7, 1.3), (2.2, 1.1), (1.8, 1.6), (0.5, 2.1), (2.6, 1.8), (2.1, 2.4), (0.8, 2.6), (1.3, 2.1), (2.8, 2.7), (0.4, 1.4), (1.9, 0.5), (1.7, 2.8), (1.1, 0.9)} {
