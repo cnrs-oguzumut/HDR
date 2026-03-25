@@ -1019,4 +1019,77 @@
     \end{center}
 \end{frame}
 
+% Slide 26: Numerical implementation
+\begin{frame}{Numerical implementation}
+    \begin{columns}[t]
+        \begin{column}{0.4\textwidth}
+            \centering
+            % FEM mesh box
+            \begin{tikzpicture}[scale=0.8]
+                % Outline
+                \draw[AcademicNavy, thick] (-0.3, -0.3) rectangle (3.3, 3.3);
+                % Lines
+                \foreach \x in {0,1,2,3} {
+                    \foreach \y in {0,1,2,3} {
+                        \ifnum\y<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x,\y+1); \fi
+                        \ifnum\x<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x+1,\y); \fi
+                        \ifnum\x<3 \ifnum\y<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x+1,\y+1); \fi \fi
+                    }
+                }
+                % Nodes
+                \foreach \x in {0,1,2,3} {
+                    \foreach \y in {0,1,2,3} {
+                        \draw[fill=white, draw=AcademicNavy, thick] (\x,\y) circle (0.2);
+                    }
+                }
+            \end{tikzpicture}
+            
+            \vspace{1.0cm}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} First Piola-Kirchhoff stress}
+                
+                \vspace{0.2cm}
+                \hspace{0.2cm}\colorbox{gray!20}{
+                    \colorbox{white}{
+                        $\mathbf{P} = 2\mathbf{F}\mathbf{M}\boldsymbol{\Sigma}\mathbf{M}^T$.
+                    }
+                }
+                
+                \vspace{0.5cm}
+                {\small \color{red!80!black} \textbf{Plasticity is the geometrical update of the $\mathbf{m}(\mathbf{C})$ tensor}}
+            \end{flushleft}
+        \end{column}
+        
+        \begin{column}{0.6\textwidth}
+            \centering
+            \textbf{\color{red!80!black} FEM discretization:} \\
+            \vspace{0.2cm}
+            \begin{tabular}{cc}
+                \colorbox{gray!20}{\Large $W = \int_{\Omega} \phi_0 d\Omega$} & 
+                \colorbox{gray!20}{$\begin{array}{l} \mathbf{u}(\mathbf{X}) = \mathbf{u}_i N_i(\mathbf{X}) \\ \mathbf{F} = \mathbf{I} + \mathbf{u}_i \otimes \nabla N_i \end{array}$}
+            \end{tabular}
+            
+            \vspace{0.6cm}
+            \textbf{\color{red!80!black} Solve numerically with L-BFGS:} \\
+            \vspace{0.2cm}
+            \colorbox{gray!20}{\Large $0 = \frac{\partial W}{\partial \mathbf{u}_i} = \int_{\Omega} \mathbf{P} \nabla N_i d\Omega$,}
+            
+            \vspace{0.6cm}
+            \textbf{\color{red!80!black} Geometrically nonlinear elasticity} \\
+            \vspace{0.2cm}
+            \colorbox{gray!20}{
+                \colorbox{white}{
+                    $\boldsymbol{\Sigma} = \left[ \begin{matrix} 
+                        \frac{\partial \Phi^0}{\partial \tilde{C}_{11}} & \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} \\[0.1cm]
+                        \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} & \frac{\partial \Phi^0}{\partial \tilde{C}_{22}}
+                    \end{matrix} \right]$,
+                }
+            }
+            
+            \vspace{0.8cm}
+            {\Large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \end{document}
