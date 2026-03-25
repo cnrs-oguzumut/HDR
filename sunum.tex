@@ -1019,12 +1019,13 @@
 
 % Slide 27: Numerical implementation
 \begin{frame}{Numerical implementation}
+    \vspace{-0.3cm}
     \begin{columns}[c, onlytextwidth]
         % --- Left Column: Mesh and Stress ---
         \begin{column}{0.44\textwidth}
             \centering
-            % FEM mesh box
-            \begin{tikzpicture}[scale=0.82]
+            % FEM mesh box - Reduced scale
+            \begin{tikzpicture}[scale=0.74]
                 \draw[AcademicNavy, thick] (-0.3, -0.3) rectangle (3.3, 3.3);
                 \foreach \x in {0,1,2,3} {
                     \foreach \y in {0,1,2,3} {
@@ -1040,18 +1041,18 @@
                 }
             \end{tikzpicture}
             
-            \vspace{0.6cm}
+            \vspace{0.4cm}
             \begin{flushleft}
                 \textbf{\color{red!80!black} First Piola-Kirchhoff stress} \\
-                \vspace{0.1cm}
+                \vspace{0.05cm}
                 \hspace{0.5cm}\colorbox{gray!20}{
                     \colorbox{white}{
-                        \rule[-0.2cm]{0pt}{0.6cm}
+                        \rule[-0.15cm]{0pt}{0.5cm}
                         $\mathbf{P} = 2\mathbf{F}\mathbf{M}\boldsymbol{\Sigma}\mathbf{M}^T$
                     }
                 }
                 
-                \vspace{0.6cm}
+                \vspace{0.4cm}
                 {\small \color{red!80!black} \textbf{Plasticity is the geometrical\\ update of the $\mathbf{m}(\mathbf{C})$ tensor}}
             \end{flushleft}
         \end{column}
@@ -1060,67 +1061,67 @@
         \begin{column}{0.54\textwidth}
             \begin{flushleft}
                 \textbf{\color{red!80!black} FEM discretization:} \\
-                \vspace{0.1cm}
+                \vspace{0.05cm}
                 \colorbox{gray!20}{
                     \begin{minipage}{\dimexpr\textwidth-12pt\relax}
                         \centering
                         \hfill $\displaystyle W = \int_{\Omega} \phi_0 d\Omega$ \hfill
-                        $\displaystyle \begin{array}{l} \mathbf{u}(\mathbf{X}) = \mathbf{u}_i N_i(\mathbf{X}) \\ \mathbf{F} = \mathbf{I} + \mathbf{u}_i \otimes \nabla N_i \end{array}$ \hfill \null
+                        $\displaystyle \begin{array}{l} \mathbf{u}(\mathbf{X}) = \mathbf{u}_i N_i \\ \mathbf{F} = \mathbf{I} + \mathbf{u}_i \otimes \nabla N_i \end{array}$ \hfill \null
                     \end{minipage}
                 }
                 
-                \vspace{0.5cm}
+                \vspace{0.3cm}
                 \textbf{\color{red!80!black} Solve numerically with L-BFGS:} \\
-                \vspace{0.1cm}
+                \vspace{0.05cm}
                 \colorbox{gray!20}{
                     \begin{minipage}{\dimexpr\textwidth-12pt\relax}
-                        \centering \rule[-0.4cm]{0pt}{1.0cm}
+                        \centering \rule[-0.2cm]{0pt}{0.7cm}
                         $\displaystyle 0 = \frac{\partial W}{\partial \mathbf{u}_i} = \int_{\Omega} \mathbf{P} \nabla N_i d\Omega$
                     \end{minipage}
                 }
                 
-                \vspace{0.5cm}
+                \vspace{0.3cm}
                 \textbf{\color{red!80!black} Geometrically nonlinear elasticity} \\
-                \vspace{0.1cm}
+                \vspace{0.05cm}
                 \colorbox{gray!20}{
                     \centering
                     \colorbox{white}{
-                        \rule[-0.6cm]{0pt}{1.35cm}
+                        \rule[-0.4cm]{0pt}{1.0cm}
                         $\displaystyle \boldsymbol{\Sigma} = \left[ \begin{matrix} 
-                            \frac{\partial \Phi^0}{\partial \tilde{C}_{11}} & \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} \\[0.2cm]
+                            \frac{\partial \Phi^0}{\partial \tilde{C}_{11}} & \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} \\[0.15cm]
                             \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} & \frac{\partial \Phi^0}{\partial \tilde{C}_{22}}
                         \end{matrix} \right]$
                     }
                 }
                 
-                \vspace{0.5cm}
+                \vspace{0.3cm}
                 \centering
-                {\Large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$}
+                {\large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$}
             \end{flushleft}
         \end{column}
     \end{columns}
 \end{frame}
 
 
-% Slide 28: Yield surface in perfect crystal under shear load
+% Slide 28: Stability Loss in Perfect Crystals
 \begin{frame}{Stability Loss in Perfect Crystals}
+    \vspace{0.4cm}
     \centering
-    \vspace{-0.2cm}
     
     % --- Box 1: Baseline State ---
-    \begin{beamercolorbox}[wd=0.88\textwidth, rounded=true, shadow=true, center]{title}
-        \centering \rule{0pt}{0.5cm}
-        {\footnotesize \textbf{Homogeneous State:} \quad $\phi(\mathbf{C}) = \phi_0(\tilde{\mathbf{C}})$} \qquad 
+    \begin{beamercolorbox}[wd=0.92\textwidth, rounded=true, center]{title}
+        \centering \rule{0pt}{0.6cm}
+        {\textbf{Homogeneous State:} \quad $\phi(\mathbf{C}) = \phi_0(\tilde{\mathbf{C}})$} \qquad 
         \vline \qquad
-        {\footnotesize \textbf{Shear Loading:} \quad $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
-        \rule[-0.4cm]{0pt}{0.5cm}
+        {\textbf{Shear Loading:} \quad $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
+        \rule[-0.5cm]{0pt}{0.6cm}
     \end{beamercolorbox}
 
-    \vspace{0.65cm}
+    \vspace{0.7cm}
     % --- Physics: Perturbation ---
     {\small \color{gray} We introduce an incremental displacement perturbation:} \\
-    \vspace{0.15cm}
-    {\large $\mathbf{u}(\mathbf{x}) = \boldsymbol{\eta} \exp(i k \boldsymbol{\zeta} \cdot \mathbf{x})$}
+    \vspace{0.2cm}
+    {\Large $\mathbf{u}(\mathbf{x}) = \boldsymbol{\eta} \exp(i k \boldsymbol{\zeta} \cdot \mathbf{x})$}
 
     \vspace{0.8cm}
     % --- Step 2: Mechanical Response ---
@@ -1129,11 +1130,11 @@
             \centering
             \colorbox{AcademicNavy!5}{
                 \begin{minipage}{0.95\linewidth}
-                    \centering \rule{0pt}{0.4cm}
+                    \centering \rule{0pt}{0.35cm}
                     \textbf{\color{red!80!black} Linearization} \\
-                    \vspace{0.25cm}
-                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \quad \rightarrow \quad [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta}=0$
-                    \rule[-0.35cm]{0pt}{0.4cm}
+                    \vspace{0.2cm}
+                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \rightarrow [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta}=0$
+                    \rule[-0.3cm]{0pt}{0.35cm}
                 \end{minipage}
             }
         \end{column}
@@ -1146,11 +1147,11 @@
             \centering
             \colorbox{AcademicNavy!5}{
                 \begin{minipage}{0.95\linewidth}
-                    \centering \rule{0pt}{0.4cm}
+                    \centering \rule{0pt}{0.35cm}
                     \textbf{\color{red!80!black} Acoustic Tensor} \\
-                    \vspace{0.25cm}
+                    \vspace{0.2cm}
                     $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$
-                    \rule[-0.35cm]{0pt}{0.4cm}
+                    \rule[-0.3cm]{0pt}{0.35cm}
                 \end{minipage}
             }
         \end{column}
@@ -1158,16 +1159,17 @@
 
     \vfill
     % --- Final Result: The Yield Point ---
-    \begin{beamercolorbox}[wd=0.65\textwidth, rounded=true, shadow=true, center]{block title}
-        \centering \rule{0pt}{0.5cm}
-        \textbf{\Large Stability Limit (Yield Surface)} \\
-        \vspace{0.3cm}
-        \LARGE $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$
-        \rule[-0.5cm]{0pt}{0.5cm}
+    \begin{beamercolorbox}[wd=0.6\textwidth, rounded=true, center]{block title}
+        \centering \rule{0pt}{0.4cm}
+        \textbf{\large Stability Limit (Yield Surface)} \\
+        \vspace{0.2cm}
+        \Large $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$
+        \rule[-0.4cm]{0pt}{0.4cm}
     \end{beamercolorbox}
-    \vspace{0.1cm}
+    \vspace{0.3cm}
     {\scriptsize Critical orientation $\boldsymbol{\zeta} = (\cos \xi, \sin \xi)$ for loss of convexity.}
 \end{frame}
+
 
 
 
