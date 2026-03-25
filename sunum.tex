@@ -1104,95 +1104,54 @@
 
 % Slide 28: Yield surface in perfect crystal under shear load
 \begin{frame}{Yield surface in perfect crystal under shear load}
-    \vspace{-0.3cm}
-    \begin{columns}[t, onlytextwidth]
-        \begin{column}{0.31\textwidth}
-            {\footnotesize \color{red!80!black} \textbf{Strain-energy density:}} \\
-            \vspace{0.1cm}
-            \colorbox{gray!20}{
-                \rule[-0.2cm]{0pt}{0.6cm} $\phi(\mathbf{C}) \equiv \phi_0(\tilde{\mathbf{C}})$
-            }
+    \vspace{-0.2cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.65\textwidth}
+            {\footnotesize \color{red!80!black} \textbf{Strain-energy density:}} \hfill {\footnotesize \color{red!80!black} \textbf{Loading:}} \\
+            \colorbox{gray!20}{\rule[-0.2cm]{0pt}{0.65cm} $\phi(\mathbf{C}) \equiv \phi_0(\tilde{\mathbf{C}})$} \hfill
+            \colorbox{gray!20}{\rule[-0.2cm]{0pt}{0.65cm} $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
         \end{column}
         
         \begin{column}{0.31\textwidth}
-            \centering
-            {\footnotesize \color{red!80!black} \textbf{Loading:}} \\
-            \vspace{0.1cm}
-            \colorbox{gray!20}{
-                \rule[-0.2cm]{0pt}{0.6cm} $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$
-            }
-        \end{column}
-        
-        \begin{column}{0.35\textwidth}
             \raggedleft
-            {\footnotesize \color{gray} For incremental displacement} \\
+            {\footnotesize \color{gray} Incr. displacement:} \\
             {\large $\mathbf{u} = \boldsymbol{\eta} e^{i k \boldsymbol{\zeta} \cdot \mathbf{x}}$}
         \end{column}
     \end{columns}
 
-    \vspace{0.4cm}
-    {\footnotesize \color{red!80!black} \textbf{Linearisation of the mechanical eq:}} \\
+    \vspace{0.3cm}
+    \centering
+    {\small \color{red!80!black} \textbf{Linearisation of mechanical eq.}} \\
     \vspace{0.1cm}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.35\textwidth}
-            \centering
-            \colorbox{gray!20}{
-                \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{A}_{piqj} u_{j,pq} = 0,$
-            } 
-        \end{column}
-        \begin{column}{0.1\textwidth}
-            \centering {\color{AcademicNavy} \Huge $\Rightarrow$}
-        \end{column}
-        \begin{column}{0.45\textwidth}
-            \centering
-            \colorbox{gray!20}{
-                \rule[-0.4cm]{0pt}{1.0cm} \Large $[\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta} = 0,$
-            }
-        \end{column}
-    \end{columns}
+    \colorbox{gray!20}{
+        \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{A}_{piqj} u_{j,pq} = 0$
+    } 
+    \\[0.1cm] {\LARGE \color{AcademicNavy} $\Downarrow$} \\[0.1cm]
+    \colorbox{gray!20}{
+        \rule[-0.4cm]{0pt}{1.0cm} \Large $[\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta} = 0$
+    }
 
-    \vspace{0.4cm}
-    \begin{columns}[t, onlytextwidth]
-        \begin{column}{0.45\textwidth}
+    \vspace{0.3cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
             {\footnotesize \color{red!80!black} \textbf{Acoustic tensor:}} \\
-            \vspace{0.1cm}
-            \colorbox{gray!20}{
-                \rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$
-            }
+            \colorbox{gray!20}{\rule[-0.4cm]{0pt}{1.0cm} \Large $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$}
         \end{column}
-        
-        \begin{column}{0.45\textwidth}
+        \begin{column}{0.48\textwidth}
             \raggedleft
-            {\footnotesize \color{red!80!black} \textbf{Solve:}} \\
-            \vspace{0.1cm}
-            \colorbox{gray!20}{
-                \rule[-0.4cm]{0pt}{1.0cm} \Large $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0.$
-            }
+            {\footnotesize \color{red!80!black} \textbf{Solve Condition:}} \\
+            \colorbox{gray!20}{\rule[-0.4cm]{0pt}{1.0cm} \Large $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$}
             \\[0.1cm]
             {\scriptsize $\boldsymbol{\zeta} = (\cos(\xi), \sin(\xi))$}
         \end{column}
     \end{columns}
 
     \vfill
-    \begin{columns}[t, onlytextwidth]
-        \begin{column}{0.43\textwidth}
-            \colorbox{gray!20}{
-                \begin{minipage}{\textwidth}
-                    \tiny 
-                    $\mathcal{A}_{rsij} = m_{pk}m_{nl}(m_{ac}m_{bd}H_{klcd}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{pnij}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{abrs} + A_{kl}\left[\frac{\partial^2\mathbf{C}}{\partial\mathbf{F}\partial\mathbf{F}}\right]_{pnrsij})$
-                \end{minipage}
-            }
-        \end{column}
-        \hfill
-        \begin{column}{0.54\textwidth}
-            \colorbox{gray!20}{
-                \begin{minipage}{\textwidth}
-                    \tiny 
-                    $\mathbf{H} = \left[\frac{\partial^2\phi_0}{\partial\tilde{\mathbf{C}}\partial\tilde{\mathbf{C}}}\right] = \dots$ (Double-well potential Hessian)
-                \end{minipage}
-            }
-        \end{column}
-    \end{columns}
+    \colorbox{gray!15}{
+        \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+            \tiny $\mathcal{A}_{rsij} = m_{pk}m_{nl}(m_{ac}m_{bd}H_{klcd}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{pnij}\left[\frac{\partial\mathbf{C}}{\partial\mathbf{F}}\right]_{abrs} + A_{kl}\left[\frac{\partial^2\mathbf{C}}{\partial\mathbf{F}\partial\mathbf{F}}\right]_{pnrsij})$ \hfill $\mathbf{H} = \left[\frac{\partial^2\phi_0}{\partial\tilde{\mathbf{C}}\partial\tilde{\mathbf{C}}}\right]$
+        \end{minipage}
+    }
 \end{frame}
 
 
