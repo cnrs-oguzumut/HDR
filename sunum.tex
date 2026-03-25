@@ -1196,21 +1196,45 @@
     \end{center}
 \end{frame}
 
-% Slide 31: Numerical results: Pattern evolution
-\begin{frame}{Numerical results: Pattern evolution}
+% Slide 31: Critical exponents and finite size scaling
+\begin{frame}{Critical exponents and finite size scaling}
     \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
+        % --- Left: Figures Grid ---
+        \begin{column}{0.42\textwidth}
             \centering
-            \includegraphics[width=0.9\columnwidth]{Figures/Fig6-a.pdf} \\
-            \vspace{0.3cm}
-            \includegraphics[width=0.9\columnwidth]{Figures/Fig6-c.pdf}
+            {\renewcommand{\arraystretch}{0.5}
+            \begin{tabular}{cc}
+                \includegraphics[width=0.48\linewidth]{Figures/Fig6-a.pdf} & 
+                \includegraphics[width=0.48\linewidth]{Figures/Fig6-b.pdf} \\
+                \vspace{0.1cm} \\
+                \includegraphics[width=0.48\linewidth]{Figures/Fig6-c.pdf} & 
+                \includegraphics[width=0.48\linewidth]{Figures/Fig6-d.pdf}
+            \end{tabular}}
         \end{column}
         
-        \begin{column}{0.48\textwidth}
-            \centering
-            \includegraphics[width=0.9\columnwidth]{Figures/Fig6-b.pdf} \\
-            \vspace{0.3cm}
-            \includegraphics[width=0.9\columnwidth]{Figures/Fig6-d.pdf}
+        % --- Right: Summary Text ---
+        \begin{column}{0.55\textwidth}
+            \colorbox{gray!15}{
+                \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                    \scriptsize
+                    \textbf{Observables:} \\
+                    Energy dissipated at a single avalanche $\Delta W$ and the corresponding macroscopic stress drop $\Delta \Sigma = A\Delta\sigma_{xy}$ ($A$: surface area).
+                    
+                    \vspace{0.3cm}
+                    
+                    \textbf{Finite-size scaling ansatz:} \\
+                    Probability distribution of these observables follows:
+                    \begin{equation*}
+                        P(s;L) = s^{-x} F(s/L^{D_x})
+                    \end{equation*}
+                    where $L = Nh$ is linear system size, $h$ is element size, $x$ is power-law exponent ($x = \tau$ for stress, $x = \epsilon$ for energy), and $D_x$ is fractal dimension. $F(u)$ is a universal scaling function.
+                    
+                    \vspace{0.3cm}
+                    
+                    \textbf{Key Findings:} \\
+                    In amorphous plasticity, exponents $\epsilon$ and $\tau$ are similar for pre- and post-yield regimes, while $D_\epsilon$ and $D_\tau$ may differ [15, 63--65].
+                \end{minipage}
+            }
         \end{column}
     \end{columns}
 \end{frame}
