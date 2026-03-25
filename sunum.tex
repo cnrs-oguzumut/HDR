@@ -769,16 +769,16 @@
             % --- Deformation Map F ---
             \draw[->, ultra thick, AcademicNavy] (2.8, 0.5) -- (4.2, 0.5) node[midway, above=4pt] {\Large $\mathbf{F}$};
             
-            % --- Deformed Lattice (Affine trans applying F) ---
-            \begin{scope}[shift={(5.5,0)}, cm={1.1, 0, 0.35, 1.0, (0,0)}]
+            % --- Deformed Lattice (Affine trans applying F onto coordinates only) ---
+            \begin{scope}[shift={(5.5,0)}]
                 \foreach \x in {0,1,2} {
                     \foreach \y in {0,1} {
-                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.15);
+                        \shade[ball color=AcademicNavy] ({\x*1.1 + \y*0.35}, {\y}) circle (0.15);
                     }
                 }
                 % Transformed Basis vectors
-                \draw[->, ultra thick] (0,0) -- (1,0) node[midway, below=3pt] {$\mathbf{f}_1$};
-                \draw[->, ultra thick] (0,0) -- (0,1) node[midway, left=4pt] {$\mathbf{f}_2$};
+                \draw[->, ultra thick] (0,0) -- (1.1, 0) node[midway, below=3pt] {$\mathbf{f}_1$};
+                \draw[->, ultra thick] (0,0) -- (0.35, 1) node[midway, left=2pt] {$\mathbf{f}_2$};
             \end{scope}
         \end{tikzpicture}
     \end{center}
@@ -797,6 +797,14 @@
         \hspace{0.5cm} {\Large $\displaystyle \mathbf{C}^* = (\mathbf{F}^*)^T \mathbf{F}^* = \mathbf{F}^T \mathbf{Q}^T \mathbf{Q} \mathbf{F} = \mathbf{F}^T \mathbf{F} = \mathbf{C}$}
     \end{flushleft}
     
+\end{frame}
+
+% Slide 19: Stress-Strain Curves Comparison
+\begin{frame}{Stress-Strain Curves Comparison (CuZr)}
+    \vspace{-0.2cm}
+    \begin{center}
+        \includegraphics[width=\textwidth, height=0.88\textheight, keepaspectratio]{Figures/SS_Curves_Comparison.png}
+    \end{center}
 \end{frame}
 
 \end{document}
