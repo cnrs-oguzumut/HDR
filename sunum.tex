@@ -862,4 +862,79 @@
     
 \end{frame}
 
+% Slide 21: Lagrange reduction
+\begin{frame}{Lagrange reduction}
+    
+    \vspace{0.1cm}
+    {\large Lagrange reduction gives you the \textbf{shortest} and the \textbf{most acute} vector}
+    
+    \vspace{0.4cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.9, every node/.style={transform shape=false}]
+            
+            % Initial configuration B_0
+            \begin{scope}[shift={(0,3)}]
+                \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \node[above, align=center, font=\small] at (1, 1.5) {Initial \\ configuration $\mathcal{B}_0$};
+                
+                \coordinate (O1) at (1.2, 1.4);
+                \draw[->, thick] (O1) -- ++(0, 0.6) node[right, font=\footnotesize] {$\mathbf{n}_0^\alpha$};
+                \draw[->, thick] (O1) -- ++(0.7, 0) node[right, font=\footnotesize] {$\mathbf{m}_0^\alpha$};
+            \end{scope}
+
+            % Intermediate configuration \bar{B}
+            \begin{scope}[shift={(2.8, -0.5)}]
+                \begin{scope}[cm={1,0,0.5,1,(0,0)}]
+                    \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \end{scope}
+                \node[below, align=center, font=\small] at (1.5, -0.2) {Intermediate \\ configuration $\bar{\mathcal{B}}$};
+                
+                \coordinate (O2) at (2.8, 0.2);
+                \draw[->, thick] (O2) -- ++(0, 0.6) node[right, font=\footnotesize] {$\mathbf{n}_0^\alpha$};
+                \draw[->, thick] (O2) -- ++(0.7, 0) node[right, font=\footnotesize] {$\mathbf{m}_0^\alpha$};
+            \end{scope}
+
+            % Current configuration B
+            \begin{scope}[shift={(7.5, 2.0)}]
+                \begin{scope}[cm={0.9,0.3,0.3,0.9,(0,0)}]
+                    \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \end{scope}
+                \node[below right, align=center, font=\small] at (1.0, -0.1) {Current \\ configuration $\mathcal{B}$};
+                
+                \coordinate (O3) at (-0.2, 0.6);
+                \draw[->, thick] (O3) -- ++(-0.3, 0.6) node[above, font=\footnotesize] {$\mathbf{n}^\alpha$};
+                \draw[->, thick] (O3) -- ++(0.7, 0.3) node[right, font=\footnotesize] {$\mathbf{m}^\alpha$};
+                
+                \node[above right, align=left, font=\scriptsize] at (1.0, 1.8) {
+                    $\mathbf{m}^\alpha = \mathbf{F}^e \mathbf{m}_0^\alpha$ \\[0.1cm]
+                    $\mathbf{n}^\alpha = \mathbf{n}_0^\alpha \mathbf{F}^{e-1}$
+                };
+            \end{scope}
+
+            % Arrows and labels
+            % Initial to Current
+            \draw[->, thick] (2.3, 3.8) .. controls (4.2, 4.3) and (5.8, 4.0) .. (7.2, 3.2) 
+                node[midway, above, align=center, font=\small] {Deformation \\ gradient $\mathbf{F}$};
+            
+            % Initial to Intermediate
+            \draw[->, thick] (1.0, 2.7) .. controls (1.0, 1.5) and (1.5, 0.5) .. (2.5, 0.2)
+                node[midway, left, align=center, font=\small] {Plastic $\mathbf{F}^p$ \\ component};
+                
+            % Intermediate to Current
+            \draw[->, thick] (5.2, 0.4) .. controls (6.5, 0.8) and (7.0, 1.3) .. (7.2, 1.8)
+                node[midway, right, align=center, font=\small] {Elastic $\mathbf{F}^e$ \\ component};
+
+            % Center equation
+            \node[font=\large] at (4.5, 1.6) {$\mathbf{F} = \mathbf{F}^e \mathbf{F}^p$};
+
+        \end{tikzpicture}
+    \end{center}
+
+    \vspace{0.4cm}
+    \begin{center}
+        \Large We can show that \quad $\mathbf{F} = \mathbf{F}_e \mathbf{F}_p$ \quad with \quad $\mathbf{F}_p = \mathbf{M}^{-1}$
+    \end{center}
+
+\end{frame}
+
 \end{document}
