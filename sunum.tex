@@ -1294,7 +1294,7 @@
                 \draw[->] (reb) -- (min2);
                 \draw[->] (min2) -- (check2);
                 \draw[->] (check2.west) -- ++(-0.5,0) |- (reb.west) node[near start, left] {\tiny No};
-                \draw[->] (check2.east) -- ++(0.7,0) |- (next.south) node[near start, right] {\tiny Yes};
+                \draw[->] (check2.east) -| (next.south) node[near start, above] {\tiny Yes};
                 \draw[->] (check) -- node[above] {\tiny No} (next);
             \end{tikzpicture}
         \end{column}
