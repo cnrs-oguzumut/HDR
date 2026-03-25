@@ -875,11 +875,11 @@
             % Initial configuration B_0
             \begin{scope}[shift={(0,3)}]
                 \draw[step=0.2, thick] (0,0) grid (2,1.2);
-                \node[above, align=center, font=\small] at (1, 1.5) {Initial \\ configuration $\mathcal{B}_0$};
+                \node[align=center, font=\small] at (0.8, 1.8) {Initial \\[-0.05cm] configuration $\mathcal{B}_0$};
                 
-                \coordinate (O1) at (1.2, 1.4);
-                \draw[->, thick] (O1) -- ++(0, 0.6) node[right, font=\footnotesize] {$\mathbf{n}_0^\alpha$};
-                \draw[->, thick] (O1) -- ++(0.7, 0) node[right, font=\footnotesize] {$\mathbf{m}_0^\alpha$};
+                \coordinate (O1) at (1.8, 1.4);
+                \draw[->, thick] (O1) -- ++(0, 0.7) node[right=-1pt, font=\small] {$\mathbf{n}_0^\alpha$};
+                \draw[->, thick] (O1) -- ++(0.7, 0) node[right=0pt, font=\small] {$\mathbf{m}_0^\alpha$};
             \end{scope}
 
             % Intermediate configuration \bar{B}
@@ -925,14 +925,14 @@
                 node[midway, right, align=center, font=\small] {Elastic $\mathbf{F}^e$ \\ component};
 
             % Center equation
-            \node[font=\large] at (4.5, 1.6) {$\mathbf{F} = \mathbf{F}^e \mathbf{F}^p$};
+            \node[font=\large] at (4.5, 1.6) {$\mathbf{F} = \mathbf{F}^{\mathbf{e}} \mathbf{F}^{\mathbf{p}}$};
 
         \end{tikzpicture}
     \end{center}
 
     \vspace{0.4cm}
     \begin{center}
-        \Large We can show that \quad $\mathbf{F} = \mathbf{F}_e \mathbf{F}_p$ \quad with \quad $\mathbf{F}_p = \mathbf{M}^{-1}$
+        \Large We can show that \quad $\mathbf{F} = \mathbf{F}_{\mathbf{e}} \mathbf{F}_{\mathbf{p}}$ \quad with \quad $\mathbf{F}_{\mathbf{p}} = \mathbf{M}^{-1}$
     \end{center}
 
 \end{frame}
