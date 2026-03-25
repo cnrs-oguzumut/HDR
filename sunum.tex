@@ -1255,42 +1255,44 @@
 % Slide 33: Extension: Iterative Rebonding Algorithm
 \begin{frame}{Extension: Iterative Rebonding Algorithm}
     \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.65\textwidth}
+        \begin{column}{0.62\textwidth}
             \begin{enumerate}
-                \item \textbf{\color{AcademicNavy} Energy Minimization}
+                \item \textbf{\color{AcademicNavy} Standard Energy Minimization}
                 \begin{itemize}
-                    \item Perform standard L-BFGS minimization of $\displaystyle W(\mathbf{u}, \mathbf{M})$ at fixed loading.
+                    \item Solve standard L-BFGS for $W(\mathbf{u}, \mathbf{M})$ at fixed loading step.
                 \end{itemize}
                 
-                \item \textbf{\color{AcademicNavy} Plasticity Detection}
+                \item \textbf{\color{AcademicNavy} Structural Detection ($m_3$)}
                 \begin{itemize}
-                    \item Detect sites where plasticity occurs (change in mapping $\mathbf{M}$ or local index $m_3$).
+                    \item Identify nodes/points where the \textbf{3rd step of Lagrange reduction ($m_3$)} is activated.
                 \end{itemize}
                 
-                \item \textbf{\color{AcademicNavy} Neighbor Re-connection (Rebonding)}
+                \item \textbf{\color{AcademicNavy} Coordinate-Based Re-connection}
                 \begin{itemize}
-                    \item Re-evaluate and reset bond connectivity based on current spatial coordinates $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
+                    \item Re-connect all bonds globally based on the current spatial coordinates $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
                 \end{itemize}
                 
-                \item \textbf{\color{AcademicNavy} Iterative Relaxation}
+                \item \textbf{\color{AcademicNavy} Unconstrained Relaxation}
                 \begin{itemize}
-                    \item Repeat minimization and rebonding iteratively until the energy converges.
+                    \item Perform full iterative minimization until the energy reaches its global minimum (process ends when energy stops decreasing).
                 \end{itemize}
             \end{enumerate}
         \end{column}
         
-        \begin{column}{0.32\textwidth}
+        \begin{column}{0.35\textwidth}
             \centering
-            \begin{tikzpicture}[>=stealth, thick, node distance=1.4cm]
-                \node[draw, rounded corners, fill=gray!10] (min) {\footnotesize Minimize $W$};
-                \node[draw, diamond, aspect=2, below=of min, fill=white, inner sep=1pt] (check) {\tiny Plastic?};
-                \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Rebond};
-                \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=gray!10] (next) {\tiny Success};
+            \begin{tikzpicture}[>=stealth, thick, node distance=1.3cm]
+                \node[draw, rounded corners, fill=gray!10] (min1) {\footnotesize Minimize $W$};
+                \node[draw, diamond, aspect=2, below=of min1, fill=white, inner sep=1pt] (check) {\scriptsize $m_3$ active?};
+                \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Re-bond};
+                \node[draw, rounded corners, below=of reb, fill=gray!10] (min2) {\footnotesize Full Relaxation};
+                \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=AcademicNavy!10] (next) {\scriptsize Success};
                 
-                \draw[->] (min) -- (check);
-                \draw[->] (check) -- node[left] {\tiny Yes} (reb);
-                \draw[->] (reb.west) -- ++(-0.5,0) |- (min.west);
-                \draw[->] (check) -- node[above] {\tiny No} (next);
+                \draw[->] (min1) -- (check);
+                \draw[->] (check) -- node[left] {\scriptsize Yes} (reb);
+                \draw[->] (reb) -- (min2);
+                \draw[->] (min2.east) -- ++(0.3,0) |- (next.south);
+                \draw[->] (check) -- node[above] {\scriptsize No} (next);
             \end{tikzpicture}
         \end{column}
     \end{columns}
