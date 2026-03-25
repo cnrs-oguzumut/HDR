@@ -1259,40 +1259,43 @@
             \begin{enumerate}
                 \item \textbf{\color{AcademicNavy} Standard Energy Minimization}
                 \begin{itemize}
-                    \item Solve standard L-BFGS for $W(\mathbf{u}, \mathbf{M})$ at fixed loading step.
+                    \item Perform L-BFGS for $W(\mathbf{u}, \mathbf{M})$ at fixed loading step.
                 \end{itemize}
                 
-                \item \textbf{\color{AcademicNavy} Structural Detection ($m_3$)}
+                \item \textbf{\color{AcademicNavy} Large-Shear Activation ($m_3$)}
                 \begin{itemize}
-                    \item Identify nodes/points where the \textbf{3rd step of Lagrange reduction ($m_3$)} is activated.
+                    \item Identify nodes/points where the \textbf{3rd step of Lagrange reduction ($m_3$)} is triggered.
                 \end{itemize}
                 
-                \item \textbf{\color{AcademicNavy} Coordinate-Based Re-connection}
+                \item \textbf{\color{AcademicNavy} Global Relaxation Loop}
                 \begin{itemize}
-                    \item Re-connect all bonds globally based on the current spatial coordinates $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
-                \end{itemize}
-                
-                \item \textbf{\color{AcademicNavy} Unconstrained Relaxation}
-                \begin{itemize}
-                    \item Perform full iterative minimization until the energy reaches its global minimum (process ends when energy stops decreasing).
+                    \item \textit{While energy $E$ is decreasing:}
+                    \begin{itemize}
+                        \item \textbf{Re-bond:} Global connectivity update using current positions $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
+                        \item \textbf{Minimize:} Unconstrained relaxation of the energy with the new topology.
+                    \end{itemize}
+                    \item Convergence reached when the energy steady state is found.
                 \end{itemize}
             \end{enumerate}
         \end{column}
         
         \begin{column}{0.35\textwidth}
             \centering
-            \begin{tikzpicture}[>=stealth, thick, node distance=1.3cm]
-                \node[draw, rounded corners, fill=gray!10] (min1) {\footnotesize Minimize $W$};
+            \begin{tikzpicture}[>=stealth, thick, node distance=1.1cm]
+                \node[draw, rounded corners, fill=gray!10] (min1) {\footnotesize Standard Min.};
                 \node[draw, diamond, aspect=2, below=of min1, fill=white, inner sep=1pt] (check) {\scriptsize $m_3$ active?};
                 \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Re-bond};
-                \node[draw, rounded corners, below=of reb, fill=gray!10] (min2) {\footnotesize Full Relaxation};
+                \node[draw, rounded corners, below=of reb, fill=gray!10] (min2) {\footnotesize Full Min.};
+                \node[draw, diamond, aspect=2, below=of min2, fill=white, inner sep=1pt] (check2) {\tiny $\Delta E \approx 0$?};
                 \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=AcademicNavy!10] (next) {\scriptsize Success};
                 
                 \draw[->] (min1) -- (check);
-                \draw[->] (check) -- node[left] {\scriptsize Yes} (reb);
+                \draw[->] (check) -- node[left] {\tiny Yes} (reb);
                 \draw[->] (reb) -- (min2);
-                \draw[->] (min2.east) -- ++(0.3,0) |- (next.south);
-                \draw[->] (check) -- node[above] {\scriptsize No} (next);
+                \draw[->] (min2) -- (check2);
+                \draw[->] (check2.west) -- ++(-0.5,0) |- (reb.west) node[near start, left] {\tiny No};
+                \draw[->] (check2.east) -- ++(0.7,0) |- (next.south) node[near start, right] {\tiny Yes};
+                \draw[->] (check) -- node[above] {\tiny No} (next);
             \end{tikzpicture}
         \end{column}
     \end{columns}
