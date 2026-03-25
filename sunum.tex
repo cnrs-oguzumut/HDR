@@ -748,4 +748,55 @@
     \end{center}
 \end{frame}
 
+% Slide 18: Lattice deformation
+\begin{frame}{Lattice deformation}
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=1.3, every node/.style={transform shape=false}]
+            % --- Reference Lattice ---
+            \begin{scope}
+                \foreach \x in {0,1,2} {
+                    \foreach \y in {0,1} {
+                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.15);
+                    }
+                }
+                % Basis vectors
+                \draw[->, ultra thick] (0,0) -- (1,0) node[midway, below=3pt] {$\mathbf{e}_1$};
+                \draw[->, ultra thick] (0,0) -- (0,1) node[midway, left=3pt] {$\mathbf{e}_2$};
+            \end{scope}
+            
+            % --- Deformation Map F ---
+            \draw[->, ultra thick, AcademicNavy] (2.8, 0.5) -- (4.2, 0.5) node[midway, above=4pt] {\Large $\mathbf{F}$};
+            
+            % --- Deformed Lattice (Affine trans applying F) ---
+            \begin{scope}[shift={(5.5,0)}, cm={1.1, 0, 0.35, 1.0, (0,0)}]
+                \foreach \x in {0,1,2} {
+                    \foreach \y in {0,1} {
+                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.15);
+                    }
+                }
+                % Transformed Basis vectors
+                \draw[->, ultra thick] (0,0) -- (1,0) node[midway, below=3pt] {$\mathbf{f}_1$};
+                \draw[->, ultra thick] (0,0) -- (0,1) node[midway, left=4pt] {$\mathbf{f}_2$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \begin{flushleft}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Lattice deformation:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle \mathbf{f}_I = \mathbf{F} \mathbf{e}_I$}
+        
+        \vspace{0.4cm}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Lattice metric:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle C_{IJ} = \mathbf{f}_I \cdot \mathbf{f}_J = (\mathbf{F} \mathbf{e}_I) \cdot (\mathbf{F} \mathbf{e}_J) = \mathbf{e}_I \cdot (\mathbf{F}^T \mathbf{F}) \mathbf{e}_J$}
+        
+        \vspace{0.4cm}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Invariance under rigid body rotation:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle \mathbf{C}^* = (\mathbf{F}^*)^T \mathbf{F}^* = \mathbf{F}^T \mathbf{Q}^T \mathbf{Q} \mathbf{F} = \mathbf{F}^T \mathbf{F} = \mathbf{C}$}
+    \end{flushleft}
+    
+\end{frame}
+
 \end{document}
