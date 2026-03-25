@@ -9,7 +9,7 @@
 \usepackage{tikz}
 \usepackage{amsmath, amssymb, mathtools}
 \usepackage{animate} % Added for native sequence animations
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta, shapes.geometric, positioning}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
 \definecolor{SecondaryTitle}{RGB}{153, 0, 0} % Professional Dark Red
@@ -1252,7 +1252,51 @@
     \end{center}
 \end{frame}
 
-% Slide 33: Phase Field Evolution Simulation
+% Slide 33: Extension: Iterative Rebonding Algorithm
+\begin{frame}{Extension: Iterative Rebonding Algorithm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.65\textwidth}
+            \begin{enumerate}
+                \item \textbf{\color{AcademicNavy} Energy Minimization}
+                \begin{itemize}
+                    \item Perform standard L-BFGS minimization of $\displaystyle W(\mathbf{u}, \mathbf{M})$ at fixed loading.
+                \end{itemize}
+                
+                \item \textbf{\color{AcademicNavy} Plasticity Detection}
+                \begin{itemize}
+                    \item Detect sites where plasticity occurs (change in mapping $\mathbf{M}$ or local index $m_3$).
+                \end{itemize}
+                
+                \item \textbf{\color{AcademicNavy} Neighbor Re-connection (Rebonding)}
+                \begin{itemize}
+                    \item Re-evaluate and reset bond connectivity based on current spatial coordinates $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
+                \end{itemize}
+                
+                \item \textbf{\color{AcademicNavy} Iterative Relaxation}
+                \begin{itemize}
+                    \item Repeat minimization and rebonding iteratively until the energy converges.
+                \end{itemize}
+            \end{enumerate}
+        \end{column}
+        
+        \begin{column}{0.32\textwidth}
+            \centering
+            \begin{tikzpicture}[>=stealth, thick, node distance=1.4cm]
+                \node[draw, rounded corners, fill=gray!10] (min) {\footnotesize Minimize $W$};
+                \node[draw, diamond, aspect=2, below=of min, fill=white, inner sep=1pt] (check) {\tiny Plastic?};
+                \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Rebond};
+                \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=gray!10] (next) {\tiny Success};
+                
+                \draw[->] (min) -- (check);
+                \draw[->] (check) -- node[left] {\tiny Yes} (reb);
+                \draw[->] (reb.west) -- ++(-0.5,0) |- (min.west);
+                \draw[->] (check) -- node[above] {\tiny No} (next);
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 34: Phase Field Evolution Simulation
 \begin{frame}{Phase Field Evolution Simulation}
     \begin{center}
         \vspace{0.2cm}
