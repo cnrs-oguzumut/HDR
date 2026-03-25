@@ -837,4 +837,29 @@
     
 \end{frame}
 
+% Slide 20: Lagrange reduction
+\begin{frame}{Lagrange reduction}
+    
+    \vspace{0.4cm}
+    \begin{itemize}
+        \setlength\itemsep{0.3cm}
+        \item \textbf{if} $C_{12} < 0$, change sign to $C_{12}$;
+        \item \textbf{if} $C_{22} < C_{11}$, swap the two components;
+        \item \textbf{if} $2C_{12} > C_{11}$, set $C_{12} = C_{12} - C_{11}$ and $C_{22} = C_{22} + C_{11} - 2C_{12}$.
+    \end{itemize}
+    
+    \vspace{0.8cm}
+    \begin{itemize}
+        \setlength\itemsep{0.3cm}
+        \item initiate $\mathbf{m} = \mathbb{I}$;
+        \item define the following three matrices : \quad
+              $\displaystyle \mathbf{m}_1 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad \mathbf{m}_2 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \mathbf{m}_3 = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}$;
+        \item initiate recursive algorithm :
+        \item \textbf{if} $C_{12} < 0$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_1$;
+        \item \textbf{if} $C_{22} < C_{11}$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_2$;
+        \item \textbf{if} $2C_{12} > C_{11}$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_3$.
+    \end{itemize}
+    
+\end{frame}
+
 \end{document}
