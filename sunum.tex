@@ -951,4 +951,65 @@
     \end{center}
 \end{frame}
 
+% Slide 24: Landau theory with infinite symmetry
+\begin{frame}{Landau theory with infinite symmetry}
+
+    \begin{itemize}
+        \setlength\itemsep{0.25cm}
+        \item \textbf{How to construct the Landau energy for crystal ?}\\[0.1cm]
+        The energy should be a function of lattice vectors:
+        
+        \begin{center}
+            \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape=false}]
+                % Left box
+                \node[fill=gray!30, align=center, inner sep=6pt] at (-1.5, 0.5) {\Large $\mathbf{e}_a$};
+                % Reference Lattice
+                \begin{scope}
+                    \foreach \x in {0,1,2} {
+                        \foreach \y in {0,1} {
+                            \shade[ball color=gray!60] (\x,\y) circle (0.15);
+                        }
+                    }
+                    % Basis vectors
+                    \draw[->, thick] (0,0) -- (1,0) node[midway, below=3pt] {$e_1$};
+                    \draw[->, thick] (0,0) -- (0,1) node[midway, left=3pt] {$e_2$};
+                \end{scope}
+                
+                % Arrow
+                \draw[->, thick] (2.8, 0.5) -- (4.2, 0.5);
+                
+                % Right box
+                \node[fill=gray!30, align=center, inner sep=6pt] at (3.5, -0.1) {\large $\mathbf{f}_a = \mathbf{F} \mathbf{e}_a$};
+                
+                % Deformed Lattice
+                \begin{scope}[shift={(5.5,0)}]
+                    \foreach \x in {0,1,2} {
+                        \foreach \y in {0,1} {
+                            \shade[ball color=gray!60] ({\x*1.1 + \y*0.35}, {\y}) circle (0.15);
+                        }
+                    }
+                    \draw[->, thick] (0,0) -- (1.1, 0) node[midway, below=3pt] {$f_1$};
+                    \draw[->, thick] (0,0) -- (0.35, 1) node[midway, left=2pt] {$f_2$};
+                \end{scope}
+            \end{tikzpicture}
+        \end{center}
+        
+        \item \textbf{How the energy should change when we deform the crystal ?}\\[0.1cm]
+        $\mathbf{F}$ is a constant deformation gradient\\[0.1cm]
+        The energy should be a function of deformed lattice vectors
+        
+        \item \textbf{Objectivity} \hspace{0.5cm} 
+        \colorbox{gray!30}{\large \rule[-0.2cm]{0pt}{0.65cm} $\phi(\mathbf{f}_a \cdot \mathbf{f}_b) = \phi(\mathbf{F}^T \mathbf{F}) = \phi(\mathbf{C})$} 
+        \hspace{0.5cm} {\Large $\mathbf{F} \rightarrow \mathbf{Q}\mathbf{F}$}
+        
+        \hspace{0.5cm} $\mathbf{C}$ is the Cauchy-Green strain tensor or metric tensor (order parameter)
+        
+        \vspace{0.1cm}
+        \item \textbf{Lattice invariant shears} \hspace{0.5cm}
+        \colorbox{gray!30}{\large \rule[-0.2cm]{0pt}{0.65cm} $\phi(\tilde{\mathbf{C}}) = \phi(\mathbf{C})$} 
+        \hspace{0.5cm} {\Large $\mathbf{F} \rightarrow \mathbf{F}\mathbf{M}$} \hspace{0.3cm} {\Large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{C} \mathbf{M}$}
+    \end{itemize}
+
+\end{frame}
+
 \end{document}
