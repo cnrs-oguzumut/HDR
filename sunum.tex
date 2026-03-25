@@ -1269,7 +1269,7 @@
                 
                 \item \textbf{\color{AcademicNavy} Global Relaxation Loop}
                 \begin{itemize}
-                    \item \textit{While energy $E$ is decreasing:}
+                    \item \textit{While energy $W$ is decreasing:}
                     \begin{itemize}
                         \item \textbf{Re-bond:} Global connectivity update using current positions $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
                         \item \textbf{Minimize:} Unconstrained relaxation of the energy with the new topology.
@@ -1286,7 +1286,7 @@
                 \node[draw, diamond, aspect=2, below=of min1, fill=white, inner sep=1pt] (check) {\scriptsize $m_3$ active?};
                 \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Re-bond};
                 \node[draw, rounded corners, below=of reb, fill=gray!10] (min2) {\footnotesize Full Min.};
-                \node[draw, diamond, aspect=2, below=of min2, fill=white, inner sep=1pt] (check2) {\tiny $\Delta E \approx 0$?};
+                \node[draw, diamond, aspect=2, below=of min2, fill=white, inner sep=1pt] (check2) {\tiny $\Delta W \approx 0$?};
                 \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=AcademicNavy!10] (next) {\scriptsize Success};
                 
                 \draw[->] (min1) -- (check);
