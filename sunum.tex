@@ -2,13 +2,15 @@
 
 % --- Typography & Colors ---
 \usefonttheme[onlymath]{serif} % Professional serif math fonts
-\usepackage[sfdefault]{FiraSans} 
+\usepackage[sfdefault]{plex-sans} 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs} 
 \usepackage{tikz}
 \usepackage{amsmath, amssymb, mathtools}
 \usepackage{animate} % Added for native sequence animations
+\usepackage{multimedia} % Added for movies
+\usepackage{fontawesome5} % Added for icons
 \usetikzlibrary{arrows.meta, shapes.geometric, positioning}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
@@ -68,7 +70,7 @@
             {\tiny \color{AcademicNavy}\textbf{Rapporteurs}\\[0.1cm]
             \begin{tabular}{@{}p{3.0cm} l@{}}
                 Mme Maurine MONTAGNAT & \textit{DR CNRS, IGE} \\
-                M. Muhittin MUNGAN & \textit{Professeur, Univ. of Cologne} \\
+                M. Muhittin MUNGAN & \textit{Professeur, Université de Cologne} \\
                 M. Aurélien VATTRÉ & \textit{MR Onera, Univ. Paris-Saclay} \\
             \end{tabular}}
         \end{column}
@@ -76,7 +78,7 @@
         \begin{column}{0.48\textwidth}
             {\tiny \color{AcademicNavy}\textbf{Examinateurs}\\[0.1cm]
             \begin{tabular}{@{}p{3.0cm} l@{}}
-                Mme Véronique LAZARUS & \textit{Professure, ENSTA Paris} \\
+                Mme Véronique LAZARUS & \textit{Professeure, ENSTA Paris} \\
                 M. Nicolas AUFFRAY & \textit{Professeur, Sorbonne Université} \\
                 M. Denis GRATIAS & \textit{DR émérite CNRS, IRCP} \\
                 M. Damien FAURIE & \textit{Professeur, USPN} \\
@@ -496,7 +498,7 @@
 \end{frame}
 
 % Slide 13: Geometrically Nonlinear and Linear Elasticity
-\begin{frame}{Modeling: geometrically nonlinear and linear elasticity}
+\begin{frame}{Modeling: Geometrically Nonlinear and Linear Elasticity}
     
     % --- Custom TikZ Infographic ---
     \begin{center}
@@ -620,7 +622,7 @@
 
 
 
-% Slide 16: Molecular Dynamics and Crystallization
+% Slide 15: Molecular Dynamics and Crystallization
 \begin{frame}{Molecular Dynamics: Energy Minimization \& Crystallization}
     
     \begin{itemize}
@@ -695,7 +697,76 @@
     \end{center}
 \end{frame}
 
-% Slide 17: Lattice symmetry
+% Slide 16: Continuum Mechanics: Displacement Field Minimization
+\begin{frame}{Continuum Mechanics: Energy Minimization via Displacement}
+
+    \begin{itemize}
+        \item In the continuum framework, we minimize the total energy $W(\mathbf{u})$ with respect to the displacement field $\mathbf{u}(\mathbf{X})$.
+        \item A deformed triangular finite element converges to an optimal configuration where element size $h$ is minimized and geometry is regularized.
+        \item The minimization naturally leads to \textbf{stress equilibrium} and the optimal element shape.
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape}]
+
+            % --- Deformed Triangle (Left) ---
+            \begin{scope}[shift={(-2.8, 0)}]
+                \node[above] at (0.8, 3.2) {\textbf{\small Deformed}};
+
+                % Deformed triangle (distorted)
+                \draw[ultra thick, AcademicNavy] (0.2, 0.5) -- (2.0, 0.2) -- (1.6, 2.5) -- cycle;
+
+                % Nodes
+                \shade[ball color=SecondaryTitle] (0.2, 0.5) circle (0.12);
+                \shade[ball color=SecondaryTitle] (2.0, 0.2) circle (0.12);
+                \shade[ball color=SecondaryTitle] (1.6, 2.5) circle (0.12);
+
+                % Displacement vectors
+                \draw[->, thick, red!70] (0.2, 0.5) -- (0.45, 0.9) node[right, font=\tiny] {$\mathbf{u}_1$};
+                \draw[->, thick, red!70] (2.0, 0.2) -- (2.15, 0.65) node[right, font=\tiny] {$\mathbf{u}_2$};
+                \draw[->, thick, red!70] (1.6, 2.5) -- (1.35, 2.75) node[above, font=\tiny] {$\mathbf{u}_3$};
+            \end{scope}
+
+            % --- Arrow and Equation (Center) ---
+            \begin{scope}[shift={(0.5, 0)}]
+                \draw[->, ultra thick, SecondaryTitle] (0, 1.25) -- (1.2, 1.25);
+                \node[align=center, font=\tiny] at (0.6, 1.75) {$\arg\min_{\mathbf{u}}$};
+                \node[align=center, font=\tiny] at (0.6, 1.55) {$W(\mathbf{u})$};
+            \end{scope}
+
+            % --- Optimized Right Triangle (Right) ---
+            \begin{scope}[shift={(3.0, 0)}]
+                \node[above] at (0.8, 3.2) {\textbf{\small Optimized (90°)}};
+
+                % Right isosceles triangle (90 degrees at bottom-left)
+                \draw[ultra thick, AcademicNavy] (0, 0.2) -- (1.8, 0.2) -- (0, 1.8) -- cycle;
+
+                % Nodes
+                \shade[ball color=AcademicNavy] (0, 0.2) circle (0.12);
+                \shade[ball color=AcademicNavy] (1.8, 0.2) circle (0.12);
+                \shade[ball color=AcademicNavy] (0, 1.8) circle (0.12);
+
+                % Right angle marker
+                \draw[AcademicNavy, thick] (0.2, 0.2) -- (0.2, 0.4) -- (0, 0.4);
+
+                % Edge length markers
+                \draw[<->, thick, red] (-0.3, 0.2) -- (-0.3, 1.8) node[midway, left=3pt, font=\tiny, text=red] {$h$};
+                \draw[<->, thick, red] (0, -0.15) -- (1.8, -0.15) node[midway, below=2pt, font=\tiny, text=red] {$h$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% Slide 17: Single dislocation: MS vs MTM
+\begin{frame}{Single Dislocation: MS vs MTM}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth, height=0.85\textheight, keepaspectratio]{Figures/ms_mtm_comp.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 18: Lattice symmetry
 \begin{frame}{Lattice symmetry}
     
     \vspace{0.2cm}
@@ -739,7 +810,7 @@
     \end{center}
 \end{frame}
 
-% Slide 18: Lattice deformation
+% Slide 20: Lattice deformation
 \begin{frame}{Lattice deformation}
     
     \vspace{0.2cm}
@@ -828,7 +899,7 @@
     
 \end{frame}
 
-% Slide 20: Lagrange reduction
+% Slide 21: Lagrange reduction
 \begin{frame}{Lagrange reduction}
     
     \vspace{0.4cm}
@@ -928,26 +999,45 @@
 
 \end{frame}
 
-% Slide 22: Slip vs. Shear mechanics and elastic energy
+% Slide 23: Slip vs. Shear mechanics and elastic energy
 \begin{frame}{Slip vs. Shear mechanics and elastic energy}
     \begin{center}
         \includegraphics[width=\textwidth, height=0.88\textheight, keepaspectratio]{Figures/Slip_vs_Shear.png}
     \end{center}
 \end{frame}
 
-% Slide 23: Plasticity Models
+% Slide 24: Plasticity Models
 \begin{frame}{Plasticity: Dislocations as carriers}
     \begin{center}
         \includegraphics[width=\textwidth, height=0.88\textheight, keepaspectratio]{Figures/Plasticity.png}
     \end{center}
 \end{frame}
 
-% Slide 24: Landau theory with infinite symmetry
+\begin{frame}{Theoretical Context \& Historical Bottlenecks}
+    \begin{itemize}
+        \item \textbf{Foundational 1D Models}: Frenkel--Kontorova and Peierls--Nabarro [1, 2].
+        \item \textbf{Numerical Transition}: Ginzburg--Landau formalism [3--5].
+        \item \textbf{Geometric Hurdles}: Cubic grids on triangular lattices [3]. 
+        \item \textbf{Structural Bottleneck}: Linearized strains prevent capturing lattice rotations [6--8].
+        \item \textbf{Successes in Large Deformations}: Reaction pathways-based potentials [9] and symmetry-based reversibility [10].
+    \end{itemize}
+
+    \begin{center}
+        \includegraphics[width=0.35\textwidth, keepaspectratio]{Figures/baggio.png}
+    \end{center}
+
+    \vspace{0.1cm}
+    {\tiny 
+    {[1]} Kontorova \& Frenkel (1939) \quad {[2]} Peierls (1940) \quad {[3]} Onuki (2003) \quad {[4]} Onuki et al. (2005) \quad {[5]} Minami \& Onuki (2007) \\
+    {[6]} Geslin et al. (2014) \quad {[7]} Salman \& Truskinovsky (2011) \quad {[8]} Salman \& Truskinovsky (2012) \quad {[9]} Denoual \& Vattré (2016) \quad {[10]} Bhattacharya et al. (2004)}
+\end{frame}
+
+% Slide 25: Landau theory with infinite symmetry
 \begin{frame}{Landau theory with infinite symmetry}
 
     \begin{itemize}
         \setlength\itemsep{0.25cm}
-        \item \textbf{How to construct the Landau energy for crystal ?}\\[0.1cm]
+        \item \textbf{How to Construct the Landau Energy for a Crystal}\\[0.1cm]
         The energy should be a function of lattice vectors:
         
         \begin{center}
@@ -985,7 +1075,7 @@
             \end{tikzpicture}
         \end{center}
         
-        \item \textbf{How the energy should change when we deform the crystal ?}\\[0.1cm]
+        \item \textbf{How Should the Energy Change When We Deform the Crystal?}\\[0.1cm]
         $\mathbf{F}$ is a constant deformation gradient\\[0.1cm]
         The energy should be a function of deformed lattice vectors
         
@@ -1003,21 +1093,21 @@
 
 \end{frame}
 
-% Slide 25: Energy landscape for a square crystal
+% Slide 26: Energy landscape for a square crystal
 \begin{frame}{Energy landscape for a square crystal}
     \begin{center}
         \includegraphics[width=0.7\textwidth, height=0.65\textheight, keepaspectratio]{Figures/Fig1-b.pdf}
     \end{center}
 \end{frame}
 
-% Slide 26: Constructing Landau energy
+% Slide 27: Constructing Landau energy
 \begin{frame}{Constructing Landau energy}
     \begin{center}
         \includegraphics[width=0.9\textwidth, keepaspectratio]{Figures/Figure5.pdf}
     \end{center}
 \end{frame}
 
-% Slide 27: Numerical implementation
+% Slide 28: Numerical implementation
 \begin{frame}{Numerical implementation}
     \vspace{-0.3cm}
     \begin{columns}[c, onlytextwidth]
@@ -1052,8 +1142,14 @@
                     }
                 }
                 
-                \vspace{0.4cm}
-                {\small \color{red!80!black} \textbf{Plasticity is the geometrical\\ update of the $\mathbf{m}(\mathbf{C})$ tensor}}
+                \vspace{0.6cm}
+                \begin{center}
+                    \colorbox{SecondaryTitle!15}{
+                        \rule[-0.2cm]{0pt}{0.6cm}
+                        \Large \textbf{\color{SecondaryTitle} Plasticity: Geometrical Update of $\mathbf{m}(\mathbf{C})$}
+                        \rule[-0.2cm]{0pt}{0.0cm}
+                    }
+                \end{center}
             \end{flushleft}
         \end{column}
         
@@ -1103,7 +1199,7 @@
 \end{frame}
 
 
-% Slide 28: Stability Loss in Perfect Crystals
+% Slide 29: Stability Loss in Perfect Crystals
 \begin{frame}{Stability Loss in Perfect Crystals}
     \vspace{0.4cm}
     \centering
@@ -1133,7 +1229,7 @@
                     \centering \rule{0pt}{0.35cm}
                     \textbf{\color{red!80!black} Linearization} \\
                     \vspace{0.2cm}
-                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \rightarrow [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta}=0$
+                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \rightarrow [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}] \cdot \boldsymbol{\eta}=0$
                     \rule[-0.3cm]{0pt}{0.35cm}
                 \end{minipage}
             }
@@ -1170,10 +1266,14 @@
     {\scriptsize (Unit vector $\boldsymbol{\zeta} = (\cos \xi, \sin \xi)$ characterizes the loss of convexity.)}
 \end{frame}
 
+% Slide 30: Numerical Stability Limit Analysis
+\begin{frame}{Numerical Stability Limit Analysis}
+    \begin{center}
+        \includegraphics[width=0.70\textwidth, height=0.65\textheight, keepaspectratio]{Figures/Fig111.pdf}
+    \end{center}
+\end{frame}
 
-
-
-% Slide 29: Numerical results: Dislocation dipole
+% Slide 31: Numerical results: Dislocation dipole
 \begin{frame}{Numerical results: Dislocation dipole}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.55\textwidth}
@@ -1216,8 +1316,8 @@
     \end{columns}
 \end{frame}
 
-% Slide 30: Comparison with literature
-\begin{frame}{Numerical results: Comparison with literature}
+% Slide 32: Comparison with literature
+\begin{frame}{Numerical results: Comparison with Baggio et al.}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.5\textwidth}
             \centering
@@ -1226,7 +1326,7 @@
             \animategraphics[autoplay,loop,width=6.8cm]{8}{./nathan_frames/frame_}{001}{086}
             
             \vspace{0.2cm}
-            {\tiny \color{gray} \textit{(Requires Adobe Acrobat Reader or Okular to animate)}}
+            % Subtitle removed
             
             \vspace{0.4cm}
             \begin{flushleft}
@@ -1246,26 +1346,26 @@
             \includegraphics[width=0.75\textwidth, keepaspectratio]{Figures/LD16854cvr_copie.pdf}
             
             \vspace{0.4cm}
-            {\small Baggio et. al, PRL, 2019}
+            {\small Baggio et al., PRL, 2019}
         \end{column}
     \end{columns}
 \end{frame}
 
-% Slide 31: Numerical results: Shear banding and localization
+% Slide 32: Numerical results: Shear banding and localization
 \begin{frame}{Numerical results: Shear banding and localization}
     \begin{center}
         \includegraphics[width=0.85\textwidth, keepaspectratio]{Figures/Fig3.pdf}
     \end{center}
 \end{frame}
 
-% Slide 32: Numerical results: Stress-strain response
+% Slide 33: Numerical results: Stress-strain response
 \begin{frame}{Numerical results: Stress-strain response}
     \begin{center}
         \includegraphics[width=\textwidth, keepaspectratio]{Figures/Fig4.pdf}
     \end{center}
 \end{frame}
 
-% Slide 33: Critical exponents and finite size scaling
+% Slide 34: Critical exponents and finite size scaling
 \begin{frame}{Critical exponents and finite size scaling}
     \begin{columns}[c]
         % --- Left: Figures Grid ---
@@ -1310,7 +1410,25 @@
     \end{columns}
 \end{frame}
 
-% Slide 34: Mesh Effect in Lagrangian Description
+% Slide 35: Configurational space representation
+\begin{frame}{Configurational Space Representation}
+    \vfill
+    \begin{center}
+        \renewcommand{\arraystretch}{0.5}
+        \begin{tabular}{cc}
+            \includegraphics[height=3.6cm]{Figures/poincare_triangles_10000.png} &
+            \includegraphics[height=3.6cm]{Figures/poincare_triangles_10070.png} \\
+            {\tiny $\alpha=0.2$} & {\tiny $\alpha=0.3$} \\
+            \addlinespace[0.4cm]
+            \includegraphics[height=3.6cm]{Figures/poincare_triangles_10680.png} &
+            \includegraphics[height=3.6cm]{Figures/poincare_triangles_10990.png} \\
+            {\tiny $\alpha=0.5$} & {\tiny $\alpha=0.7$}
+        \end{tabular}
+    \end{center}
+    \vfill
+\end{frame}
+
+% Slide 36: Mesh Effect in Lagrangian Description
 \begin{frame}{Mesh Effect in Lagrangian Description}
     \begin{center}
         \includegraphics[width=0.85\textwidth, height=0.45\textheight, keepaspectratio]{Figures/Fig7_zoom.pdf}
@@ -1323,7 +1441,7 @@
     \end{center}
 \end{frame}
 
-% Slide 35: Extension: Iterative Rebonding Algorithm
+% Slide 37: Extension: Iterative Rebonding Algorithm
 \begin{frame}{Extension: Iterative Rebonding Algorithm}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.62\textwidth}
@@ -1372,7 +1490,14 @@
     \end{columns}
 \end{frame}
 
-% Slide 36: Numerical Results: Post-Rebonding Relaxation
+% Slide 38: Rebonding in Action
+\begin{frame}{Rebonding in Action}
+    \begin{center}
+        \animategraphics[autoplay,loop,width=1.0\textwidth]{10}{side_by_side_frames/frame_}{001}{162}
+    \end{center}
+\end{frame}
+
+% Slide 40: Numerical Results: Post-Rebonding Relaxation
 \begin{frame}{Numerical Results: Post-Rebonding Relaxation}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.48\textwidth}
@@ -1395,14 +1520,228 @@
     \end{center}
 \end{frame}
 
-% Slide 37: Phase Field Evolution Simulation
+% Slide 41: Phase Field Evolution Simulation
 \begin{frame}{Phase Field Evolution Simulation}
+    \begin{itemize}
+        \item Phase-field dynamics showing domain evolution and microstructure formation
+        \item Color represents order parameter evolution during deformation
+        \item Domain boundaries emerge through energetically driven dynamics
+    \end{itemize}
+
+    \vfill
+
     \begin{center}
-        \vspace{0.2cm}
+        \vspace{0.1cm}
         \animategraphics[autoplay,loop,width=10.5cm]{3}{fps_frames/frame_}{001}{243}
-        
-        \vspace{0.4cm}
-        {\footnotesize \color{gray} \textit{(Requires Adobe Acrobat Reader or Okular to animate)}}
+    \end{center}
+\end{frame}
+
+% Slide 42: Grain Boundary formation
+\begin{frame}{Grain Boundary formation}
+    \begin{itemize}
+        \item Self-organized grain boundary formation through phase-field dynamics
+        \item Two initially disordered grains rotate to minimize system energy
+        \item Grain boundary emerges as sharp interface separating distinct crystallographic orientations
+    \end{itemize}
+
+    \vfill
+
+    \begin{center}
+        \vspace{0.1cm}
+        % Native animation from frames
+        \animategraphics[autoplay,loop,width=10.5cm]{20}{gb_frames/frame_}{001}{100}
+    \end{center}
+\end{frame}
+
+% Slide 43: Grain Boundary configurations
+\begin{frame}{Grain Boundary configurations}
+    \vspace{0.8cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\theta = 5^\circ$}} \\[0.2cm]
+            \includegraphics[height=3.8cm, keepaspectratio]{Figures/gb_theta5.png}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\theta = 15^\circ$}} \\[0.2cm]
+            \includegraphics[height=3.8cm, keepaspectratio]{Figures/gb_theta15.png}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\Sigma 5$ boundary}} \\[0.2cm]
+            \includegraphics[height=4.8cm, keepaspectratio]{Figures/gb_special_sigma.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+% Slide 44: Nano-indentation
+\begin{frame}{Nano-indentation}
+    \vspace{0.4cm}
+    \begin{columns}[T, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small \color{AcademicNavy} \textbf{no rebonding}}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small \color{AcademicNavy} \textbf{rebonding}}
+        \end{column}
+    \end{columns}
+    \vspace{0.2cm}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/indentation2.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 45: Pantographic Metamaterials
+\begin{frame}{Pantographic Metamaterials: Structure and Applications}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.95\textwidth, height=0.6\textheight, keepaspectratio]{Figures/pantomat.png}
+            {\tiny Reference and deformed configurations}
+        \end{column}
+
+        \begin{column}{0.48\textwidth}
+            {\small \textbf{\color{AcademicNavy} Structure:}}
+            \begin{itemize}
+                \item Two orthogonal families of fibers
+                \item Interconnected by \textbf{hinges}
+                \item Creates distinctive meso-architecture
+            \end{itemize}
+
+            \vspace{0.2cm}
+            {\small \textbf{\color{AcademicNavy} Theory:}}
+            \begin{itemize}
+                \item Described by \textbf{second-gradient continuum mechanics}
+                \item Bending of fibers contributes to strain energy
+                \item Energy depends on \textbf{second gradient} of displacement
+            \end{itemize}
+
+            \vspace{0.2cm}
+            {\small \textbf{\color{AcademicNavy} Applications:}}
+            \begin{itemize}
+                \item Acoustic metamaterials (wave control)
+                \item Auxetic materials (negative Poisson ratio)
+                \item Impact absorption and damping
+                \item Aerospace composites
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 46: Reconstructive Phase transitions
+\begin{frame}{Reconstructive Phase Transitions}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Molecular Dynamics (MD)}} \\[0.3cm]
+            \includegraphics[width=0.95\textwidth, height=0.68\textheight, keepaspectratio]{Figures/Figure7.pdf}
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Mesoscopic Tensorial Model}} \\[0.3cm]
+            \includegraphics[width=0.95\textwidth, height=0.68\textheight, keepaspectratio]{Figures/Figure20.jpg}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 46: Partial and Full Dislocations Comparison
+\begin{frame}{Partial and Full Dislocations: Microstructure}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small Partial Dislocations} \\[0.2cm]
+            \includegraphics[width=0.95\textwidth, height=0.7\textheight, keepaspectratio]{Figures/partials.pdf}
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small Cauchy-Born vs. Generalized Stacking Fault} \\[0.2cm]
+            \includegraphics[width=0.95\textwidth, height=0.7\textheight, keepaspectratio]{Figures/cbr_gsf_comparison.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 47: Mesoscopic Tensorial Model - Physical Meaning and Theory
+\begin{frame}{Physical Meaning \& Metric Decomposition}
+    \begin{columns}[T, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            {\small \textbf{\color{AcademicNavy} Full Dislocation:}} A complete lattice translation. After passage, every atom sits on a site previously occupied by another atom. No defect remains—that's why full dislocations are called \textbf{``perfect.''} \\[0.3cm]
+
+            {\small \textbf{\color{AcademicNavy} Partial Dislocation:}} Shifts atoms to positions that don't coincide with the original lattice, creating a stacking fault—the ABC sequence becomes disrupted. \\[0.3cm]
+
+            {\small \textbf{\color{red!70} Why Cauchy-Born Fails:}} Partials involve interactions \textbf{beyond nearest neighbors}, which Cauchy-Born cannot capture.
+        \end{column}
+
+        \begin{column}{0.48\textwidth}
+            {\tiny \textbf{\color{AcademicNavy} Metric Components:}}
+            \begin{align*}
+                C_{ss} &= \hat{\mathbf{s}}^T \mathbf{C} \hat{\mathbf{s}} = |\mathbf{F}\hat{\mathbf{s}}|^2 \\
+                C_{nn} &= \hat{\mathbf{n}}^T \mathbf{C} \hat{\mathbf{n}} = |\mathbf{F}\hat{\mathbf{n}}|^2 \\
+                C_{sn} &= \hat{\mathbf{s}}^T \mathbf{C} \hat{\mathbf{n}} = (\mathbf{F}\hat{\mathbf{s}}) \cdot (\mathbf{F}\hat{\mathbf{n}})
+            \end{align*}
+
+            {\tiny \textbf{Physical meanings:}
+            \begin{itemize}
+                \item $C_{ss}$: stretch of slip direction
+                \item $C_{nn}$: stretch of plane normal
+                \item $C_{sn}$: loss of orthogonality
+            \end{itemize}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 48: Congruence Decomposition and Corrected Energy
+\begin{frame}{Corrected Registries: $\alpha$ and $\beta$}
+    \vspace{0.2cm}
+    % Top section: Full and Partial side by side
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.45\textwidth}
+            \centering
+            {\small \textbf{\color{AcademicNavy} For Full Dislocations:}}
+            \[
+                \boxed{\beta = \frac{\hat{\mathbf{s}}_{\text{full}}^T \mathbf{C}\, \hat{\mathbf{n}}}{\hat{\mathbf{s}}_{\text{full}}^T \mathbf{C}\, \hat{\mathbf{s}}_{\text{full}}}}
+            \]
+        \end{column}
+
+        \begin{column}{0.45\textwidth}
+            \centering
+            {\small \textbf{\color{AcademicNavy} For Partial Dislocations:}}
+            \[
+                \boxed{\alpha = \frac{\hat{\mathbf{s}}_{\text{part}}^T \mathbf{C}\, \hat{\mathbf{n}}}{\hat{\mathbf{s}}_{\text{part}}^T \mathbf{C}\, \hat{\mathbf{s}}_{\text{part}}}}
+            \]
+        \end{column}
+    \end{columns}
+
+    \vspace{0.3cm}
+
+    {\small Both measure the \textbf{projection of deformed normal} onto deformed slip direction, normalized by elastic stretch.}
+
+    \vfill
+
+    % Bottom center: Energy centered at bottom
+    \begin{center}
+        {\small \textbf{\color{AcademicNavy} Corrected Energy Decomposition:}}
+
+        \vspace{0.15cm}
+        \[
+            \Psi_{\text{total}} = W_{\text{CB}}(\mathbf{C}_e) + \gamma(\alpha, \beta)
+        \]
+
+        {\tiny
+        \begin{itemize}
+            \item $W_{\text{CB}}(\mathbf{C}_e)$: Cauchy-Born energy on elastic metric only
+            \item $\gamma(\alpha,\beta)$: Atomistic gamma surface at registries $\alpha, \beta$
+            \item Elastic metric: $C_e^{nn} = C_{nn} - C_{sn}^2/C_{ss}$
+        \end{itemize}
+        }
+
+        \vspace{0.1cm}
+        {\small \textbf{Key insight:} Energy depends on \textbf{both} $\alpha$ and $\beta$, predicting which dislocation type forms.}
     \end{center}
 \end{frame}
 
