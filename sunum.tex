@@ -105,7 +105,91 @@
     \titlepage
 \end{frame}
 
-% Slide 2
+% Slide 2: LSPM Historical Timeline with Publications
+\begin{frame}{LSPM Research Evolution}
+    \vspace*{-0.3cm}
+    \begin{columns}[T, totalwidth=\textwidth]
+        % --- LEFT COLUMN: Spiral Timeline ---
+        \column{0.28\textwidth}
+        \centering
+        \vspace{0.5cm}
+        \begin{tikzpicture}[scale=0.7, font=\small]
+            % --- Background: Concentric circles ---
+            \foreach \r in {1.0, 2.0, 3.0, 4.0} {
+                \draw[AcademicNavy!8, line width=0.3pt] (0,0) circle (\r);
+            }
+
+            % --- Milestone nodes (condensed spiral) ---
+            \node[circle, fill=AcademicNavy!75, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (340:1.1) (m1) {1980};
+            \node[circle, fill=AcademicNavy!68, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (70:1.6) (m2) {1985};
+            \node[circle, fill=AcademicNavy!58, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (120:2.0) (m3) {1998};
+            \node[circle, fill=SecondaryTitle!70, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (190:3.0) (m4) {2000s};
+            \node[circle, fill=SecondaryTitle!76, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (255:3.6) (m5) {2010};
+            \node[circle, fill=AcademicNavy!45, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (310:4.1) (m6) {Future};
+
+            % --- Spiral connecting path ---
+            \draw[AcademicNavy!30, line width=0.8pt] (m1) to[bend right=15] (m2);
+            \draw[AcademicNavy!25, line width=0.8pt] (m2) to[bend right=15] (m3);
+            \draw[AcademicNavy!20, line width=0.8pt] (m3) to[bend right=15] (m4);
+            \draw[SecondaryTitle!30, line width=0.8pt] (m4) to[bend right=15] (m5);
+            \draw[AcademicNavy!20, line width=0.8pt] (m5) to[bend right=15] (m6);
+
+        \end{tikzpicture}
+
+        % --- SPACER ---
+        \column{0.12\textwidth}
+        % --- RIGHT COLUMN: Publications List ---
+        \column{0.60\textwidth}
+        \vspace{0.0cm}
+        \hspace{0.5cm}{\large \color{AcademicNavy}\textbf{Key Publications \& Directions}}
+
+        \vspace{0.3cm}
+
+        % --- 1980s ---
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!75} 1980s: Crystal Plasticity}
+
+        \hspace{0.5cm}{\footnotesize Franciosi, Berveiller, Zaoui --- \textit{Strain Hardening Framework}}
+
+
+        \vspace{0.2cm}
+
+        % --- 1998 ---
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!58} 1998: Variational Methods}
+
+        \hspace{0.5cm}{\footnotesize Brancfort \& Marigo --- \textit{Variational Brittle Fracture}}
+
+        \vspace{0.2cm}
+
+        % --- 2000s ---
+        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!65} 2000s: Modern Methods}
+
+        \hspace{0.5cm}{\footnotesize Bourdin, Franciosi \& Marigo --- \textit{Phase-Field}}
+
+        \hspace{0.5cm}{\footnotesize Bacroix, Brenner, Otsuka --- \textit{Transformation \& FFT}}
+
+        \hspace{0.5cm}{\footnotesize Bacroix, Franciosi et al. --- \textit{Crystal Plasticity}}
+
+        \vspace{0.2cm}
+
+        % --- Future ---
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!45} Future: Emergent Directions}
+
+        \hspace{0.5cm}{\footnotesize Small-scale material behavior}
+
+        \hspace{0.5cm}{\footnotesize Meta-materials \& architectured systems}
+    \end{columns}
+
+    \vfill
+    {\centering \tiny \color{AcademicNavy!60} Plasticity \& hardening foundations $\rightarrow$ Modern computational materials science}
+\end{frame}
+
+% Slide 3
 \begin{frame}{Non-linear phenomena}
     \vspace*{0.3cm}
     % --- TOP ROW: Crystals & Transitions ---
