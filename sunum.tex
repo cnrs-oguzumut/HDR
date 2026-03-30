@@ -167,13 +167,16 @@
         \vspace{0.2cm}
 
         % --- 2000s ---
-        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!65} 2000s: Modern Methods}
-
-        \hspace{0.5cm}{\footnotesize Bourdin, Franciosi \& Marigo --- \textit{Phase-Field}}
+        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!65} 2000s: Phase Transformations}
 
         \hspace{0.5cm}{\footnotesize Bacroix, Brenner, Otsuka --- \textit{Transformation \& FFT}}
 
-        \hspace{0.5cm}{\footnotesize Bacroix, Franciosi et al. --- \textit{Crystal Plasticity}}
+        \vspace{0.2cm}
+
+        % --- 2010 ---
+        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!76} 2010: Crystal Plasticity}
+
+        \hspace{0.5cm}{\footnotesize Ioanescu --- \textit{Dynamic Crystal Plasticity: An Eulerian Approach}}
 
         \vspace{0.2cm}
 
@@ -266,15 +269,10 @@
     {\centering\color{AcademicNavy!30}\rule{0.6\textwidth}{0.4pt}\par}
     \vfill
 
-    \begin{center}
-        \begin{minipage}{0.85\textwidth}
-            \begin{block}{Unifying Perspective}
-                \centering
-                \vspace{0.1cm}
-                These phenomena are inherently \textbf{\color{AcademicNavy} displacement-driven} (\textit{non-diffusive}) and can be studied within the \textbf{same context} of displacive instabilities.
-            \end{block}
-        \end{minipage}
-    \end{center}
+    \begin{block}{Unifying Perspective}
+        \vspace{0.1cm}
+        These phenomena are inherently displacement-driven (non-diffusive)
+    \end{block}
 \end{frame}
 
 % Slide 4
@@ -637,16 +635,12 @@
         \begin{tikzpicture}[>=stealth, scale=1.1, every node/.style={transform shape}]
             
             % --- Reference configuration ---
-            % thin black axes
-            \draw[->, thick] (-0.4, -0.4) -- (1.2, -0.4) node[midway, below=2pt] {$\mathbf{e}_1^A$};
-            \draw[->, thick] (-0.4, -0.4) -- (-0.4, 1.2) node[midway, left=2pt] {$\mathbf{e}_2^A$};
-            
             % Square
             \draw[fill=lightgray, draw=black, thick] (0,0) rectangle (1,1);
-            
-            % Basises vectors (red arrows)
-            \draw[->, ultra thick, red] (0,0) -- (1,0); 
-            \draw[->, ultra thick, red] (0,0) -- (0,1);
+
+            % Basis vectors (red arrows) with labels
+            \draw[->, ultra thick, red] (0,0) -- (1,0) node[below right=-2pt] {$\mathbf{e}_1^A$};
+            \draw[->, ultra thick, red] (0,0) -- (0,1) node[left=3pt] {$\mathbf{e}_2^A$};
             
             % Blue dots
             \foreach \x in {0,1} \foreach \y in {0,1} \fill[AcademicNavy] (\x,\y) circle (3pt);
@@ -1226,14 +1220,6 @@
                     }
                 }
                 
-                \vspace{0.6cm}
-                \begin{center}
-                    \colorbox{SecondaryTitle!15}{
-                        \rule[-0.2cm]{0pt}{0.6cm}
-                        \Large \textbf{\color{SecondaryTitle} Plasticity: Geometrical Update of $\mathbf{m}(\mathbf{C})$}
-                        \rule[-0.2cm]{0pt}{0.0cm}
-                    }
-                \end{center}
             \end{flushleft}
         \end{column}
         
@@ -1274,12 +1260,19 @@
                     }
                 }
                 
-                \vspace{0.3cm}
-                \centering
-                {\large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$}
             \end{flushleft}
         \end{column}
     \end{columns}
+
+    \vspace{0.3cm}
+    \begin{center}
+        \colorbox{SecondaryTitle!15}{
+            \rule[-0.2cm]{0pt}{0.6cm}\hspace{0.3cm}
+            \Large \textbf{\color{SecondaryTitle} Plasticity: Geometrical Update of $\mathbf{m}(\mathbf{C})$}
+            \quad $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$
+            \hspace{0.3cm}\rule[-0.2cm]{0pt}{0.6cm}
+        }
+    \end{center}
 \end{frame}
 
 
@@ -1607,9 +1600,8 @@
 % Slide 41: Phase Field Evolution Simulation
 \begin{frame}{Phase Field Evolution Simulation}
     \begin{itemize}
-        \item Phase-field dynamics showing domain evolution and microstructure formation
-        \item Color represents order parameter evolution during deformation
-        \item Domain boundaries emerge through energetically driven dynamics
+        \item MTM simulations showing domain evolution and microstructure formation
+        \item Color represents the strain-energy density field
     \end{itemize}
 
     \vfill
@@ -1811,10 +1803,14 @@
     \begin{center}
         {\small \textbf{\color{AcademicNavy} Corrected Energy Decomposition:}}
 
-        \vspace{0.15cm}
-        \[
-            \Psi_{\text{total}} = W_{\text{CB}}(\mathbf{C}_e) + \gamma(\alpha, \beta)
-        \]
+        \vspace{0.1cm}
+        \fbox{%
+        \begin{minipage}{0.6\textwidth}
+        \centering\vspace{0.05cm}
+        $\displaystyle\Psi_{\text{total}} = W_{\text{CB}}(\mathbf{C}_e) + \gamma(\alpha, \beta)$
+        \vspace{0.05cm}
+        \end{minipage}
+        }
 
         {\tiny
         \begin{itemize}
