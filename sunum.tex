@@ -700,150 +700,6 @@
 
 
 
-% Slide 15: Molecular Dynamics and Crystallization
-\begin{frame}{Molecular Dynamics: Energy Minimization \& Crystallization}
-    
-    \begin{itemize}
-        \item In molecular dynamics, atoms interact via a strong pairwise repulsive-attractive potential (like the Lennard-Jones potential), featuring a stable energy minimum at atomic spacing $r = r_{eq}$.
-        \item When the global energy of the system is minimized, chaotic atomic arrangements escape high-energy states and spontaneously organize into a \textbf{stable crystal lattice} where spacing equilibrates at $r = r_{lattice}$.
-    \end{itemize}
-    
-    \vspace{0.6cm}
-    \begin{center}
-        \begin{tikzpicture}[>=stealth, scale=0.88, every node/.style={transform shape}]
-            
-            % --- LJ Curve (Left) ---
-            \begin{scope}[shift={(-2.8, 0.5)}]
-                \clip (-0.7, -2.2) rectangle (3.2, 2.9); 
-                \draw[->, thick] (0, -1.8) -- (0, 2.2) node[above] {$V(r)$};
-                \draw[->, thick] (-0.2, 0) -- (2.8, 0) node[right] {$r$};
-                % LJ Curve: V(r) = e*( (1/r)^12 - 2*(1/r)^6 ) -> min at r=1, V=-e
-                \draw[ultra thick, AcademicNavy, domain=0.86:2.8, samples=100] plot (\x, { 1.5*( (1/\x)^12 - 2*(1/\x)^6 ) });
-                
-                % r_eq min marking
-                \draw[dashed, thick] (1, 0) -- (1, -1.5);
-                \fill[SecondaryTitle] (1, -1.5) circle (3pt) node[below=3pt, font=\small, text=black] {$r_{eq}$};
-                
-                % Two interacting atoms illustration (shifted right to avoid V-axis and LJ curve)
-                \def\atomradius{0.18}
-                \def\cloudradius{0.38}
-                
-                % Electron clouds (transparent overlapping)
-                \fill[AcademicNavy, opacity=0.15] (1.3, 1.7) circle (\cloudradius);
-                \fill[AcademicNavy, opacity=0.15] (2.3, 1.7) circle (\cloudradius);
-                
-                % Atoms (Shiny 3D balls)
-                \shade[ball color=AcademicNavy] (1.3, 1.7) circle (\atomradius);
-                \shade[ball color=AcademicNavy] (2.3, 1.7) circle (\atomradius);
-                
-                \draw[<->, thick] (1.48, 1.7) -- (2.12, 1.7) node[midway, below=1pt, font=\footnotesize] {$r$};
-            \end{scope}
-
-            % --- Initial State (Center) ---
-            \begin{scope}[shift={(1.8, -1)}]
-                \draw[ultra thick] (0,0) rectangle (3,3);
-                \node[above] at (1.5, 3) {\textbf{Initial State}};
-                
-                % 16 random coordinates loosely matching the user's screenshot
-                \foreach \p in {(0.4, 0.5), (1.2, 0.4), (2.6, 0.7), (0.7, 1.3), (2.2, 1.1), (1.8, 1.6), (0.5, 2.1), (2.6, 1.8), (2.1, 2.4), (0.8, 2.6), (1.3, 2.1), (2.8, 2.7), (0.4, 1.4), (1.9, 0.5), (1.7, 2.8), (1.1, 0.9)} {
-                    \shade[ball color=AcademicNavy] \p circle (0.18);
-                }
-            \end{scope}
-            
-            % --- Arrow ---
-            \draw[->, ultra thick, SecondaryTitle] (5.1, 0.5) -- (6.6, 0.5) node[midway, above=2pt] {\textbf{Minimize}};
-            
-            % --- Crystal State (Right) ---
-            \begin{scope}[shift={(7.0, -1)}]
-                \draw[ultra thick] (0,0) rectangle (3,3);
-                \node[above] at (1.5, 3) {\textbf{Crystal Lattice}};
-                
-                % 4x4 array of atoms
-                \foreach \x in {0.45, 1.15, 1.85, 2.55} {
-                    \foreach \y in {0.45, 1.15, 1.85, 2.55} {
-                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.18);
-                    }
-                }
-                
-                % Distance marker (dimension lines projected below atoms to avoid overlap)
-                \draw[thick] (0.45, 0.25) -- (0.45, 0.08);
-                \draw[thick] (1.15, 0.25) -- (1.15, 0.08);
-                \draw[<->, thick, red] (0.45, 0.15) -- (1.15, 0.15) node[midway, below=2pt, font=\small] {$r_{lattice}$};
-            \end{scope}
-            
-        \end{tikzpicture}
-    \end{center}
-\end{frame}
-
-% Slide 16: Continuum Mechanics: Displacement Field Minimization
-\begin{frame}{Continuum Mechanics: Energy Minimization via Displacement}
-
-    \begin{itemize}
-        \item In the continuum framework, we minimize the total energy $W(\mathbf{u})$ with respect to the displacement field $\mathbf{u}(\mathbf{X})$.
-        \item A deformed triangular finite element converges to an optimal configuration where element size $h$ is minimized and geometry is regularized.
-        \item The minimization naturally leads to \textbf{stress equilibrium} and the optimal element shape.
-    \end{itemize}
-
-    \vspace{0.3cm}
-    \begin{center}
-        \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape}]
-
-            % --- Deformed Triangle (Left) ---
-            \begin{scope}[shift={(-2.8, 0)}]
-                \node[above] at (0.8, 3.2) {\textbf{\small Deformed}};
-
-                % Deformed triangle (distorted)
-                \draw[ultra thick, AcademicNavy] (0.2, 0.5) -- (2.0, 0.2) -- (1.6, 2.5) -- cycle;
-
-                % Nodes
-                \shade[ball color=SecondaryTitle] (0.2, 0.5) circle (0.12);
-                \shade[ball color=SecondaryTitle] (2.0, 0.2) circle (0.12);
-                \shade[ball color=SecondaryTitle] (1.6, 2.5) circle (0.12);
-
-                % Displacement vectors
-                \draw[->, thick, red!70] (0.2, 0.5) -- (0.45, 0.9) node[right, font=\tiny] {$\mathbf{u}_1$};
-                \draw[->, thick, red!70] (2.0, 0.2) -- (2.15, 0.65) node[right, font=\tiny] {$\mathbf{u}_2$};
-                \draw[->, thick, red!70] (1.6, 2.5) -- (1.35, 2.75) node[above, font=\tiny] {$\mathbf{u}_3$};
-            \end{scope}
-
-            % --- Arrow and Equation (Center) ---
-            \begin{scope}[shift={(0.5, 0)}]
-                \draw[->, ultra thick, SecondaryTitle] (0, 1.25) -- (1.2, 1.25);
-                \node[align=center, font=\tiny] at (0.6, 1.75) {$\arg\min_{\mathbf{u}}$};
-                \node[align=center, font=\tiny] at (0.6, 1.55) {$W(\mathbf{u})$};
-            \end{scope}
-
-            % --- Optimized Right Triangle (Right) ---
-            \begin{scope}[shift={(3.0, 0)}]
-                \node[above] at (0.8, 3.2) {\textbf{\small Optimized (90°)}};
-
-                % Right isosceles triangle (90 degrees at bottom-left)
-                \draw[ultra thick, AcademicNavy] (0, 0.2) -- (1.8, 0.2) -- (0, 1.8) -- cycle;
-
-                % Nodes
-                \shade[ball color=AcademicNavy] (0, 0.2) circle (0.12);
-                \shade[ball color=AcademicNavy] (1.8, 0.2) circle (0.12);
-                \shade[ball color=AcademicNavy] (0, 1.8) circle (0.12);
-
-                % Right angle marker
-                \draw[AcademicNavy, thick] (0.2, 0.2) -- (0.2, 0.4) -- (0, 0.4);
-
-                % Edge length markers
-                \draw[<->, thick, red] (-0.3, 0.2) -- (-0.3, 1.8) node[midway, left=3pt, font=\tiny, text=red] {$h$};
-                \draw[<->, thick, red] (0, -0.15) -- (1.8, -0.15) node[midway, below=2pt, font=\tiny, text=red] {$h$};
-            \end{scope}
-
-        \end{tikzpicture}
-    \end{center}
-\end{frame}
-
-% Slide 17: Single dislocation: MS vs MTM
-\begin{frame}{Single Dislocation: MS vs MTM}
-    \begin{center}
-        \includegraphics[width=0.95\textwidth, height=0.85\textheight, keepaspectratio]{Figures/ms_mtm_comp.pdf}
-    \end{center}
-\end{frame}
-
 % Slide 18: Lattice symmetry
 \begin{frame}{Lattice symmetry}
     
@@ -1185,7 +1041,127 @@
     \end{center}
 \end{frame}
 
-% Slide 28: Numerical implementation
+% Slide 28: Molecular Dynamics and Crystallization
+\begin{frame}{Molecular Dynamics: Energy Minimization \& Crystallization}
+
+    \begin{itemize}
+        \item In molecular dynamics, atoms interact via a strong pairwise repulsive-attractive potential (like the Lennard-Jones potential), featuring a stable energy minimum at atomic spacing $r = r_{eq}$.
+        \item When the global energy of the system is minimized, chaotic atomic arrangements escape high-energy states and spontaneously organize into a \textbf{stable crystal lattice} where spacing equilibrates at $r = r_{lattice}$.
+    \end{itemize}
+
+    \vspace{0.6cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.88, every node/.style={transform shape}]
+
+            % --- LJ Curve (Left) ---
+            \begin{scope}[shift={(-2.8, 0.5)}]
+                \clip (-0.7, -2.2) rectangle (3.2, 2.9);
+                \draw[->, thick] (0, -1.8) -- (0, 2.2) node[above] {$V(r)$};
+                \draw[->, thick] (-0.2, 0) -- (2.8, 0) node[right] {$r$};
+                % LJ Curve: V(r) = e*( (1/r)^12 - 2*(1/r)^6 ) -> min at r=1, V=-e
+                \draw[ultra thick, AcademicNavy, domain=0.86:2.8, samples=100] plot (\x, { 1.5*( (1/\x)^12 - 2*(1/\x)^6 ) });
+
+                % r_eq min marking
+                \draw[dashed, thick] (1, 0) -- (1, -1.5);
+                \fill[SecondaryTitle] (1, -1.5) circle (3pt) node[below=3pt, font=\small, text=black] {$r_{eq}$};
+
+                % Two interacting atoms illustration (shifted right to avoid V-axis and LJ curve)
+                \def\atomradius{0.18}
+                \def\cloudradius{0.38}
+
+                % Electron clouds (transparent overlapping)
+                \fill[AcademicNavy, opacity=0.15] (1.3, 1.7) circle (\cloudradius);
+                \fill[AcademicNavy, opacity=0.15] (2.3, 1.7) circle (\cloudradius);
+
+                % Atoms (Shiny 3D balls)
+                \shade[ball color=AcademicNavy] (1.3, 1.7) circle (\atomradius);
+                \shade[ball color=AcademicNavy] (2.3, 1.7) circle (\atomradius);
+
+                \draw[<->, thick] (1.48, 1.7) -- (2.12, 1.7) node[midway, below=1pt, font=\footnotesize] {$r$};
+            \end{scope}
+
+            % --- Initial State (Center) ---
+            \begin{scope}[shift={(1.8, -1)}]
+                \draw[ultra thick] (0,0) rectangle (3,3);
+                \node[above] at (1.5, 3) {\textbf{Initial State}};
+
+                \foreach \p in {(0.4, 0.5), (1.2, 0.4), (2.6, 0.7), (0.7, 1.3), (2.2, 1.1), (1.8, 1.6), (0.5, 2.1), (2.6, 1.8), (2.1, 2.4), (0.8, 2.6), (1.3, 2.1), (2.8, 2.7), (0.4, 1.4), (1.9, 0.5), (1.7, 2.8), (1.1, 0.9)} {
+                    \shade[ball color=AcademicNavy] \p circle (0.18);
+                }
+            \end{scope}
+
+            % --- Arrow ---
+            \draw[->, ultra thick, SecondaryTitle] (5.1, 0.5) -- (6.6, 0.5) node[midway, above=2pt] {\textbf{Minimize}};
+
+            % --- Crystal State (Right) ---
+            \begin{scope}[shift={(7.0, -1)}]
+                \draw[ultra thick] (0,0) rectangle (3,3);
+                \node[above] at (1.5, 3) {\textbf{Crystal Lattice}};
+
+                \foreach \x in {0.45, 1.15, 1.85, 2.55} {
+                    \foreach \y in {0.45, 1.15, 1.85, 2.55} {
+                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.18);
+                    }
+                }
+
+                \draw[thick] (0.45, 0.25) -- (0.45, 0.08);
+                \draw[thick] (1.15, 0.25) -- (1.15, 0.08);
+                \draw[<->, thick, red] (0.45, 0.15) -- (1.15, 0.15) node[midway, below=2pt, font=\small] {$r_{lattice}$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% Slide 29: Continuum Mechanics: Displacement Field Minimization
+\begin{frame}{Continuum Mechanics: Energy Minimization via Displacement}
+
+    \begin{itemize}
+        \item In the continuum framework, we minimize the total energy $W(\mathbf{u})$ with respect to the displacement field $\mathbf{u}(\mathbf{X})$.
+        \item A deformed triangular finite element converges to an optimal configuration where element size $h$ is minimized and geometry is regularized.
+        \item The minimization naturally leads to \textbf{stress equilibrium} and the optimal element shape.
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape}]
+
+            % --- Deformed Triangle (Left) ---
+            \begin{scope}[shift={(-2.8, 0)}]
+                \node[above] at (0.8, 3.2) {\textbf{\small Deformed}};
+                \draw[ultra thick, AcademicNavy] (0.2, 0.5) -- (2.0, 0.2) -- (1.6, 2.5) -- cycle;
+                \shade[ball color=SecondaryTitle] (0.2, 0.5) circle (0.12);
+                \shade[ball color=SecondaryTitle] (2.0, 0.2) circle (0.12);
+                \shade[ball color=SecondaryTitle] (1.6, 2.5) circle (0.12);
+                \draw[->, thick, red!70] (0.2, 0.5) -- (0.45, 0.9) node[right, font=\tiny] {$\mathbf{u}_1$};
+                \draw[->, thick, red!70] (2.0, 0.2) -- (2.15, 0.65) node[right, font=\tiny] {$\mathbf{u}_2$};
+                \draw[->, thick, red!70] (1.6, 2.5) -- (1.35, 2.75) node[above, font=\tiny] {$\mathbf{u}_3$};
+            \end{scope}
+
+            % --- Arrow and Equation (Center) ---
+            \begin{scope}[shift={(0.5, 0)}]
+                \draw[->, ultra thick, SecondaryTitle] (0, 1.25) -- (1.2, 1.25);
+                \node[align=center, font=\tiny] at (0.6, 1.75) {$\arg\min_{\mathbf{u}}$};
+                \node[align=center, font=\tiny] at (0.6, 1.55) {$W(\mathbf{u})$};
+            \end{scope}
+
+            % --- Optimized Right Triangle (Right) ---
+            \begin{scope}[shift={(3.0, 0)}]
+                \node[above] at (0.8, 3.2) {\textbf{\small Optimized (90°)}};
+                \draw[ultra thick, AcademicNavy] (0, 0.2) -- (1.8, 0.2) -- (0, 1.8) -- cycle;
+                \shade[ball color=AcademicNavy] (0, 0.2) circle (0.12);
+                \shade[ball color=AcademicNavy] (1.8, 0.2) circle (0.12);
+                \shade[ball color=AcademicNavy] (0, 1.8) circle (0.12);
+                \draw[AcademicNavy, thick] (0.2, 0.2) -- (0.2, 0.4) -- (0, 0.4);
+                \draw[<->, thick, red] (-0.3, 0.2) -- (-0.3, 1.8) node[midway, left=3pt, font=\tiny, text=red] {$h$};
+                \draw[<->, thick, red] (0, -0.15) -- (1.8, -0.15) node[midway, below=2pt, font=\tiny, text=red] {$h$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% Slide 29: Numerical implementation
 \begin{frame}{Numerical implementation}
     \vspace{-0.3cm}
     \begin{columns}[c, onlytextwidth]
@@ -1208,7 +1184,7 @@
                     }
                 }
             \end{tikzpicture}
-            
+
             \vspace{0.4cm}
             \begin{flushleft}
                 \textbf{\color{red!80!black} First Piola-Kirchhoff stress} \\
@@ -1219,10 +1195,10 @@
                         $\mathbf{P} = 2\mathbf{F}\mathbf{M}\boldsymbol{\Sigma}\mathbf{M}^T$
                     }
                 }
-                
+
             \end{flushleft}
         \end{column}
-        
+
         % --- Right Column: Equations ---
         \begin{column}{0.54\textwidth}
             \begin{flushleft}
@@ -1235,7 +1211,7 @@
                         $\displaystyle \begin{array}{l} \mathbf{u}(\mathbf{X}) = \mathbf{u}_i N_i \\ \mathbf{F} = \mathbf{I} + \mathbf{u}_i \otimes \nabla N_i \end{array}$ \hfill \null
                     \end{minipage}
                 }
-                
+
                 \vspace{0.3cm}
                 \textbf{\color{red!80!black} Solve numerically with L-BFGS:} \\
                 \vspace{0.05cm}
@@ -1245,7 +1221,7 @@
                         $\displaystyle 0 = \frac{\partial W}{\partial \mathbf{u}_i} = \int_{\Omega} \mathbf{P} \nabla N_i d\Omega$
                     \end{minipage}
                 }
-                
+
                 \vspace{0.3cm}
                 \textbf{\color{red!80!black} Geometrically nonlinear elasticity} \\
                 \vspace{0.05cm}
@@ -1253,13 +1229,13 @@
                     \centering
                     \colorbox{white}{
                         \rule[-0.4cm]{0pt}{1.0cm}
-                        $\displaystyle \boldsymbol{\Sigma} = \left[ \begin{matrix} 
+                        $\displaystyle \boldsymbol{\Sigma} = \left[ \begin{matrix}
                             \frac{\partial \Phi^0}{\partial \tilde{C}_{11}} & \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} \\[0.15cm]
                             \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} & \frac{\partial \Phi^0}{\partial \tilde{C}_{22}}
                         \end{matrix} \right]$
                     }
                 }
-                
+
             \end{flushleft}
         \end{column}
     \end{columns}
@@ -1275,8 +1251,57 @@
     \end{center}
 \end{frame}
 
+% Slide 30: Single dislocation: MS vs MTM
+\begin{frame}{Single Dislocation: MS vs MTM}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth, height=0.85\textheight, keepaspectratio]{Figures/ms_mtm_comp.pdf}
+    \end{center}
+\end{frame}
 
-% Slide 29: Stability Loss in Perfect Crystals
+% Slide 31: Numerical results: Dislocation dipole
+\begin{frame}{Numerical results: Dislocation dipole}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \centering
+            \colorbox{gray!10}{
+                \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/dipole.png}
+            }
+        \end{column}
+
+        \begin{column}{0.42\textwidth}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} Configuration:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Periodic boundary conditions \\
+                        $\bullet$ Dislocation pair $\pm \mathbf{b}$ \\
+                        $\bullet$ Energy-minimized lattice
+                    \end{minipage}
+                }
+
+                \vspace{0.8cm}
+                \textbf{\color{red!80!black} Model parameters:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Order parameter $\mathbf{m}(\mathbf{C})$ \\
+                        $\bullet$ Linear finite elements \\
+                        $\bullet$ L-BFGS minimization
+                    \end{minipage}
+                }
+
+                \vspace{0.8cm}
+                \centering
+                \textbf{\large Stable dipole configuration}
+            \end{flushleft}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 32: Stability Loss in Perfect Crystals
 \begin{frame}{Stability Loss in Perfect Crystals}
     \vspace{0.4cm}
     \centering
@@ -1350,50 +1375,7 @@
     \end{center}
 \end{frame}
 
-% Slide 31: Numerical results: Dislocation dipole
-\begin{frame}{Numerical results: Dislocation dipole}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.55\textwidth}
-            \centering
-            \colorbox{gray!10}{
-                \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/dipole.png}
-            } 
-        \end{column}
-        
-        \begin{column}{0.42\textwidth}
-            \begin{flushleft}
-                \textbf{\color{red!80!black} Configuration:} \\
-                \vspace{0.1cm}
-                \colorbox{gray!20}{
-                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
-                        \small
-                        $\bullet$ Periodic boundary conditions \\
-                        $\bullet$ Dislocation pair $\pm \mathbf{b}$ \\
-                        $\bullet$ Energy-minimized lattice
-                    \end{minipage}
-                }
-                
-                \vspace{0.8cm}
-                \textbf{\color{red!80!black} Model parameters:} \\
-                \vspace{0.1cm}
-                \colorbox{gray!20}{
-                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
-                        \small
-                        $\bullet$ Order parameter $\mathbf{m}(\mathbf{C})$ \\
-                        $\bullet$ Linear finite elements \\
-                        $\bullet$ L-BFGS minimization
-                    \end{minipage}
-                }
-                
-                \vspace{0.8cm}
-                \centering
-                \textbf{\large Stable dipole configuration}
-            \end{flushleft}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% Slide 32: Comparison with literature
+% Slide 33: Comparison with literature
 \begin{frame}{Numerical results: Comparison with Baggio et al.}
     \begin{columns}[c, onlytextwidth]
         \begin{column}{0.5\textwidth}
@@ -1431,7 +1413,7 @@
 % Slide 32: Numerical results: Shear banding and localization
 \begin{frame}{Numerical results: Shear banding and localization}
     \begin{center}
-        \includegraphics[width=0.85\textwidth, keepaspectratio]{Figures/Fig3.pdf}
+        \includegraphics[width=0.80\textwidth, height=0.82\textheight, keepaspectratio]{Figures/Fig3.pdf}
     \end{center}
 \end{frame}
 
@@ -1625,7 +1607,7 @@
     \begin{center}
         \vspace{0.1cm}
         % Native animation from frames
-        \animategraphics[autoplay,loop,width=10.5cm]{20}{gb_frames/frame_}{001}{100}
+        \animategraphics[autoplay,loop,width=8.5cm,height=0.58\textheight,keepaspectratio]{20}{gb_frames/frame_}{001}{100}
     \end{center}
 \end{frame}
 
@@ -1672,157 +1654,392 @@
 \end{frame}
 
 % Slide 45: Pantographic Metamaterials
-\begin{frame}{Pantographic Metamaterials: Structure and Applications}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \centering
-            \includegraphics[width=0.95\textwidth, height=0.6\textheight, keepaspectratio]{Figures/pantomat.png}
-            {\tiny Reference and deformed configurations}
-        \end{column}
+% Last slide: Pantographic structure and second-gradient bending energy
+\begin{frame}{Pantographic Structures \& Second-Gradient Elasticity}
+    \vspace{-0.2cm}
 
-        \begin{column}{0.48\textwidth}
-            {\small \textbf{\color{AcademicNavy} Structure:}}
-            \begin{itemize}
-                \item Two orthogonal families of fibers
-                \item Interconnected by \textbf{hinges}
-                \item Creates distinctive meso-architecture
-            \end{itemize}
+    % --- TOP: image ---
+    \begin{center}
+        \includegraphics[width=0.92\textwidth, height=0.46\textheight, keepaspectratio]{Figures/pantograph.png}
+    \end{center}
 
-            \vspace{0.2cm}
-            {\small \textbf{\color{AcademicNavy} Theory:}}
-            \begin{itemize}
-                \item Described by \textbf{second-gradient continuum mechanics}
-                \item Bending of fibers contributes to strain energy
-                \item Energy depends on \textbf{second gradient} of displacement
-            \end{itemize}
+    \vspace{0.05cm}
 
-            \vspace{0.2cm}
-            {\small \textbf{\color{AcademicNavy} Applications:}}
-            \begin{itemize}
-                \item Acoustic metamaterials (wave control)
-                \item Auxetic materials (negative Poisson ratio)
-                \item Impact absorption and damping
-                \item Aerospace composites
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% Slide 46: Reconstructive Phase transitions
-\begin{frame}{Reconstructive Phase Transitions}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\scriptsize \color{AcademicNavy} \textbf{Molecular Dynamics (MD)}} \\[0.3cm]
-            \includegraphics[width=0.95\textwidth, height=0.68\textheight, keepaspectratio]{Figures/Figure7.pdf}
-        \end{column}
-        \hfill
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\scriptsize \color{AcademicNavy} \textbf{Mesoscopic Tensorial Model}} \\[0.3cm]
-            \includegraphics[width=0.95\textwidth, height=0.68\textheight, keepaspectratio]{Figures/Figure20.jpg}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% Slide 46: Partial and Full Dislocations Comparison
-\begin{frame}{Partial and Full Dislocations: Microstructure}
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\small Partial Dislocations} \\[0.2cm]
-            \includegraphics[width=0.95\textwidth, height=0.7\textheight, keepaspectratio]{Figures/partials.pdf}
-        \end{column}
-        \hfill
-        \begin{column}{0.48\textwidth}
-            \centering
-            {\small Cauchy-Born vs. Generalized Stacking Fault} \\[0.2cm]
-            \includegraphics[width=0.95\textwidth, height=0.7\textheight, keepaspectratio]{Figures/cbr_gsf_comparison.png}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% Slide 47: Mesoscopic Tensorial Model - Physical Meaning and Theory
-\begin{frame}{Physical Meaning \& Metric Decomposition}
+    % --- BOTTOM: three columns ---
     \begin{columns}[T, onlytextwidth]
-        \begin{column}{0.48\textwidth}
-            {\small \textbf{\color{AcademicNavy} Full Dislocation:}} A complete lattice translation. After passage, every atom sits on a site previously occupied by another atom. No defect remains—that's why full dislocations are called \textbf{``perfect.''} \\[0.3cm]
-
-            {\small \textbf{\color{AcademicNavy} Partial Dislocation:}} Shifts atoms to positions that don't coincide with the original lattice, creating a stacking fault—the ABC sequence becomes disrupted. \\[0.3cm]
-
-            {\small \textbf{\color{red!70} Why Cauchy-Born Fails:}} Partials involve interactions \textbf{beyond nearest neighbors}, which Cauchy-Born cannot capture.
+        \begin{column}{0.30\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Inextensible beams + free pivots}\\[0.1cm]
+            {\footnotesize Affine deformation is a \textbf{mechanism}: beams scissor freely $\Rightarrow$ \textbf{zero elastic energy} (case a). Only \textbf{non-affine} deformation forces bending (case b).}
         \end{column}
 
-        \begin{column}{0.48\textwidth}
-            {\tiny \textbf{\color{AcademicNavy} Metric Components:}}
-            \begin{align*}
-                C_{ss} &= \hat{\mathbf{s}}^T \mathbf{C} \hat{\mathbf{s}} = |\mathbf{F}\hat{\mathbf{s}}|^2 \\
-                C_{nn} &= \hat{\mathbf{n}}^T \mathbf{C} \hat{\mathbf{n}} = |\mathbf{F}\hat{\mathbf{n}}|^2 \\
-                C_{sn} &= \hat{\mathbf{s}}^T \mathbf{C} \hat{\mathbf{n}} = (\mathbf{F}\hat{\mathbf{s}}) \cdot (\mathbf{F}\hat{\mathbf{n}})
-            \end{align*}
+        \begin{column}{0.36\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Purely second-gradient energy}\\[0.1cm]
+            \colorbox{gray!12}{%
+                \begin{minipage}{\linewidth}
+                \centering\vspace{0.04cm}
+                $\displaystyle W = \int \frac{\lambda_1^2}{2}(u'')^2\, dx$
+                \vspace{0.04cm}
+                \end{minipage}
+            }\\[0.1cm]
+            {\footnotesize \textbf{No first-gradient term}: $(u'')^2$ is not a correction — it \textbf{is} the leading-order energy.}
+        \end{column}
 
-            {\tiny \textbf{Physical meanings:}
-            \begin{itemize}
-                \item $C_{ss}$: stretch of slip direction
-                \item $C_{nn}$: stretch of plane normal
-                \item $C_{sn}$: loss of orthogonality
-            \end{itemize}}
+        \begin{column}{0.30\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Applications}\\[0.1cm]
+            {\footnotesize First physical realization of a \textbf{second-gradient elastic material}. Enables: \textbf{lightweight aerospace} structures, \textbf{soft robotics}, \textbf{biomedical scaffolds}, and \textbf{impact-absorbing metamaterials}. Fabricable by \textbf{3D printing}.}
         \end{column}
     \end{columns}
 \end{frame}
 
-% Slide 48: Congruence Decomposition and Corrected Energy
-\begin{frame}{Corrected Registries: $\alpha$ and $\beta$}
-    \vspace{0.2cm}
-    % Top section: Full and Partial side by side
-    \begin{columns}[c, onlytextwidth]
-        \begin{column}{0.45\textwidth}
+% Last slide: Spring-chain embedded in pantograph — from 1st to 2nd gradient
+\begin{frame}{From First- to Second-Gradient Elasticity via Pantograph}
+    \vspace{-0.1cm}
+    \begin{columns}[T, onlytextwidth]
+
+        % ---- LEFT: plain spring chain ----
+        \begin{column}{0.48\textwidth}
             \centering
-            {\small \textbf{\color{AcademicNavy} For Full Dislocations:}}
-            \[
-                \boxed{\beta = \frac{\hat{\mathbf{s}}_{\text{full}}^T \mathbf{C}\, \hat{\mathbf{n}}}{\hat{\mathbf{s}}_{\text{full}}^T \mathbf{C}\, \hat{\mathbf{s}}_{\text{full}}}}
-            \]
+            {\footnotesize\bfseries\color{AcademicNavy} Conventional spring chain}\\[0.15cm]
+            \includegraphics[width=\textwidth, height=1.6cm, keepaspectratio]{Figures/Page3_Fig1.png}\\[0.2cm]
+            {\footnotesize\bfseries Discrete energy:}\\[0.1cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{0.92\linewidth}
+                \centering\vspace{0.1cm}
+                $\displaystyle E_S(\mathbf{u}) = a \sum_{i=0}^{N-1} f \left( \frac{u_{i+1}-u_i}{a} \right)$
+                \vspace{0.1cm}
+                \end{minipage}
+            }\\[0.15cm]
+            {\footnotesize Conventional limit $(a\to 0)$ yields classical first-gradient elasticity.}
         \end{column}
 
-        \begin{column}{0.45\textwidth}
+        % ---- RIGHT: pantograph-embedded chain ----
+        \begin{column}{0.48\textwidth}
             \centering
-            {\small \textbf{\color{AcademicNavy} For Partial Dislocations:}}
-            \[
-                \boxed{\alpha = \frac{\hat{\mathbf{s}}_{\text{part}}^T \mathbf{C}\, \hat{\mathbf{n}}}{\hat{\mathbf{s}}_{\text{part}}^T \mathbf{C}\, \hat{\mathbf{s}}_{\text{part}}}}
-            \]
+            {\footnotesize\bfseries\color{AcademicNavy} Pantograph-embedded chain}\\[0.15cm]
+            \includegraphics[width=\textwidth, height=1.6cm, keepaspectratio]{Figures/Page5_Fig1.png}\\[0.2cm]
+            {\footnotesize\bfseries Discrete energy:}\\[0.1cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{0.92\linewidth}
+                \centering\vspace{0.1cm}
+                $\displaystyle E_B(\mathbf{u}) = a \sum_{i=1}^{N-1} \frac{\lambda_1^2}{2} \left( \frac{u_{i+1}+u_{i-1}-2u_i}{a^2} \right)^2$
+                \vspace{0.1cm}
+                \end{minipage}
+            }\\[0.15cm]
+            {\footnotesize Embedded pantograph mechanisms introduce \textbf{second-gradient} energy terms.}
         \end{column}
+
     \end{columns}
-
-    \vspace{0.3cm}
-
-    {\small Both measure the \textbf{projection of deformed normal} onto deformed slip direction, normalized by elastic stretch.}
 
     \vfill
-
-    % Bottom center: Energy centered at bottom
     \begin{center}
-        {\small \textbf{\color{AcademicNavy} Corrected Energy Decomposition:}}
-
-        \vspace{0.1cm}
-        \fbox{%
-        \begin{minipage}{0.6\textwidth}
-        \centering\vspace{0.05cm}
-        $\displaystyle\Psi_{\text{total}} = W_{\text{CB}}(\mathbf{C}_e) + \gamma(\alpha, \beta)$
-        \vspace{0.05cm}
-        \end{minipage}
+        {\footnotesize\bfseries Combined Continuum Limit $(a \to 0)$:}\\[0.1cm]
+        \colorbox{AcademicNavy!10}{%
+            \begin{minipage}{0.65\linewidth}
+            \centering\vspace{0.2cm}
+            \Large \color{AcademicNavy}
+            $\displaystyle E(u) = \int_0^1 \left( f(\varepsilon) + \frac{\lambda_1^2}{2} \varepsilon'^2 \right) dx$
+            \vspace{0.2cm}
+            \end{minipage}
         }
-
-        {\tiny
-        \begin{itemize}
-            \item $W_{\text{CB}}(\mathbf{C}_e)$: Cauchy-Born energy on elastic metric only
-            \item $\gamma(\alpha,\beta)$: Atomistic gamma surface at registries $\alpha, \beta$
-            \item Elastic metric: $C_e^{nn} = C_{nn} - C_{sn}^2/C_{ss}$
-        \end{itemize}
-        }
-
-        \vspace{0.1cm}
-        {\small \textbf{Key insight:} Energy depends on \textbf{both} $\alpha$ and $\beta$, predicting which dislocation type forms.}
     \end{center}
+\end{frame}
+
+\begin{frame}{Localization in the absence of Second Gradient ($\lambda_1 = 0$)}
+    \centering
+    \vspace{-0.4cm}
+
+    % --- TOP: Energy Density ---
+    \colorbox{AcademicNavy!5}{
+        \begin{minipage}{0.40\textwidth}
+            \centering\vspace{0.05cm}
+            {\footnotesize\bfseries\color{AcademicNavy} 1. Energy Density: Softening}\\[0.05cm]
+            \includegraphics[width=\textwidth, height=2.2cm, keepaspectratio]{delocal_images/Page3_Fig2.png}
+            \vspace{0.05cm}
+        \end{minipage}
+    }
+
+    \vspace{0.15cm}
+
+    % --- BOTTOM: Numerical Result (Featured) ---
+    \colorbox{AcademicNavy!5}{
+        \begin{minipage}{0.90\textwidth}
+            \centering\vspace{0.1cm}
+            {\small\bfseries\color{AcademicNavy} 2. Numerical Result: Localization}\\[0.1cm]
+            \includegraphics[width=\textwidth, height=3.5cm, keepaspectratio]{delocal_images/Page4_Fig1_v.png}
+            \vspace{0.1cm}
+        \end{minipage}
+    }
+\end{frame}
+
+\begin{frame}{Second-Gradient Elasticity ($\lambda_1 > 0$)}
+    \centering
+    \vspace{-0.1cm}
+    
+    \colorbox{AcademicNavy!5}{
+        \begin{minipage}{0.92\textwidth}
+            \centering\vspace{0.1cm}
+            {\small\bfseries\color{AcademicNavy} Numerical Solution with Second Gradient}\\[0.1cm]
+            \includegraphics[width=\textwidth, height=5.0cm, keepaspectratio]{delocal_images/Page5_Fig2_i.png}
+            \vspace{0.1cm}
+        \end{minipage}
+    }
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Conclusion:} The pantograph-induced second gradient penalizes localization.
+    \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}{Stability Analysis and Critical Loading}
+    \vspace{-0.1cm}
+    \begin{columns}[c, onlytextwidth]
+        % --- Left: Equations ---
+        \begin{column}{0.46\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Continuum Energy Functional:}\\[0.10cm]
+            \colorbox{gray!10}{\begin{minipage}{0.98\linewidth}
+                \vspace{0.08cm}
+                {\small$E(u) = \int_0^1 \!\left( f(\varepsilon) + \tfrac{\lambda_1^2}{2} \varepsilon'^2 \right) dx$} \hfill {\small(6)}
+                \vspace{0.08cm}
+            \end{minipage}}\\[0.15cm]
+
+            {\footnotesize\bfseries\color{AcademicNavy} Linearized Perturbation ($s = u - u^0$):}\\[0.10cm]
+            \colorbox{gray!10}{\begin{minipage}{0.98\linewidth}
+                \vspace{0.08cm}
+                {\small$-\lambda_1^2 s'''' + \tfrac{\partial^2 f}{\partial \varepsilon^2}(\bar{\varepsilon})\,s'' = 0$} \hfill {\small(7)}
+                \vspace{0.08cm}
+            \end{minipage}}\\[0.06cm]
+            {\scriptsize\color{gray} ansatz: $s(x) \sim \sin(n\pi x)$}\\[0.12cm]
+
+            {\footnotesize\bfseries\color{AcademicNavy} Critical Loading Condition:}\\[0.10cm]
+            \colorbox{gray!10}{\begin{minipage}{0.98\linewidth}
+                \vspace{0.08cm}
+                {\small$\tfrac{\partial^2 f}{\partial \varepsilon^2}(\bar{\varepsilon}) = -\lambda_1^2(n\pi)^2$} \hfill {\small(8)}
+                \vspace{0.08cm}
+            \end{minipage}}
+        \end{column}
+
+        % --- Right: Image ---
+        \begin{column}{0.51\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{
+                \begin{minipage}{\dimexpr\linewidth-6pt\relax}
+                    \centering\vspace{0.1cm}
+                    \includegraphics[width=\textwidth, height=6.5cm, keepaspectratio]{delocal_images/Page6_Fig1_v.png}
+                    \\[0.1cm]
+                    {\scriptsize\bfseries\color{AcademicNavy} Critical wavelength of instability vs.\ $\lambda_1$}
+                    \vspace{0.1cm}
+                \end{minipage}
+            }
+        \end{column}
+    \end{columns}
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Result:} Critical loading condition determines the onset of strain localization; second-gradient term $\lambda_1$ sets the wavelength of instability.
+    \end{beamercolorbox}
+\end{frame}
+
+% ── NEW SLIDE ────────────────────────────────────────────────────────────────
+\begin{frame}{Non-Equilibrium Solutions}
+    \vspace{-0.1cm}
+
+    % --- Top: three-panel figure ---
+    \begin{center}
+        \colorbox{AcademicNavy!5}{%
+            \begin{minipage}{0.97\textwidth}
+                \centering\vspace{0.08cm}
+                \includegraphics[width=\textwidth, height=4.2cm, keepaspectratio]{delocal_images/7.jpg}
+                \\[0.05cm]
+                {\scriptsize\color{gray}
+                    (a)~energy $E$ vs.\ $\bar{\varepsilon}$ \quad
+                    (b)~stiffness $\kappa$ vs.\ $\bar{\varepsilon}$ \quad
+                    (c)~strain profile $\varepsilon(X)$}
+                \vspace{0.06cm}
+            \end{minipage}%
+        }
+    \end{center}
+
+    \vspace{0.10cm}
+
+    % --- Bottom: equations (9) and (10) side by side ---
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Nonlinear Equilibrium Equation:}\\[0.10cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$\displaystyle -\lambda_1^2 u'''' + \frac{\partial^2 f}{\partial \varepsilon^2}(u')\,u'' = 0$} \hfill {\small(9)}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+            {\footnotesize\bfseries\color{AcademicNavy} Second Variation:}\\[0.10cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$\displaystyle \delta^2 E(u)(v,v) = \int_0^1 \!\left[\tfrac{\partial^2 f}{\partial\varepsilon^2}(u')v'^2 + \lambda_1^2 v''^2\right]dx$} \hfill {\small(10)}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }
+        \end{column}
+    \end{columns}
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Key point:} Non-affine metastable states satisfy the nonlinear ODE (9); stability is governed by the sign of the second variation (10).
+    \end{beamercolorbox}
+\end{frame}
+
+% ── NEW SLIDE ────────────────────────────────────────────────────────────────
+\begin{frame}{Elastic Background}
+
+    % --- Equation ---
+    {\footnotesize\bfseries\color{AcademicNavy} Energy Functional with Elastic Background:}\\[0.08cm]
+    \colorbox{gray!10}{%
+        \begin{minipage}{\linewidth}
+            \vspace{0.07cm}
+            \centering
+            {\small$\displaystyle E(u) = \int_0^1 \!\left( f(\varepsilon) + \tfrac{\lambda_1^2}{2}\,\varepsilon'^2 + \tfrac{\lambda_2^{-2}}{2}(u - u^0)^2 \right) dx$}
+            \vspace{0.07cm}
+        \end{minipage}%
+    }
+
+    \vspace{0.08cm}
+
+    % --- Figure ---
+    \begin{center}
+        \colorbox{AcademicNavy!5}{%
+            \begin{minipage}{0.97\textwidth}
+                \centering\vspace{0.05cm}
+                \includegraphics[width=\textwidth, height=4.3cm, keepaspectratio]{delocal_images/8.jpg}
+                \\[0.03cm]
+                {\scriptsize\color{gray}
+                    (a,d)~solution branches \quad
+                    (b,e)~stability regions in $(\bar\varepsilon,\lambda)$ \quad
+                    (c,f)~critical mode $n_c$}
+                \vspace{0.03cm}
+            \end{minipage}%
+        }
+    \end{center}
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Effect of $\lambda_2$:} Elastic background shrinks the unstable region and selects a finite critical mode $n_c$.
+    \end{beamercolorbox}
+\end{frame}
+
+% ── NEW SLIDE ────────────────────────────────────────────────────────────────
+\begin{frame}{Non-Equilibrium Solutions with Elastic Background}
+
+    \begin{center}
+        \colorbox{AcademicNavy!5}{%
+            \begin{minipage}{0.97\textwidth}
+                \centering\vspace{0.08cm}
+                \includegraphics[width=\textwidth, height=5.8cm, keepaspectratio]{delocal_images/Page10_Fig1_v.png}
+                \\[0.06cm]
+                {\scriptsize\color{gray}
+                    (a)~stress $\sigma$ vs.\ $\bar{\varepsilon}$ \quad
+                    (b)~stiffness $\kappa$ vs.\ $\bar{\varepsilon}$ \quad
+                    (c)~strain profile $\varepsilon(X)$}
+                \vspace{0.06cm}
+            \end{minipage}%
+        }
+    \end{center}
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Result:} The elastic background regularises the non-affine branch, yielding smooth strain profiles and bounded stiffness.
+    \end{beamercolorbox}
+\end{frame}
+
+% ── NEW SLIDE ────────────────────────────────────────────────────────────────
+\begin{frame}{Phase-Field Model of Fracture}
+    \vspace{-0.1cm}
+    \begin{columns}[c, onlytextwidth]
+
+        % --- Left: Equations ---
+        \begin{column}{0.46\textwidth}
+
+            {\footnotesize\bfseries\color{AcademicNavy} Total Energy:}\\[0.08cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$\displaystyle E = \int_0^1 \!\left( f(\varepsilon,\alpha) + \frac{\lambda_1^2}{2}(\alpha')^2 + \frac{\lambda_2^{-2}}{2}(u-u^0)^2 \right) dx$}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }\\[0.18cm]
+
+            {\footnotesize\bfseries\color{AcademicNavy} Energy Density:}\\[0.08cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$\displaystyle f(\varepsilon,\alpha) = \tfrac{1}{2}\,g(\alpha)\,\varepsilon^2 + h(\alpha)$}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }\\[0.18cm]
+
+            {\footnotesize\bfseries\color{AcademicNavy} Degradation:}\\[0.08cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$g(\alpha) = (1-\alpha)^2$}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }\\[0.14cm]
+
+            {\footnotesize\bfseries\color{AcademicNavy} Dissipation:}\\[0.08cm]
+            \colorbox{gray!10}{%
+                \begin{minipage}{\linewidth}
+                    \vspace{0.08cm}
+                    {\small$h(\alpha) = \alpha^2$}
+                    \vspace{0.08cm}
+                \end{minipage}%
+            }
+
+        \end{column}
+
+        % --- Right: Figure ---
+        \begin{column}{0.51\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{%
+                \begin{minipage}{\dimexpr\linewidth-6pt\relax}
+                    \centering\vspace{0.06cm}
+                    \includegraphics[width=\textwidth, height=6.8cm, keepaspectratio]{delocal_images/19.jpg}
+                    \\[0.04cm]
+                    {\scriptsize\color{gray} $\sigma$ vs.\ $\bar\varepsilon$,\ \ strain $\varepsilon(x)$,\ \ damage $\alpha(x)$ for modes $n=3$--$7$}
+                    \vspace{0.04cm}
+                \end{minipage}%
+            }
+        \end{column}
+
+    \end{columns}
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\scriptsize \faCheckCircle \quad \textbf{Phase-field:} $\alpha \in [0,1]$ interpolates between intact ($\alpha=0$) and fully broken ($\alpha=1$) material.
+    \end{beamercolorbox}
+\end{frame}
+
+% ── NEW SLIDE ────────────────────────────────────────────────────────────────
+\begin{frame}{Future Directions}
+
+    \begin{center}
+        \colorbox{AcademicNavy!5}{%
+            \begin{minipage}{0.97\textwidth}
+                \centering\vspace{0.08cm}
+                \includegraphics[width=\textwidth, height=6.5cm, keepaspectratio]{delocal_images/Page18_Fig1.png}
+                \\[0.06cm]
+                {\scriptsize\color{gray}
+                    (a)~shear \quad
+                    (b)~uni-axial tension \quad
+                    (c)~bi-axial (hydrostatic) compression}
+                \vspace{0.06cm}
+            \end{minipage}%
+        }
+    \end{center}
+
 \end{frame}
 
 \end{document}
