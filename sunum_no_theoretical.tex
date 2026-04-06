@@ -1,0 +1,1460 @@
+\documentclass[10pt, aspectratio=169]{beamer}
+
+% --- Typography & Colors ---
+\usefonttheme[onlymath]{serif} % Professional serif math fonts
+\usepackage[sfdefault]{FiraSans} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs} 
+\usepackage{tikz}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{animate} % Added for native sequence animations
+\usepackage{multimedia} % Added for movies
+\usepackage{fontawesome5} % Added for icons
+\usetikzlibrary{arrows.meta, shapes.geometric, positioning}
+
+\definecolor{AcademicNavy}{RGB}{0, 51, 102}
+\definecolor{SecondaryTitle}{RGB}{153, 0, 0} % Professional Dark Red
+\setbeamercolor{titlelike}{fg=AcademicNavy}
+\setbeamercolor{structure}{fg=AcademicNavy}
+\setbeamercolor{block title}{fg=SecondaryTitle}
+
+% --- Font Settings ---
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+
+% --- Footer & Page Numbering ---
+\setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+\setbeamerfont{footline}{size=\fontsize{6}{7}\selectfont}
+\setbeamercolor{footline}{fg=AcademicNavy!60}
+\setbeamertemplate{footline}{
+    \hfill
+    \insertframenumber / \inserttotalframenumber
+    \hspace{0.5cm}\vspace{0.1cm}
+}
+\setbeamertemplate{itemize items}[circle] % Unify bullet points globally
+
+% --- Custom Title Page Design ---
+\setbeamertemplate{title page}{
+    \vspace*{0.5cm}
+    % 1. TOP Logo Header
+    \begin{columns}[c, totalwidth=\textwidth]
+        \column{0.20\textwidth}
+            \raggedright\includegraphics[height=1.0cm]{LOGO_CNRS_BLEU.png}
+        \column{0.60\textwidth}
+            \centering\includegraphics[height=1.0cm]{logo_lspm.png}
+        \column{0.20\textwidth}
+            \raggedleft\includegraphics[height=1.0cm]{USPN.png}
+    \end{columns}
+
+    \vspace{0.8cm}
+
+    % 2. Title and Subtitle Block
+    \begin{centering}
+        {\usebeamerfont{title} \usebeamercolor[fg]{title} \huge \textbf{\inserttitle} \par}
+        \vspace{0.4cm}
+        {\usebeamerfont{subtitle} \usebeamercolor[fg]{subtitle} \small \textit{\insertsubtitle} \par}
+        
+        \vspace{0.5cm}
+        
+        {\usebeamerfont{author} \large \textbf{\insertauthor} \par}
+        \vspace{0.15cm}
+        {\usebeamerfont{institute} \tiny \insertinstitute \\[0.1cm] \scriptsize \insertdate \par}
+    \end{centering}
+
+    \vspace{0.4cm}
+
+    % 3. Jury Panel (Aligned Footer)
+    \begin{columns}[T, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            {\tiny \color{AcademicNavy}\textbf{Rapporteurs}\\[0.1cm]
+            \begin{tabular}{@{}p{3.0cm} l@{}}
+                Mme Maurine MONTAGNAT & \textit{DR CNRS, IGE} \\
+                M. Muhittin MUNGAN & \textit{Professeur, Univ. of Cologne} \\
+                M. Aurélien VATTRÉ & \textit{MR Onera, Univ. Paris-Saclay} \\
+            \end{tabular}}
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+            {\tiny \color{AcademicNavy}\textbf{Examinateurs}\\[0.1cm]
+            \begin{tabular}{@{}p{3.0cm} l@{}}
+                Mme Véronique LAZARUS & \textit{Professure, ENSTA Paris} \\
+                M. Nicolas AUFFRAY & \textit{Professeur, Sorbonne Université} \\
+                M. Denis GRATIAS & \textit{DR émérite CNRS, IRCP} \\
+                M. Damien FAURIE & \textit{Professeur, USPN} \\
+                M. Ioan R. IOANESCU & \textit{Professeur, USPN} \\
+            \end{tabular}}
+        \end{column}
+    \end{columns}
+
+    \vspace{0.5cm}
+}
+
+
+% --- Metadata ---
+\title{Mechanics of displacive instabilities in solids}
+\subtitle{Habilitation à Diriger des Recherches (HDR)}
+\author{O\u{g}uz Umut Salman}
+\institute{Laboratoire des Sciences des Procédés et des Matériaux (LSPM) \\ CNRS UPR 3407 | Université Sorbonne Paris Nord}
+\date{31 Mars 2026}
+
+\begin{document}
+
+% Slide 1
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+% Slide 2
+\begin{frame}{Non-linear phenomena}
+    \vspace*{0.3cm}
+    % --- TOP ROW: Crystals & Transitions ---
+    \begin{block}{Crystal Transitions and Disorder}
+        \vspace{0.3cm}
+        \begin{columns}[c, onlytextwidth]
+            % Left Column: Crystalline
+            \begin{column}{0.32\textwidth}
+                \centering
+                \textbf{\small Crystalline}\\[0.1cm]
+                \includegraphics[width=\textwidth,height=2.8cm,keepaspectratio]{Figures/crystal.pdf}
+            \end{column}
+
+            % Middle Column: Arrows and Labels
+            \begin{column}{0.32\textwidth}
+                \centering
+                {\tiny \textbf{Stronger disorder}}\\[-0.1cm]
+                \begin{tikzpicture}
+                    \draw[AcademicNavy, ultra thick, -{Stealth[scale=1.5]}] (0,0) -- (1.5,0);
+                \end{tikzpicture}
+                \\[0.2cm]
+                \begin{tikzpicture}
+                    \draw[AcademicNavy, ultra thick, {Stealth[scale=1.5]}-] (0,0) -- (1.5,0);
+                \end{tikzpicture}
+                \\[-0.1cm]
+                {\tiny \textbf{Weak disorder}}
+            \end{column}
+
+            % Right Column: Amorphous
+            \begin{column}{0.32\textwidth}
+                \centering
+                \textbf{\small Amorphous}\\[0.1cm]
+                \includegraphics[width=\textwidth,height=2.8cm,keepaspectratio]{Figures/amorphous.pdf}
+            \end{column}
+        \end{columns}
+    \end{block}
+
+    \vspace{0.4cm}
+
+    % --- BOTTOM ROW: Meta-materials ---
+    \begin{block}{Meta-materials}
+        \vspace{0.3cm}
+        \begin{columns}[T, onlytextwidth]
+            \column{0.48\textwidth}
+                \centering 
+                {\scriptsize \color{AcademicNavy} \textbf{spring-chain}} \\[0.2cm]
+                \includegraphics[width=\textwidth,height=2.2cm,keepaspectratio]{Figures/Page3_Fig1.png}
+            \column{0.48\textwidth}
+                \centering
+                {\scriptsize \color{AcademicNavy} \textbf{spring-chain system embedded into a pantograph}} \\[0.2cm]
+                \includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/Page5_Fig1.png}
+        \end{columns}
+    \end{block}
+\end{frame}
+
+% Slide 3
+\section{Introduction}
+\begin{frame}{Scientific Context: Nonlinearity \& Instability}
+    \begin{block}{Scientific Challenges}
+        \vspace{0.1cm}
+        \textbf{\color{AcademicNavy} The Challenge:}\\[0.1cm]
+        Understanding material behavior beyond the elastic limit where microscale rearrangements drive macroscopic nonlinearity.
+        
+        \vspace{0.3cm}
+        \textbf{\color{AcademicNavy} Key Phenomena:}
+        \begin{itemize}
+            \item \textbf{Phase Transitions:} Martensitic transformations.
+            \item \textbf{Plasticity:} Dislocation-mediated flow and avalanches.
+            \item \textbf{Fracture:} Brittle-to-ductile transitions and damage.
+        \end{itemize}
+    \end{block}
+
+    \vfill
+    {\centering\color{AcademicNavy!30}\rule{0.6\textwidth}{0.4pt}\par}
+    \vfill
+
+    \begin{center}
+        \begin{minipage}{0.85\textwidth}
+            \begin{block}{Unifying Perspective}
+                \centering
+                \vspace{0.1cm}
+                These phenomena are inherently \textbf{\color{AcademicNavy} displacement-driven} (\textit{non-diffusive}) and can be studied within the \textbf{same context} of displacive instabilities.
+            \end{block}
+        \end{minipage}
+    \end{center}
+\end{frame}
+
+% Slide 4
+\begin{frame}{Common Physical Mechanisms: Displacive Instabilities}
+    \vspace{0.2cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Plasticity}}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Fracture}}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Phase Transition}}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{Figures/fig_disp.pdf}
+    \end{center}
+    
+    \vfill
+    \begin{block}{Central Theme}
+        \centering \small \textit{Uniform treatment through the lens of non-convex energy and geometric frustration.}
+    \end{block}
+\end{frame}
+
+% Slide 5: Motivation for Unification
+\begin{frame}{Motivation for Unification}
+    \vspace{0.3cm}
+    \begin{columns}[T, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Experimental Observations}} \\[0.2cm]
+            \includegraphics[width=\textwidth,height=6.2cm,keepaspectratio]{Figures/Page5_Img0.jpg}
+            \\[0.1cm]
+            {\tiny \textit{Zhang et al. PNAS, 2025}}
+        \end{column}
+        \hfill
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Computational Modeling}} \\[0.2cm]
+            \includegraphics[width=\textwidth,height=6.2cm,keepaspectratio]{Figures/Page18_Img0.jpg}
+            \\[0.1cm]
+            {\tiny \textit{Liu, Groh, Mater. Sci. Eng., 2014}}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 6: Self-Organization and Spatial Patterns
+\begin{frame}{Self-Organization and Spatial Patterns}
+    \vspace{0.2cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Twinning}}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Dislocation Cells}}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Fracture Patterns}}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.3cm}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth,height=6.5cm,keepaspectratio]{Figures/spatial_patterns.pdf}
+    \end{center}
+    
+    \vfill
+    \begin{block}{Complexity through Instability}
+        \centering \small \textit{Spatio-temporal organization and collective behavior.}
+    \end{block}
+\end{frame}
+
+% Slide 7: Intermittency
+\begin{frame}{Intermittency}
+    \vspace{0.1cm}
+    % --- TOP ROW: Martensite ---
+    {\scriptsize \color{AcademicNavy} \textbf{Martensite}}
+    \begin{columns}[b, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figA.pdf}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figB.pdf}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figC.pdf}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.4cm}
+
+    % --- BOTTOM ROW: Plasticity ---
+    {\scriptsize \color{AcademicNavy} \textbf{Plasticity}}
+    \begin{columns}[b, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figD.pdf}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figE.pdf}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,height=3.3cm,keepaspectratio]{Figures/figF.pdf}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 8: Multiscale Modeling Framework
+\begin{frame}{Multiscale Modeling Framework}
+    \vspace{0.1cm}
+    \begin{center}
+        \hspace*{-0.6cm}
+        \includegraphics[width=1.08\textwidth,height=7.8cm,keepaspectratio]{Figures/scales.pdf}
+    \end{center}
+    
+    \vfill
+    {\centering \fontsize{5}{6}\selectfont \textit{Integrating information from the discrete lattice to the continuous engineering scale.}\par}
+\end{frame}
+
+% Slide 9: Macroscopic Response & Engineering Scale
+\begin{frame}{Macroscopic Response \& Engineering Scale}
+    \vspace{0.1cm}
+    \begin{center}
+        \includegraphics[width=1.0\textwidth,height=7.2cm,keepaspectratio]{Figures/macroscopic.pdf}
+    \end{center}
+    
+    \vfill
+    {\centering \fontsize{5}{6}\selectfont \textit{Bridging the gap between material design and structural performance.}\par}
+\end{frame}
+
+% Slide 10: Landau Theory of Phase Transitions
+\begin{frame}{Landau Theory of Phase Transitions}
+    \vspace{-0.1cm}
+    \begin{columns}[T, onlytextwidth]
+        % --- Left Column: Figures and Bullets ---
+        \begin{column}{0.45\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Double well potential}} \\[0.1cm]
+            \includegraphics[height=1.6cm,keepaspectratio]{Figures/doublewell.pdf}
+
+            \vspace{0.2cm}
+            \raggedright
+            \begin{itemize}
+                \item {\small Landau theory consists of constructing a \textbf{mesoscopic} free energy respecting symmetry using an order parameter.}
+                \item {\small The easiest polynomial reproducing equilibrium thermodynamics.}
+                \item {\small Add the Ginzburg term to have a smooth interface.}
+            \end{itemize}
+        \end{column}
+
+        \hfill
+
+        % --- Right Column: Figures side by side + Equations below ---
+        \begin{column}{0.52\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{Solid-liquid}} \\[0.1cm]
+            \begin{columns}[c]
+                \begin{column}{0.42\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth,height=2.5cm,keepaspectratio]{Figures/pf.pdf}
+                \end{column}
+                \begin{column}{0.55\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth,height=3.0cm,keepaspectratio]{Figures/pf2.pdf}
+                \end{column}
+            \end{columns}
+
+            \vspace{0.2cm}
+            \begingroup
+            \setlength{\fboxrule}{0.8pt}
+            \setlength{\fboxsep}{8pt}
+            \fcolorbox{AcademicNavy}{AcademicNavy!3}{\parbox{0.88\textwidth}{%
+                \centering
+                \textbf{\small\color{SecondaryTitle} Phase Field Equations}\\[0.15cm]
+                $\displaystyle E[\phi] = -\phi^2 + \phi^4 + \frac{\beta}{2}\,|\nabla \phi|^2$\\[0.25cm]
+                $\displaystyle \dot{\phi} = -\,\dfrac{\delta E}{\delta \phi}$
+                \vspace{0.05cm}
+            }}
+            \endgroup
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 11: Phase-Field Literature
+\begin{frame}{Phase-Field Models across Solid Mechanics}
+    \vspace{0.2cm}
+    \begin{columns}[T, onlytextwidth]
+        % -- Phase Transitions --
+        \begin{column}{0.31\textwidth}
+            \begin{block}{Phase Transitions}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Cahn \& Hilliard (1958) \textit{J. Chem. Phys.}
+                    \item Allen \& Cahn (1979) \textit{Acta Metall.}
+                    \item Wang \& Khachaturyan (1997) \textit{Acta Mater.} 
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        % -- Fracture --
+        \begin{column}{0.29\textwidth}
+            \begin{block}{Fracture}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Francfort \& Marigo (1998) \textit{JMPS}
+                    \item Bourdin et al. (2000) \textit{JMPS}
+                    \item Miehe et al. (2010) \textit{IJNME}
+                \end{itemize}
+            \end{block}
+        \end{column}
+        
+        % -- Plasticity --
+        \begin{column}{0.38\textwidth}
+            \begin{block}{Plasticity \& Dislocations}
+                \scriptsize
+                \raggedright
+                \begin{itemize}
+                    \item Wang et al. (2001) \textit{Acta Mater.}
+                    \item Koslowski, Cuitiño \& Ortiz (2002) \textit{JMPS}
+                    \item Levitas (2013) \textit{JMPS}
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.6cm}
+    \begin{center}
+        \begingroup
+        \setlength{\fboxrule}{0.8pt}
+        \setlength{\fboxsep}{8pt}
+        \fcolorbox{AcademicNavy}{AcademicNavy!3}{\parbox{0.85\textwidth}{%
+            \centering \small \color{AcademicNavy} \textit{The phase-field framework acts as a powerful unified mathematical tool for tracking moving internal boundaries across different physical mechanisms.}
+        }}
+        \endgroup
+    \end{center}
+\end{frame}
+
+% Slide 12: Deformation Gradient and Strain Tensor
+\begin{frame}{Modeling: Deformation Gradient and Strain Tensor}
+    
+    % --- Custom TikZ Infographic for Deformation ---
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape}]
+            % Reference configuration
+            \draw[fill=AcademicNavy!5, draw=AcademicNavy, thick] (0,0) rectangle (2,2);
+            \node at (1,1) {$\mathbf{X}$};
+            \node[font=\footnotesize, AcademicNavy] at (1,-0.4) {$\mathbf{I}$};
+            
+            % Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.8,1) -- (4.2,1);
+            
+            % Deformed configuration
+            \begin{scope}[shift={(5.0,0.2)}]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0.5) (1,0) (2.5,0.5) (2.8,1.5) (1.5,2.2) (0.2,1.5)};
+                \node at (1.4,1.1) {$\mathbf{Y}(\mathbf{X})$};
+                \node[font=\footnotesize, SecondaryTitle] at (1.4,-0.6) {$\mathbf{F}$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{-0.2cm}
+    
+    % --- Equations and Text ---
+    \small
+    \begin{itemize}
+        \item \textbf{\color{AcademicNavy} Deformed state:}
+        \begin{itemize}
+            \item Displacement field: \hspace{0.5cm} $\mathbf{u}(\mathbf{X}) = \mathbf{Y}(\mathbf{X}) - \mathbf{X}$
+            \item Deformation gradient: \hspace{0.25cm} $\mathbf{F} = \nabla \mathbf{Y}$
+        \end{itemize}
+        
+        \vspace{0.2cm}
+        \item \textbf{\color{AcademicNavy} Strain energy defined in terms of strain tensor:}
+        \vspace{-0.1cm}
+        \begin{itemize}
+            \item Geometrically nonlinear strain tensor:
+            \vspace{-0.15cm}
+            \begin{equation*}
+                \epsilon_{ij}^{NL} = \frac{1}{2}(\mathbf{F}^T \mathbf{F} - \mathbf{I}) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} + \sum_k \frac{\partial u_k}{\partial x_i} \frac{\partial u_k}{\partial x_j} \right)
+            \end{equation*}
+            \vspace{-0.3cm}
+            \item Geometrically linear strain tensor:
+            \vspace{-0.15cm}
+            \begin{equation*}
+                \epsilon_{ij}^{L} = \frac{1}{2}(\mathbf{F}^T + \mathbf{F} - 2\mathbf{I}) = \frac{1}{2} \left( \frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i} \right)
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 13: Geometrically Nonlinear and Linear Elasticity
+\begin{frame}{Modeling: geometrically nonlinear and linear elasticity}
+    
+    % --- Custom TikZ Infographic ---
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.85, every node/.style={transform shape}]
+            % Reference configuration
+            \draw[fill=AcademicNavy!5, draw=AcademicNavy, thick] (0, -0.5) rectangle (2, 1.5);
+            \node at (1, 0.5) {$\mathbf{I}$};
+            
+            % Top Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.3, 0.8) -- (3.8, 1.8);
+            
+            % Top Deformed configuration F
+            \begin{scope}[shift={(4.5, 1.3)}]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0) (1,-0.5) (2.5,-0.2) (2.8,1) (1.5,1.2) (0.2,0.8)};
+                \node at (1.4, 0.4) {$\mathbf{F}$};
+            \end{scope}
+
+            % Bottom Mapping Arrow
+            \draw[->, thick, AcademicNavy] (2.3, 0.2) -- (3.8, -0.8);
+            
+            % Bottom Deformed configuration RF (rotated)
+            \begin{scope}[shift={(5.2, -1.0)}, rotate=-45]
+                \draw[fill=SecondaryTitle!5, draw=SecondaryTitle, thick] plot [smooth cycle] coordinates {(0,0) (1,-0.5) (2.5,-0.2) (2.8,1) (1.5,1.2) (0.2,0.8)};
+                \node[rotate=45] at (1.4, 0.4) {$\mathbf{R}\mathbf{F}$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.4cm}
+    
+    % --- Equations and Text ---
+    \begin{itemize}
+        \item nonlinear: \hspace{0.5cm} $\displaystyle \epsilon_{ij}^{NL} = \frac{1}{2} \left[ (\mathbf{R}\mathbf{F})^T (\mathbf{R}\mathbf{F}) - \mathbf{I} \right] = \frac{1}{2} (\mathbf{F}^T \mathbf{F} - \mathbf{I})$
+        
+        \vspace{0.3cm}
+        \item linear: \hspace{1.07cm} $\displaystyle \epsilon_{ij}^{L}\; = \frac{1}{2} \left[ (\mathbf{R}\mathbf{F})^T + (\mathbf{R}\mathbf{F}) - 2\mathbf{I} \right] \neq \frac{1}{2} (\mathbf{F}^T + \mathbf{F} - 2\mathbf{I})$
+        
+        \vspace{0.3cm}
+        \item Strain energy defined in terms of $\epsilon_{ij}^{NL}$ or $\epsilon_{ij}^{L}$ strain tensor
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \begin{center}
+        {\large \color{SecondaryTitle} $\rightarrow$} \textbf{\large In linear modeling, energy is not invariant under rotation!!!}
+    \end{center}
+\end{frame}
+
+% Slide 14: Solid-to-solid phase transitions
+\begin{frame}{Solid-to-solid phase transitions}
+    
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=1.1, every node/.style={transform shape}]
+            
+            % --- Reference configuration ---
+            % thin black axes
+            \draw[->, thick] (-0.4, -0.4) -- (1.2, -0.4) node[midway, below=2pt] {$\mathbf{e}_1^A$};
+            \draw[->, thick] (-0.4, -0.4) -- (-0.4, 1.2) node[midway, left=2pt] {$\mathbf{e}_2^A$};
+            
+            % Square
+            \draw[fill=lightgray, draw=black, thick] (0,0) rectangle (1,1);
+            
+            % Basises vectors (red arrows)
+            \draw[->, ultra thick, red] (0,0) -- (1,0); 
+            \draw[->, ultra thick, red] (0,0) -- (0,1);
+            
+            % Blue dots
+            \foreach \x in {0,1} \foreach \y in {0,1} \fill[AcademicNavy] (\x,\y) circle (3pt);
+            
+            % --- Top mapping arrow ---
+            \draw[->, thin, blue] (1.3, 0.7) -- (2.3, 1.5);
+            
+            % --- Top deformed configuration ---
+            \begin{scope}[shift={(2.6, 1.2)}]
+                \draw[fill=lightgray, draw=black, thick] (0,0) rectangle (1.6, 0.6);
+                
+                \draw[->, ultra thick, red] (0,0) -- (1.6,0);
+                \node[below right=-2pt] at (1.6, 0) {$\mathbf{e}_1^M$};
+                
+                \draw[->, ultra thick, red] (0,0) -- (0,0.6);
+                \node[left=3pt] at (0, 0.6) {$\mathbf{e}_2^M$};
+                
+                \foreach \x in {0,1.6} \foreach \y in {0,0.6} \fill[AcademicNavy] (\x,\y) circle (3pt);
+                
+                % Equation
+                \node[right] at (2.2, 0.3) {\Large $\displaystyle \mathbf{U}_1 = \begin{pmatrix} \lambda & 0 \\ 0 & \beta \end{pmatrix}$};
+            \end{scope}
+            
+            % --- Bottom mapping arrow ---
+            \draw[->, thin, blue] (1.3, 0.3) -- (2.3, -0.5);
+            
+            % --- Bottom deformed configuration ---
+            \begin{scope}[shift={(2.6, -1.5)}]
+                \draw[fill=lightgray, draw=black, thick] (0,0) rectangle (0.6, 1.6);
+                
+                \draw[->, ultra thick, red] (0,0) -- (0.6,0);
+                \node[below right=-2pt] at (0.6, 0) {$\mathbf{e}_1^M$};
+                
+                \draw[->, ultra thick, red] (0,0) -- (0,1.6);
+                \node[left=3pt] at (0, 1.6) {$\mathbf{e}_2^M$};
+                
+                \foreach \x in {0,0.6} \foreach \y in {0,1.6} \fill[AcademicNavy] (\x,\y) circle (3pt);
+                
+                % Equation
+                \node[right] at (2.2, 0.8) {\Large $\displaystyle \mathbf{U}_2 = \begin{pmatrix} \beta & 0 \\ 0 & \lambda \end{pmatrix}$};
+            \end{scope}
+            
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.3cm}
+    
+    \begin{center}
+        \textbf{\color{AcademicNavy} \small Transformation matrices:}\\[0.1cm]
+        {\Large $\displaystyle \mathbf{e}_i^M = \mathbf{U}_i \mathbf{e}_i^A$}
+        
+        \vspace{0.4cm}
+        \textbf{\color{AcademicNavy} \small Deformation gradient:}\\[0.1cm]
+        {\Large $\displaystyle \mathbf{F}_i = \mathbf{Q}_i \mathbf{U}_i$}
+    \end{center}
+\end{frame}
+
+
+
+% Slide 16: Molecular Dynamics and Crystallization
+\begin{frame}{Molecular Dynamics: Energy Minimization \& Crystallization}
+    
+    \begin{itemize}
+        \item In molecular dynamics, atoms interact via a strong pairwise repulsive-attractive potential (like the Lennard-Jones potential), featuring a stable energy minimum at atomic spacing $r = r_{eq}$.
+        \item When the global energy of the system is minimized, chaotic atomic arrangements escape high-energy states and spontaneously organize into a \textbf{stable crystal lattice} where spacing equilibrates at $r = r_{lattice}$.
+    \end{itemize}
+    
+    \vspace{0.6cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.88, every node/.style={transform shape}]
+            
+            % --- LJ Curve (Left) ---
+            \begin{scope}[shift={(-2.8, 0.5)}]
+                \clip (-0.7, -2.2) rectangle (3.2, 2.9); 
+                \draw[->, thick] (0, -1.8) -- (0, 2.2) node[above] {$V(r)$};
+                \draw[->, thick] (-0.2, 0) -- (2.8, 0) node[right] {$r$};
+                % LJ Curve: V(r) = e*( (1/r)^12 - 2*(1/r)^6 ) -> min at r=1, V=-e
+                \draw[ultra thick, AcademicNavy, domain=0.86:2.8, samples=100] plot (\x, { 1.5*( (1/\x)^12 - 2*(1/\x)^6 ) });
+                
+                % r_eq min marking
+                \draw[dashed, thick] (1, 0) -- (1, -1.5);
+                \fill[SecondaryTitle] (1, -1.5) circle (3pt) node[below=3pt, font=\small, text=black] {$r_{eq}$};
+                
+                % Two interacting atoms illustration (shifted right to avoid V-axis and LJ curve)
+                \def\atomradius{0.18}
+                \def\cloudradius{0.38}
+                
+                % Electron clouds (transparent overlapping)
+                \fill[AcademicNavy, opacity=0.15] (1.3, 1.7) circle (\cloudradius);
+                \fill[AcademicNavy, opacity=0.15] (2.3, 1.7) circle (\cloudradius);
+                
+                % Atoms (Shiny 3D balls)
+                \shade[ball color=AcademicNavy] (1.3, 1.7) circle (\atomradius);
+                \shade[ball color=AcademicNavy] (2.3, 1.7) circle (\atomradius);
+                
+                \draw[<->, thick] (1.48, 1.7) -- (2.12, 1.7) node[midway, below=1pt, font=\footnotesize] {$r$};
+            \end{scope}
+
+            % --- Initial State (Center) ---
+            \begin{scope}[shift={(1.8, -1)}]
+                \draw[ultra thick] (0,0) rectangle (3,3);
+                \node[above] at (1.5, 3) {\textbf{Initial State}};
+                
+                % 16 random coordinates loosely matching the user's screenshot
+                \foreach \p in {(0.4, 0.5), (1.2, 0.4), (2.6, 0.7), (0.7, 1.3), (2.2, 1.1), (1.8, 1.6), (0.5, 2.1), (2.6, 1.8), (2.1, 2.4), (0.8, 2.6), (1.3, 2.1), (2.8, 2.7), (0.4, 1.4), (1.9, 0.5), (1.7, 2.8), (1.1, 0.9)} {
+                    \shade[ball color=AcademicNavy] \p circle (0.18);
+                }
+            \end{scope}
+            
+            % --- Arrow ---
+            \draw[->, ultra thick, SecondaryTitle] (5.1, 0.5) -- (6.6, 0.5) node[midway, above=2pt] {\textbf{Minimize}};
+            
+            % --- Crystal State (Right) ---
+            \begin{scope}[shift={(7.0, -1)}]
+                \draw[ultra thick] (0,0) rectangle (3,3);
+                \node[above] at (1.5, 3) {\textbf{Crystal Lattice}};
+                
+                % 4x4 array of atoms
+                \foreach \x in {0.45, 1.15, 1.85, 2.55} {
+                    \foreach \y in {0.45, 1.15, 1.85, 2.55} {
+                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.18);
+                    }
+                }
+                
+                % Distance marker (dimension lines projected below atoms to avoid overlap)
+                \draw[thick] (0.45, 0.25) -- (0.45, 0.08);
+                \draw[thick] (1.15, 0.25) -- (1.15, 0.08);
+                \draw[<->, thick, red] (0.45, 0.15) -- (1.15, 0.15) node[midway, below=2pt, font=\small] {$r_{lattice}$};
+            \end{scope}
+            
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% Slide 17: Lattice symmetry
+\begin{frame}{Lattice symmetry}
+    
+    \vspace{0.2cm}
+    \begin{center}
+    \begin{tabular}{p{4.2cm} l}
+        \textbf{\color{SecondaryTitle} Bravais lattice:} & $\displaystyle \mathcal{L}(\mathbf{e}_I) = \left\{ \mathbf{x} \in \mathbb{R}^2, \mathbf{x} = v_I \mathbf{e}_I, v_I \in \mathbb{Z} \right\}$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Lattice metric:} & $\displaystyle C_{IJ} = C_{JI} = \mathbf{e}_I \cdot \mathbf{e}_J$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Non-uniqueness:} & $\displaystyle \bar{\mathbf{e}}_J = m_{IJ} \mathbf{e}_I, \quad \mathbf{m} \in GL(2,\mathbb{Z})$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} General linear group:} & $\displaystyle GL(2,\mathbb{Z}) = \left\{ \mathbf{m}, m_{IJ} \in \mathbb{Z}, \det(\mathbf{m}) = \pm 1 \right\}$ \\[0.4cm]
+        \textbf{\color{SecondaryTitle} Lattice metric:} & $\displaystyle \bar{\mathbf{C}} = \mathbf{m}^T \mathbf{C} \mathbf{m}$
+    \end{tabular}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.9, every node/.style={transform shape}]
+            
+            % 8x4 Grid of atoms (using the rich 3D shading)
+            \foreach \x in {0,...,7} {
+                \foreach \y in {0,...,3} {
+                    \shade[ball color=AcademicNavy] (\x,\y) circle (0.18);
+                }
+            }
+            
+            % Basis 1: standard square orthogonal cell
+            \draw[->, thick] (0,1) -- (1,1) node[midway, below=1pt] {$\mathbf{e}_1$};
+            \draw[->, thick] (0,1) -- (0,2) node[midway, left=1pt] {$\mathbf{e}_2$};
+            \node[text=brown!90!black, font=\bfseries] at (0.4, 1.4) {1};
+            
+            % Basis 2: slanted cell (det = 1)
+            \draw[->, thick] (3,1) -- (4,1) node[midway, below=1pt] {$\mathbf{e}_1'$};
+            \draw[->, thick] (3,1) -- (4,2) node[midway, left=3pt] {$\mathbf{e}_2'$};
+            \node[text=brown!90!black, font=\bfseries] at (3.7, 1.25) {2};
+            
+            % Basis 3: extremely slanted cell (det = 1)
+            \draw[->, thick] (5,1) -- (6,1) node[midway, below=1pt] {$\mathbf{e}_1''$};
+            \draw[->, thick] (5,1) -- (7,2) node[midway, above left=-1pt] {$\mathbf{e}_2''$};
+            \node[text=brown!90!black, font=\bfseries] at (6.35, 1.25) {3};
+            
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+% Slide 18: Lattice deformation
+\begin{frame}{Lattice deformation}
+    
+    \vspace{0.2cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=1.3, every node/.style={transform shape=false}]
+            % --- Reference Lattice ---
+            \begin{scope}
+                \foreach \x in {0,1,2} {
+                    \foreach \y in {0,1} {
+                        \shade[ball color=AcademicNavy] (\x,\y) circle (0.15);
+                    }
+                }
+                % Basis vectors
+                \draw[->, ultra thick] (0,0) -- (1,0) node[midway, below=3pt] {$\mathbf{e}_1$};
+                \draw[->, ultra thick] (0,0) -- (0,1) node[midway, left=3pt] {$\mathbf{e}_2$};
+            \end{scope}
+            
+            % --- Deformation Map F ---
+            \draw[->, ultra thick, AcademicNavy] (2.8, 0.5) -- (4.2, 0.5) node[midway, above=4pt] {\Large $\mathbf{F}$};
+            
+            % --- Deformed Lattice (Affine trans applying F onto coordinates only) ---
+            \begin{scope}[shift={(5.5,0)}]
+                \foreach \x in {0,1,2} {
+                    \foreach \y in {0,1} {
+                        \shade[ball color=AcademicNavy] ({\x*1.1 + \y*0.35}, {\y}) circle (0.15);
+                    }
+                }
+                % Transformed Basis vectors
+                \draw[->, ultra thick] (0,0) -- (1.1, 0) node[midway, below=3pt] {$\mathbf{f}_1$};
+                \draw[->, ultra thick] (0,0) -- (0.35, 1) node[midway, left=2pt] {$\mathbf{f}_2$};
+            \end{scope}
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.4cm}
+    \begin{flushleft}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Lattice deformation:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle \mathbf{f}_I = \mathbf{F} \mathbf{e}_I$}
+        
+        \vspace{0.4cm}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Lattice metric:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle C_{IJ} = \mathbf{f}_I \cdot \mathbf{f}_J = (\mathbf{F} \mathbf{e}_I) \cdot (\mathbf{F} \mathbf{e}_J) = \mathbf{e}_I \cdot (\mathbf{F}^T \mathbf{F}) \mathbf{e}_J$}
+        
+        \vspace{0.4cm}
+        \hspace{0.5cm} \textbf{\color{SecondaryTitle} \normalsize Invariance under rigid body rotation:}\\[0.15cm]
+        \hspace{0.5cm} {\Large $\displaystyle \mathbf{C}^* = (\mathbf{F}^*)^T \mathbf{F}^* = \mathbf{F}^T \mathbf{Q}^T \mathbf{Q} \mathbf{F} = \mathbf{F}^T \mathbf{F} = \mathbf{C}$}
+    \end{flushleft}
+    
+\end{frame}
+
+% Slide 19: Metric space: Poincaré projection and lattice invariant shears
+\begin{frame}{Metric space: Poincaré projection and lattice invariant shears}
+    
+    \vspace{0.1cm}
+    \begin{center}
+        \begin{tikzpicture}
+            \node[draw=AcademicNavy, thick, fill=AcademicNavy!5, rounded corners=4pt, inner sep=12pt] {
+                \begin{minipage}{0.85\textwidth}
+                    \begin{columns}[c, onlytextwidth]
+                        \begin{column}{0.4\textwidth}
+                            \centering
+                            $\displaystyle \det \mathbf{C} = C_{11}C_{22} - C_{12}^2 = 1$
+                        \end{column}
+                        \begin{column}{0.55\textwidth}
+                            \centering
+                            $\displaystyle x = t(C_{11} - C_{22})/2, \quad y = tC_{12},$\\[0.2cm]
+                            $\displaystyle t = 2(2 + C_{11} + C_{22})^{-1}$
+                        \end{column}
+                    \end{columns}
+                \end{minipage}
+            };
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.2cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth, keepaspectratio]{Figures/Figure2.pdf}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth, keepaspectratio]{Figures/Figure3.pdf}
+        \end{column}
+    \end{columns}
+    
+\end{frame}
+
+% Slide 20: Lagrange reduction
+\begin{frame}{Lagrange reduction}
+    
+    \vspace{0.4cm}
+    \begin{itemize}
+        \setlength\itemsep{0.3cm}
+        \item \textbf{if} $C_{12} < 0$, change sign to $C_{12}$;
+        \item \textbf{if} $C_{22} < C_{11}$, swap the two components;
+        \item \textbf{if} $2C_{12} > C_{11}$, set $C_{12} = C_{12} - C_{11}$ and $C_{22} = C_{22} + C_{11} - 2C_{12}$.
+    \end{itemize}
+    
+    \vspace{0.8cm}
+    \begin{itemize}
+        \setlength\itemsep{0.3cm}
+        \item initiate $\mathbf{m} = \mathbb{I}$;
+        \item define the following three matrices : \quad
+              $\displaystyle \mathbf{m}_1 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \quad \mathbf{m}_2 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \mathbf{m}_3 = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}$;
+        \item initiate recursive algorithm :
+        \item \textbf{if} $C_{12} < 0$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_1$;
+        \item \textbf{if} $C_{22} < C_{11}$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_2$;
+        \item \textbf{if} $2C_{12} > C_{11}$, \quad $\mathbf{m} \rightarrow \mathbf{m}\mathbf{m}_3$.
+    \end{itemize}
+    
+\end{frame}
+
+% Slide 21: Lagrange reduction
+\begin{frame}{Lagrange reduction}
+    
+    \vspace{0.1cm}
+    {\large Lagrange reduction gives you the \textbf{shortest} and the \textbf{most acute} vector}
+    
+    \vspace{0.4cm}
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, scale=0.75, every node/.style={transform shape=false}]
+            
+            % Initial configuration B_0
+            \begin{scope}[shift={(0,3)}]
+                \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \node[align=center, font=\small] at (0.8, 1.8) {Initial \\[-0.05cm] configuration $\mathcal{B}_0$};
+                
+                \coordinate (O1) at (1.8, 1.4);
+                \draw[->, thick] (O1) -- ++(0, 0.7) node[right=-1pt, font=\small] {$\mathbf{n}_0^\alpha$};
+                \draw[->, thick] (O1) -- ++(0.7, 0) node[right=0pt, font=\small] {$\mathbf{m}_0^\alpha$};
+            \end{scope}
+
+            % Intermediate configuration \bar{B}
+            \begin{scope}[shift={(2.8, -0.5)}]
+                \begin{scope}[cm={1,0,0.5,1,(0,0)}]
+                    \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \end{scope}
+                \node[below, align=center, font=\small] at (1.5, -0.2) {Intermediate \\ configuration $\bar{\mathcal{B}}$};
+                
+                \coordinate (O2) at (2.8, 0.2);
+                \draw[->, thick] (O2) -- ++(0, 0.6) node[right, font=\footnotesize] {$\mathbf{n}_0^\alpha$};
+                \draw[->, thick] (O2) -- ++(0.7, 0) node[right, font=\footnotesize] {$\mathbf{m}_0^\alpha$};
+            \end{scope}
+
+            % Current configuration B
+            \begin{scope}[shift={(7.5, 2.0)}]
+                \begin{scope}[cm={0.9,0.3,0.3,0.9,(0,0)}]
+                    \draw[step=0.2, thick] (0,0) grid (2,1.2);
+                \end{scope}
+                \node[below right, align=center, font=\small] at (1.0, -0.1) {Current \\ configuration $\mathcal{B}$};
+                
+                \coordinate (O3) at (-0.2, 0.6);
+                \draw[->, thick] (O3) -- ++(-0.3, 0.6) node[above, font=\footnotesize] {$\mathbf{n}^\alpha$};
+                \draw[->, thick] (O3) -- ++(0.7, 0.3) node[right, font=\footnotesize] {$\mathbf{m}^\alpha$};
+                
+                \node[above right, align=left, font=\scriptsize] at (1.0, 1.8) {
+                    $\mathbf{m}^\alpha = \mathbf{F}^e \mathbf{m}_0^\alpha$ \\[0.1cm]
+                    $\mathbf{n}^\alpha = \mathbf{n}_0^\alpha \mathbf{F}^{e-1}$
+                };
+            \end{scope}
+
+            % Arrows and labels
+            % Initial to Current
+            \draw[->, thick] (2.3, 3.8) .. controls (4.2, 4.3) and (5.8, 4.0) .. (7.2, 3.2) 
+                node[midway, above, align=center, font=\small] {Deformation \\ gradient $\mathbf{F}$};
+            
+            % Initial to Intermediate
+            \draw[->, thick] (1.0, 2.7) .. controls (1.0, 1.5) and (1.5, 0.5) .. (2.5, 0.2)
+                node[midway, left, align=center, font=\small] {Plastic $\mathbf{F}^p$ \\ component};
+                
+            % Intermediate to Current
+            \draw[->, thick] (5.2, 0.4) .. controls (6.5, 0.8) and (7.0, 1.3) .. (7.2, 1.8)
+                node[midway, right, align=center, font=\small] {Elastic $\mathbf{F}^e$ \\ component};
+
+            % Center equation
+            \node[font=\large] at (4.5, 1.6) {$\mathbf{F} = \mathbf{F}^{\mathbf{e}} \mathbf{F}^{\mathbf{p}}$};
+
+        \end{tikzpicture}
+    \end{center}
+
+    \vspace{0.2cm}
+    \begin{center}
+        \Large We can show that \quad $\mathbf{F} = \mathbf{F}_{\mathbf{e}} \mathbf{F}_{\mathbf{p}}$ \quad with \quad $\mathbf{F}_{\mathbf{p}} = \mathbf{M}^{-1}$
+    \end{center}
+
+\end{frame}
+
+% Slide 22: Slip vs. Shear mechanics and elastic energy
+\begin{frame}{Slip vs. Shear mechanics and elastic energy}
+    \begin{center}
+        \includegraphics[width=\textwidth, height=0.88\textheight, keepaspectratio]{Figures/Slip_vs_Shear.png}
+    \end{center}
+\end{frame}
+
+% Slide 23: Plasticity Models
+\begin{frame}{Plasticity: Dislocations as carriers}
+    \begin{center}
+        \includegraphics[width=\textwidth, height=0.88\textheight, keepaspectratio]{Figures/Plasticity.png}
+    \end{center}
+\end{frame}
+
+% Slide 24: Landau theory with infinite symmetry
+\begin{frame}{Landau theory with infinite symmetry}
+
+    \begin{itemize}
+        \setlength\itemsep{0.25cm}
+        \item \textbf{How to construct the Landau energy for crystal ?}\\[0.1cm]
+        The energy should be a function of lattice vectors:
+        
+        \begin{center}
+            \begin{tikzpicture}[>=stealth, scale=0.8, every node/.style={transform shape=false}]
+                % Left box
+                \node[fill=gray!30, align=center, inner sep=6pt] at (-1.5, 0.5) {\Large $\mathbf{e}_a$};
+                % Reference Lattice
+                \begin{scope}
+                    \foreach \x in {0,1,2} {
+                        \foreach \y in {0,1} {
+                            \shade[ball color=gray!60] (\x,\y) circle (0.15);
+                        }
+                    }
+                    % Basis vectors
+                    \draw[->, thick] (0,0) -- (1,0) node[midway, below=3pt] {$e_1$};
+                    \draw[->, thick] (0,0) -- (0,1) node[midway, left=3pt] {$e_2$};
+                \end{scope}
+                
+                % Arrow
+                \draw[->, thick] (2.8, 0.5) -- (4.2, 0.5);
+                
+                % Right box
+                \node[fill=gray!30, align=center, inner sep=6pt] at (3.5, -0.1) {\large $\mathbf{f}_a = \mathbf{F} \mathbf{e}_a$};
+                
+                % Deformed Lattice
+                \begin{scope}[shift={(5.5,0)}]
+                    \foreach \x in {0,1,2} {
+                        \foreach \y in {0,1} {
+                            \shade[ball color=gray!60] ({\x*1.1 + \y*0.35}, {\y}) circle (0.15);
+                        }
+                    }
+                    \draw[->, thick] (0,0) -- (1.1, 0) node[midway, below=3pt] {$f_1$};
+                    \draw[->, thick] (0,0) -- (0.35, 1) node[midway, left=2pt] {$f_2$};
+                \end{scope}
+            \end{tikzpicture}
+        \end{center}
+        
+        \item \textbf{How the energy should change when we deform the crystal ?}\\[0.1cm]
+        $\mathbf{F}$ is a constant deformation gradient\\[0.1cm]
+        The energy should be a function of deformed lattice vectors
+        
+        \item \textbf{Objectivity} \hspace{0.5cm} 
+        \colorbox{gray!30}{\large \rule[-0.2cm]{0pt}{0.65cm} $\phi(\mathbf{f}_a \cdot \mathbf{f}_b) = \phi(\mathbf{F}^T \mathbf{F}) = \phi(\mathbf{C})$} 
+        \hspace{0.5cm} {\Large $\mathbf{F} \rightarrow \mathbf{Q}\mathbf{F}$}
+        
+        \hspace{0.5cm} $\mathbf{C}$ is the Cauchy-Green strain tensor or metric tensor (order parameter)
+        
+        \vspace{0.1cm}
+        \item \textbf{Lattice invariant shears} \hspace{0.5cm}
+        \colorbox{gray!30}{\large \rule[-0.2cm]{0pt}{0.65cm} $\phi(\tilde{\mathbf{C}}) = \phi(\mathbf{C})$} 
+        \hspace{0.5cm} {\Large $\mathbf{F} \rightarrow \mathbf{F}\mathbf{M}$} \hspace{0.3cm} {\Large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{C} \mathbf{M}$}
+    \end{itemize}
+
+\end{frame}
+
+% Slide 25: Energy landscape for a square crystal
+\begin{frame}{Energy landscape for a square crystal}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth, height=0.65\textheight, keepaspectratio]{Figures/Fig1-b.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 26: Constructing Landau energy
+\begin{frame}{Constructing Landau energy}
+    \begin{center}
+        \includegraphics[width=0.9\textwidth, keepaspectratio]{Figures/Figure5.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 27: Numerical implementation
+\begin{frame}{Numerical implementation}
+    \vspace{-0.3cm}
+    \begin{columns}[c, onlytextwidth]
+        % --- Left Column: Mesh and Stress ---
+        \begin{column}{0.44\textwidth}
+            \centering
+            % FEM mesh box - Reduced scale
+            \begin{tikzpicture}[scale=0.74]
+                \draw[AcademicNavy, thick] (-0.3, -0.3) rectangle (3.3, 3.3);
+                \foreach \x in {0,1,2,3} {
+                    \foreach \y in {0,1,2,3} {
+                        \ifnum\y<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x,\y+1); \fi
+                        \ifnum\x<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x+1,\y); \fi
+                        \ifnum\x<3 \ifnum\y<3 \draw[AcademicNavy, thick] (\x,\y) -- (\x+1,\y+1); \fi \fi
+                    }
+                }
+                \foreach \x in {0,1,2,3} {
+                    \foreach \y in {0,1,2,3} {
+                        \draw[fill=white, draw=AcademicNavy, thick] (\x,\y) circle (0.17);
+                    }
+                }
+            \end{tikzpicture}
+            
+            \vspace{0.4cm}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} First Piola-Kirchhoff stress} \\
+                \vspace{0.05cm}
+                \hspace{0.5cm}\colorbox{gray!20}{
+                    \colorbox{white}{
+                        \rule[-0.15cm]{0pt}{0.5cm}
+                        $\mathbf{P} = 2\mathbf{F}\mathbf{M}\boldsymbol{\Sigma}\mathbf{M}^T$
+                    }
+                }
+                
+                \vspace{0.4cm}
+                {\small \color{red!80!black} \textbf{Plasticity is the geometrical\\ update of the $\mathbf{m}(\mathbf{C})$ tensor}}
+            \end{flushleft}
+        \end{column}
+        
+        % --- Right Column: Equations ---
+        \begin{column}{0.54\textwidth}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} FEM discretization:} \\
+                \vspace{0.05cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \centering
+                        \hfill $\displaystyle W = \int_{\Omega} \phi_0 d\Omega$ \hfill
+                        $\displaystyle \begin{array}{l} \mathbf{u}(\mathbf{X}) = \mathbf{u}_i N_i \\ \mathbf{F} = \mathbf{I} + \mathbf{u}_i \otimes \nabla N_i \end{array}$ \hfill \null
+                    \end{minipage}
+                }
+                
+                \vspace{0.3cm}
+                \textbf{\color{red!80!black} Solve numerically with L-BFGS:} \\
+                \vspace{0.05cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \centering \rule[-0.2cm]{0pt}{0.7cm}
+                        $\displaystyle 0 = \frac{\partial W}{\partial \mathbf{u}_i} = \int_{\Omega} \mathbf{P} \nabla N_i d\Omega$
+                    \end{minipage}
+                }
+                
+                \vspace{0.3cm}
+                \textbf{\color{red!80!black} Geometrically nonlinear elasticity} \\
+                \vspace{0.05cm}
+                \colorbox{gray!20}{
+                    \centering
+                    \colorbox{white}{
+                        \rule[-0.4cm]{0pt}{1.0cm}
+                        $\displaystyle \boldsymbol{\Sigma} = \left[ \begin{matrix} 
+                            \frac{\partial \Phi^0}{\partial \tilde{C}_{11}} & \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} \\[0.15cm]
+                            \frac{1}{2} \frac{\partial \Phi^0}{\partial \tilde{C}_{12}} & \frac{\partial \Phi^0}{\partial \tilde{C}_{22}}
+                        \end{matrix} \right]$
+                    }
+                }
+                
+                \vspace{0.3cm}
+                \centering
+                {\large $\tilde{\mathbf{C}} = \mathbf{M}^T \mathbf{F}^T \mathbf{F} \mathbf{M}$}
+            \end{flushleft}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
+% Slide 28: Stability Loss in Perfect Crystals
+\begin{frame}{Stability Loss in Perfect Crystals}
+    \vspace{0.4cm}
+    \centering
+    
+    % --- Box 1: Baseline State ---
+    \begin{beamercolorbox}[wd=0.92\textwidth, rounded=true, center]{title}
+        \centering \rule{0pt}{0.6cm}
+        {\textbf{Homogeneous State:} \quad $\phi(\mathbf{C}) = \phi_0(\tilde{\mathbf{C}})$} \qquad 
+        \vline \qquad
+        {\textbf{Shear Loading:} \quad $S = \mathbf{I} + \alpha \mathbf{a} \otimes \mathbf{n}$}
+        \rule[-0.5cm]{0pt}{0.6cm}
+    \end{beamercolorbox}
+
+    \vspace{0.7cm}
+    % --- Physics: Perturbation ---
+    {\small \color{gray} We introduce an incremental displacement perturbation:} \\
+    \vspace{0.2cm}
+    {\Large $\mathbf{u}(\mathbf{x}) = \boldsymbol{\eta} \exp(i k \boldsymbol{\zeta} \cdot \mathbf{x})$}
+
+    \vspace{0.8cm}
+    % --- Step 2: Mechanical Response ---
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.44\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{
+                \begin{minipage}{0.95\linewidth}
+                    \centering \rule{0pt}{0.35cm}
+                    \textbf{\color{red!80!black} Linearization} \\
+                    \vspace{0.2cm}
+                    $\mathcal{A}_{piqj} u_{j,pq} = 0 \rightarrow [\mathcal{Q}(\boldsymbol{\zeta})\boldsymbol{\eta}].\boldsymbol{\eta}=0$
+                    \rule[-0.3cm]{0pt}{0.35cm}
+                \end{minipage}
+            }
+        \end{column}
+        
+        \begin{column}{0.06\textwidth}
+            \centering \Huge \color{AcademicNavy} $\Rightarrow$
+        \end{column}
+        
+        \begin{column}{0.44\textwidth}
+            \centering
+            \colorbox{AcademicNavy!5}{
+                \begin{minipage}{0.95\linewidth}
+                    \centering \rule{0pt}{0.35cm}
+                    \textbf{\color{red!80!black} Acoustic Tensor} \\
+                    \vspace{0.2cm}
+                    $\mathcal{Q}_{jl}(\boldsymbol{\zeta}) = \mathcal{A}_{ijkl} \zeta_i \zeta_k$
+                    \rule[-0.3cm]{0pt}{0.35cm}
+                \end{minipage}
+            }
+        \end{column}
+    \end{columns}
+
+    \vfill
+    % --- Final Result: The Yield Point ---
+    \begin{beamercolorbox}[wd=0.92\textwidth, rounded=true, center]{block title}
+        \centering \rule{0pt}{0.7cm}
+        \textbf{\LARGE Stability Limit (Yield Surface)} \\
+        \vspace{0.4cm}
+        \huge $\det \mathcal{Q}(\boldsymbol{\zeta}) = 0$ \quad \Large with \quad $|\boldsymbol{\zeta}| = 1$
+        \rule[-0.6cm]{0pt}{0.7cm}
+    \end{beamercolorbox}
+    \vspace{0.3cm}
+    {\scriptsize (Unit vector $\boldsymbol{\zeta} = (\cos \xi, \sin \xi)$ characterizes the loss of convexity.)}
+\end{frame}
+
+
+
+
+% Slide 29: Numerical results: Dislocation dipole
+\begin{frame}{Numerical results: Dislocation dipole}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.55\textwidth}
+            \centering
+            \colorbox{gray!10}{
+                \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/dipole.png}
+            } 
+        \end{column}
+        
+        \begin{column}{0.42\textwidth}
+            \begin{flushleft}
+                \textbf{\color{red!80!black} Configuration:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Periodic boundary conditions \\
+                        $\bullet$ Dislocation pair $\pm \mathbf{b}$ \\
+                        $\bullet$ Energy-minimized lattice
+                    \end{minipage}
+                }
+                
+                \vspace{0.8cm}
+                \textbf{\color{red!80!black} Model parameters:} \\
+                \vspace{0.1cm}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \small
+                        $\bullet$ Order parameter $\mathbf{m}(\mathbf{C})$ \\
+                        $\bullet$ Linear finite elements \\
+                        $\bullet$ L-BFGS minimization
+                    \end{minipage}
+                }
+                
+                \vspace{0.8cm}
+                \centering
+                \textbf{\large Stable dipole configuration}
+            \end{flushleft}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 30: Comparison with literature
+\begin{frame}{Numerical results: Comparison with literature}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.5\textwidth}
+            \centering
+            \textbf{\color{AcademicNavy} Numerical simulation} \\
+            \vspace{0.2cm}
+            \animategraphics[autoplay,loop,width=6.8cm]{8}{./nathan_frames/frame_}{001}{086}
+            
+            \vspace{0.2cm}
+            % Subtitle removed
+            
+            \vspace{0.4cm}
+            \begin{flushleft}
+                \colorbox{gray!20}{
+                    \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                        \scriptsize
+                        $\bullet$ Periodic boundary conditions \\
+                        $\bullet$ Athermal quasi-static shear loading
+                    \end{minipage}
+                }
+            \end{flushleft}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \centering
+            \vspace{0.2cm}
+            \includegraphics[width=0.75\textwidth, keepaspectratio]{Figures/LD16854cvr_copie.pdf}
+            
+            \vspace{0.4cm}
+            {\small Baggio et. al, PRL, 2019}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 31: Numerical results: Shear banding and localization
+\begin{frame}{Numerical results: Shear banding and localization}
+    \begin{center}
+        \includegraphics[width=0.85\textwidth, keepaspectratio]{Figures/Fig3.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 32: Numerical results: Stress-strain response
+\begin{frame}{Numerical results: Stress-strain response}
+    \begin{center}
+        \includegraphics[width=\textwidth, keepaspectratio]{Figures/Fig4.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 33: Critical exponents and finite size scaling
+\begin{frame}{Critical exponents and finite size scaling}
+    \begin{columns}[c]
+        % --- Left: Figures Grid ---
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\renewcommand{\arraystretch}{0.5}
+            \begin{tabular}{cc}
+                \includegraphics[width=0.50\linewidth]{Figures/Fig6-a.pdf} & 
+                \includegraphics[width=0.50\linewidth]{Figures/Fig6-b.pdf} \\
+                \vspace{0.1cm} \\
+                \includegraphics[width=0.50\linewidth]{Figures/Fig6-c.pdf} & 
+                \includegraphics[width=0.50\linewidth]{Figures/Fig6-d.pdf}
+            \end{tabular}}
+        \end{column}
+        
+        \hfill
+        
+        % --- Right: Summary Text ---
+        \begin{column}{0.48\textwidth}
+            \colorbox{gray!15}{
+                \begin{minipage}{\dimexpr\textwidth-12pt\relax}
+                    \scriptsize
+                    \textbf{Observables:} \\
+                    Energy dissipated at a single avalanche $\Delta W$ and the corresponding macroscopic stress drop $\Delta \Sigma = A\Delta\sigma_{xy}$ ($A$: surface area).
+                    
+                    \vspace{0.3cm}
+                    
+                    \textbf{Finite-size scaling ansatz:} \\
+                    Probability distribution of these observables follows:
+                    \begin{equation*}
+                        P(s;L) = s^{-x} F(s/L^{D_x})
+                    \end{equation*}
+                    where $L = Nh$ is linear system size, $h$ is element size, $x$ is power-law exponent ($x = \tau$ for stress, $x = \epsilon$ for energy), and $D_x$ is fractal dimension. $F(u)$ is a universal scaling function.
+                    
+                    \vspace{0.2cm}
+                    
+                    \textbf{Key Findings:} \\
+                    In amorphous plasticity, exponents $\epsilon$ and $\tau$ are similar for pre- and post-yield regimes, while $D_\epsilon$ and $D_\tau$ may differ [15, 63--65].
+                \end{minipage}
+            }
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 34: Mesh Effect in Lagrangian Description
+\begin{frame}{Mesh Effect in Lagrangian Description}
+    \begin{center}
+        \includegraphics[width=0.85\textwidth, height=0.45\textheight, keepaspectratio]{Figures/Fig7_zoom.pdf}
+        
+        \vfill
+        {\color{gray!40}\rule{0.7\textwidth}{0.5pt}}
+        \vfill
+        
+        \includegraphics[width=\textwidth, height=0.45\textheight, keepaspectratio]{Figures/mesheffects.pdf}
+    \end{center}
+\end{frame}
+
+% Slide 35: Extension: Iterative Rebonding Algorithm
+\begin{frame}{Extension: Iterative Rebonding Algorithm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.62\textwidth}
+            \begin{enumerate}
+                \item \textbf{\color{AcademicNavy} Standard Energy Minimization}
+                \begin{itemize}
+                    \item Perform L-BFGS for $W(\mathbf{u}, \mathbf{M})$ at fixed loading step.
+                \end{itemize}
+                
+                \item \textbf{\color{AcademicNavy} Large-Shear Activation ($m_3$)}
+                \begin{itemize}
+                    \item Identify nodes/points where the \textbf{3rd step of Lagrange reduction ($m_3$)} is triggered.
+                \end{itemize}
+                
+                \item \textbf{\color{AcademicNavy} Global Relaxation Loop}
+                \begin{itemize}
+                    \item \textit{While energy $W$ is decreasing:}
+                    \begin{itemize}
+                        \item \textbf{Re-bond:} Global connectivity update using current positions $\mathbf{x} = \mathbf{X} + \mathbf{u}$.
+                        \item \textbf{Minimize:} Unconstrained relaxation of the energy with the new topology.
+                    \end{itemize}
+                    \item Convergence reached when the energy steady state is found.
+                \end{itemize}
+            \end{enumerate}
+        \end{column}
+        
+        \begin{column}{0.35\textwidth}
+            \centering
+            \begin{tikzpicture}[>=stealth, thick, node distance=1.1cm]
+                \node[draw, rounded corners, fill=gray!10] (min1) {\footnotesize $\arg\min_{\mathbf{u}} W(\mathbf{u})$};
+                \node[draw, diamond, aspect=2, below=of min1, fill=white, inner sep=1pt] (check) {\scriptsize $m_3$ active?};
+                \node[draw, rounded corners, below=of check, fill=AcademicNavy!20] (reb) {\footnotesize Re-bond};
+                \node[draw, rounded corners, below=of reb, fill=gray!10] (min2) {\footnotesize Full Min.};
+                \node[draw, diamond, aspect=2, below=of min2, fill=white, inner sep=1pt] (check2) {\tiny $\Delta W \approx 0$?};
+                \node[draw, rounded corners, right=of check, xshift=-0.2cm, fill=AcademicNavy!10] (next) {\scriptsize Success};
+                
+                \draw[->] (min1) -- (check);
+                \draw[->] (check) -- node[left] {\tiny Yes} (reb);
+                \draw[->] (reb) -- (min2);
+                \draw[->] (min2) -- (check2);
+                \draw[->] (check2.west) -- ++(-0.5,0) |- (reb.west) node[near start, left] {\tiny No};
+                \draw[->] (check2.east) -| (next.south) node[near start, above] {\tiny Yes};
+                \draw[->] (check) -- node[above] {\tiny No} (next);
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 36: Numerical Results: Post-Rebonding Relaxation
+\begin{frame}{Numerical Results: Post-Rebonding Relaxation}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.95\linewidth, height=0.38\textheight, keepaspectratio]{Figures/post_energy_plot.pdf}
+        \end{column}
+        
+        \begin{column}{0.48\textwidth}
+            \centering
+            \includegraphics[width=0.95\linewidth, height=0.38\textheight, keepaspectratio]{Figures/post_stress_plot.pdf}
+        \end{column}
+    \end{columns}
+    
+    \vfill
+    \begin{center}
+        \rule{0.8\textwidth}{0.5pt} \vfill
+        
+        \includegraphics[width=0.85\linewidth, height=0.42\textheight, keepaspectratio]{Figures/rebonding.pdf}
+        \\[0.1cm] {\scriptsize \color{gray} Final mesh configuration and global rebonding}
+    \end{center}
+\end{frame}
+
+% Slide 37: Phase Field Evolution Simulation
+\begin{frame}{Phase Field Evolution Simulation}
+    \begin{center}
+        \vspace{0.2cm}
+        \animategraphics[autoplay,loop,width=10.5cm]{3}{fps_frames/frame_}{001}{243}
+        
+    \end{center}
+\end{frame}
+
+\begin{frame}{Grain Boundary formation}
+    \begin{center}
+        \vspace{0.2cm}
+        % Native animation from frames
+        \animategraphics[autoplay,loop,width=10.5cm]{20}{gb_frames/frame_}{001}{100}
+    \end{center}
+\end{frame}
+
+% Slide 39: Grain Boundary configurations
+\begin{frame}{Grain Boundary configurations}
+    \vspace{0.8cm}
+    \begin{columns}[c, onlytextwidth]
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\theta = 5^\circ$}} \\[0.2cm]
+            \includegraphics[height=3.8cm, keepaspectratio]{Figures/gb_theta5.png}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\theta = 15^\circ$}} \\[0.2cm]
+            \includegraphics[height=3.8cm, keepaspectratio]{Figures/gb_theta15.png}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \centering
+            {\scriptsize \color{AcademicNavy} \textbf{$\Sigma 5$ boundary}} \\[0.2cm]
+            \includegraphics[height=4.8cm, keepaspectratio]{Figures/gb_special_sigma.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 40: Theoretical Context & Historical Bottlenecks
+
+% Slide 41: Nano-indentation
+\begin{frame}{Nano-indentation}
+    \vspace{0.4cm}
+    \begin{columns}[T, onlytextwidth]
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small \color{AcademicNavy} \textbf{no rebonding}}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \centering
+            {\small \color{AcademicNavy} \textbf{rebonding}}
+        \end{column}
+    \end{columns}
+    \vspace{0.2cm}
+    \begin{center}
+        \includegraphics[width=0.95\textwidth, keepaspectratio]{Figures/indentation2.pdf}
+    \end{center}
+\end{frame}
+
+\end{document}

@@ -10,7 +10,7 @@
 \usepackage{tikz}
 \usepackage{amsmath, amssymb, mathtools}
 \usepackage{fontawesome5}
-\usetikzlibrary{arrows.meta, shapes.geometric, positioning}
+\usetikzlibrary{arrows.meta, shapes.geometric, positioning, calc}
 
 \definecolor{AcademicNavy}{RGB}{0, 51, 102}
 \definecolor{SecondaryTitle}{RGB}{153, 0, 0}
@@ -452,7 +452,88 @@ Ginzburg-Landau Theory\enspace$\cdot$\enspace Phase-Field\enspace$\cdot$\enspace
 \end{frame}
 
 % ===========================================================
-% Slide 7: Lattice Symmetry & Metric Space
+% Slide 7: Fracture — Phase-Field Model
+% ===========================================================
+\begin{frame}{Fracture: Phase-Field Model}
+\vspace*{-0.2cm}
+
+% ---- Headers ----
+\begin{columns}[T, totalwidth=\textwidth]
+    \column{0.035\textwidth}
+    \column{0.315\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.02cm]
+    {\scriptsize \textcolor{AcademicNavy}{\textbf{Experiments}}}
+    \column{0.60\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.02cm]
+    {\scriptsize \textcolor{AcademicNavy}{\textbf{Simulations (Phase-Field)}}}
+\end{columns}
+
+\vspace{0.05cm}
+
+% ---- Row 1: Uniaxial ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.035\textwidth}
+    {\fontsize{5}{6}\selectfont \rotatebox{90}{\color{AcademicNavy}\textbf{Uniaxial}}}
+    \column{0.315\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{figures_dr/fracture_patterns1.png}
+    \column{0.60\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{figures_dr/fracture_sim_uniaxial.png}
+\end{columns}
+
+\vspace{0.04cm}
+
+% ---- Row 2: Biaxial ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.035\textwidth}
+    {\fontsize{5}{6}\selectfont \rotatebox{90}{\color{AcademicNavy}\textbf{Biaxial}}}
+    \column{0.315\textwidth}
+    \centering
+    \includegraphics[width=0.68\linewidth, keepaspectratio]{figures_dr/fracture_patterns2.png}
+    \column{0.60\textwidth}
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{figures_dr/fracture_sim_biaxial.png}
+\end{columns}
+
+\vspace{0.05cm}
+
+% ---- Equation + limitation ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.52\textwidth}
+    \centering
+    {\scriptsize \color{AcademicNavy}
+        $\displaystyle\mathcal{E} = \int_0^1 \!\Bigl[f(\varepsilon,\alpha) + \tfrac{\lambda_2}{2}(\alpha')^2 + \tfrac{\lambda_{-2}}{2}(u-u^0)^2\Bigr]dx$}\\[0.02cm]
+    {\fontsize{5}{6}\selectfont \color{AcademicNavy!70}
+        $\alpha\!\in\![0,1]$: damage\enspace$\cdot$\enspace
+        $\lambda_2$: fracture length\enspace$\cdot$\enspace
+        $u^0$: substrate displacement}
+    \column{0.44\textwidth}
+    \begin{tikzpicture}
+        \node[draw=SecondaryTitle, fill=SecondaryTitle!5, rounded corners=3pt, inner sep=4pt,
+              minimum width=0.96\linewidth] {
+            \begin{minipage}{0.92\linewidth}
+                {\fontsize{5}{6}\selectfont \color{SecondaryTitle}
+                \textbf{Limitation:} Linear elasticity phase-field fails to produce
+                out-of-plane deformations at large strains --- geometric nonlinearity
+                is essential.}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+\end{columns}
+
+\vspace{0.04cm}
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+{\fontsize{5}{6}\selectfont \color{AcademicNavy!80}
+    \textbf{Post-Doc:}\enspace M. Terzi\enspace|\enspace
+    \textbf{Funding:}\enspace ANR-FWF:NANOFILM\enspace|\enspace
+    \textbf{Pub:}\enspace \textit{Comput. Methods Appl. Mech. Eng.} 445, 118201 (2025)
+}
+
+\end{frame}
+
+% ===========================================================
+% Slide 8: Lattice Symmetry & Metric Space
 % ===========================================================
 \begin{frame}{Lattice Symmetry \& Metric Space}
 \vspace*{-0.2cm}
@@ -642,6 +723,470 @@ Ginzburg-Landau Theory\enspace$\cdot$\enspace Phase-Field\enspace$\cdot$\enspace
 
 
 
+\end{frame}
+
+% ===========================================================
+% Slide 11: Fracture & Plasticity
+% ===========================================================
+\begin{frame}{Fracture \& Plasticity}
+    \begin{center}
+        \includegraphics[width=\textwidth, height=0.82\textheight, keepaspectratio]{delocal_images/volumetric.pdf}
+    \end{center}
+\end{frame}
+
+% ===========================================================
+% Slide 12: Buckling-Driven Fracture
+% ===========================================================
+\begin{frame}{Fracture: Buckling \& Delamination}
+\vspace*{-0.2cm}
+
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.48\textwidth}
+    \centering
+    {\small \textcolor{AcademicNavy}{\textbf{Buckling sequence I}}}\\[0.1cm]
+    \includegraphics[width=\linewidth, height=0.68\textheight, keepaspectratio]{figures_dr/buckling1.png}
+
+    \column{0.48\textwidth}
+    \centering
+    {\small \textcolor{AcademicNavy}{\textbf{Buckling sequence II}}}\\[0.1cm]
+    \includegraphics[width=\linewidth, height=0.68\textheight, keepaspectratio]{figures_dr/buckling2.png}
+\end{columns}
+
+\vfill
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+\begin{center}
+{\scriptsize \color{AcademicNavy!80}
+\textbf{Model capabilities:}\enspace
+Plasticity\enspace$\cdot$\enspace Fracture\enspace$\cdot$\enspace Geometric nonlinearities
+}
+\end{center}
+
+\end{frame}
+
+% ===========================================================
+% Slide 13: Partial and Full Dislocations
+% ===========================================================
+\begin{frame}{FCC Crystals: Partial and Full Dislocations}
+\vspace*{-0.2cm}
+
+% ---- Top: images ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.48\textwidth}
+    \centering
+    {\small \textcolor{AcademicNavy}{\textbf{Partial Dislocations}}}\\[0.1cm]
+    \includegraphics[width=0.95\textwidth, height=0.38\textheight, keepaspectratio]{Figures/partials.pdf}
+
+    \column{0.48\textwidth}
+    \centering
+    {\small \textcolor{AcademicNavy}{\textbf{Cauchy-Born vs.\ Generalized Stacking Fault}}}\\[0.1cm]
+    \includegraphics[width=0.95\textwidth, height=0.38\textheight, keepaspectratio]{Figures/cbr_gsf_comparison.png}
+\end{columns}
+
+\vspace{0.12cm}
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+\vspace{0.06cm}
+
+% ---- Bottom: corrected registries ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.28\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[draw=AcademicNavy, fill=AcademicNavy!5, rounded corners=4pt, inner sep=6pt] {
+            \begin{minipage}{0.90\linewidth}
+                {\scriptsize \textbf{\color{AcademicNavy} Full dislocations:}}\\[0.08cm]
+                {\small $\displaystyle \beta = \frac{\hat{\mathbf{s}}_\text{full}^T \mathbf{C}\,\hat{\mathbf{n}}}{\hat{\mathbf{s}}_\text{full}^T \mathbf{C}\,\hat{\mathbf{s}}_\text{full}}$}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+
+    \column{0.28\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[draw=AcademicNavy, fill=AcademicNavy!5, rounded corners=4pt, inner sep=6pt] {
+            \begin{minipage}{0.90\linewidth}
+                {\scriptsize \textbf{\color{AcademicNavy} Partial dislocations:}}\\[0.08cm]
+                {\small $\displaystyle \alpha = \frac{\hat{\mathbf{s}}_\text{part}^T \mathbf{C}\,\hat{\mathbf{n}}}{\hat{\mathbf{s}}_\text{part}^T \mathbf{C}\,\hat{\mathbf{s}}_\text{part}}$}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+
+    \column{0.40\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[draw=AcademicNavy, fill=AcademicNavy!5, rounded corners=4pt, inner sep=6pt] {
+            \begin{minipage}{0.94\linewidth}
+                {\scriptsize \textbf{\color{AcademicNavy} Corrected energy:}\enspace
+                $\Psi = W_\text{CB}(\mathbf{C}_e) + \gamma(\alpha,\beta)$}\\[0.08cm]
+                \textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}\\[0.05cm]
+                {\fontsize{5}{6}\selectfont \color{AcademicNavy!80}
+                $\mathbf{C}_e$: from multiplicative decomp.\ $\mathbf{F}=\mathbf{F}_e\mathbf{F}_\text{proj}$ $\Rightarrow$ $\mathbf{C}=\mathbf{F}_\text{proj}^T\mathbf{C}_e\mathbf{F}_\text{proj}$ (congruence transf.)\\[0.04cm]
+                $C_e^{nn} = C_{nn} - C_{sn}^2/C_{ss}$ \quad — strips out plastic slip\\[0.04cm]
+                $\alpha,\beta$: registries extracted from $\mathbf{C}$ via projection onto slip directions}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+\end{columns}
+
+\end{frame}
+
+% ===========================================================
+% Slide 13: Signal Analysis & Fatigue Diagnostics
+% ===========================================================
+\begin{frame}{Signal Analysis \& Fatigue Diagnostics}
+\vspace*{-0.2cm}
+
+% ---- TOP: two section headers ----
+\begin{columns}[T, totalwidth=\textwidth]
+    \column{0.48\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.06cm]
+    {\small \textcolor{AcademicNavy}{\textbf{Industrial Applications}}}\\[0.03cm]
+    {\scriptsize Physics-grounded diagnostics $\to$ safety-critical components}
+
+    \column{0.48\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.06cm]
+    {\small \textcolor{AcademicNavy}{\textbf{Fatigue Diagnostics Pipeline}}}\\[0.03cm]
+    {\scriptsize Signal processing $\to$ complexity monitoring $\to$ failure prediction}
+\end{columns}
+
+\vspace{0.05cm}
+
+% ---- MIDDLE: figure + diagnostics boxes ----
+\begin{columns}[c, totalwidth=\textwidth]
+    \column{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[draw=AcademicNavy, fill=AcademicNavy!5, rounded corners=4pt, inner sep=5pt,
+              minimum width=0.92\linewidth] {
+            \begin{minipage}{0.88\linewidth}
+                {\scriptsize \textbf{\color{AcademicNavy} Industrial Applications}}\\[0.04cm]
+                {\scriptsize
+                \begin{itemize}\setlength\itemsep{0.06cm}
+                    \item[\color{SecondaryTitle}\faAngleRight] \textbf{Predictive maintenance \& RUL}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Real-time health score replaces fixed inspection intervals}
+                    \item[\color{SecondaryTitle}\faAngleRight] \textbf{Nuclear \& critical infrastructure}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Distinguish benign background AE from genuine crack propagation}
+                    \item[\color{SecondaryTitle}\faAngleRight] \textbf{Digital twin calibration}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} MTM as physics engine: measured AE $\to$ microstructural state $\to$ life projection}
+                \end{itemize}}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+
+    \column{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \node[draw=SteelBlue, fill=SteelBlue!5, rounded corners=4pt, inner sep=5pt,
+              minimum width=0.92\linewidth] {
+            \begin{minipage}{0.88\linewidth}
+                {\scriptsize \textbf{\color{SteelBlue} Signal processing chain}}\\[0.04cm]
+                {\scriptsize
+                \begin{itemize}\setlength\itemsep{0.06cm}
+                    \item[\color{SteelBlue}\faAngleRight] \textbf{Wavelet packet decomposition}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Time-frequency isolation of transient AE bursts}
+                    \item[\color{SteelBlue}\faAngleRight] \textbf{Multiscale Entropy (MSE)}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Complexity collapse across scales $\to$ precursor to failure}
+                    \item[\color{SteelBlue}\faAngleRight] \textbf{Gutenberg-Richter $b$-value}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Decreasing $b$: large events dominate $\to$ imminent fracture}
+                    \item[\color{SteelBlue}\faAngleRight] \textbf{$k$-means + PCA clustering}\\[-0.05cm]
+                        {\tiny\color{AcademicNavy!80} Separates damage mechanisms by spectral fingerprint}
+                \end{itemize}}
+            \end{minipage}
+        };
+    \end{tikzpicture}
+\end{columns}
+
+\vspace{0.04cm}
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+\vspace{0.02cm}
+
+{\scriptsize \color{SteelBlue}\textbf{Key outcomes:}\enspace
+\color{black}
+MTM unifies AE signatures of plasticity, fracture \& phase transitions\enspace$\cdot$\enspace
+MSE collapse = \textbf{precursor} to fatigue failure\enspace$\cdot$\enspace
+Constrained disorder $\to$ extended fatigue life
+}
+{\fontsize{5}{6}\selectfont \color{AcademicNavy!80}
+    \textbf{Funding:}\enspace ANR\enspace|\enspace
+    \textbf{Pub:}\enspace (in preparation)
+}
+
+
+\end{frame}
+
+% ===========================================================
+% Slide: From First- to Second-Gradient Elasticity via Pantograph
+% ===========================================================
+\begin{frame}{From First- to Second-Gradient Elasticity via Pantograph}
+\vspace*{-0.2cm}
+
+% ---- Top: two columns ----
+\begin{columns}[T, totalwidth=\textwidth]
+
+    \column{0.48\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.03cm]
+    {\small \textcolor{AcademicNavy}{\textbf{Conventional spring chain}}}\\[0.06cm]
+    \centering
+    \includegraphics[width=\linewidth, height=1.4cm, keepaspectratio]{Figures/Page3_Fig1.png}\\[0.06cm]
+    \colorbox{gray!10}{%
+        \begin{minipage}{0.96\linewidth}
+        \centering\vspace{0.04cm}
+        {\scriptsize $\displaystyle E_S = a \sum_{i} f\!\left(\tfrac{u_{i+1}-u_i}{a}\right)$}
+        \vspace{0.04cm}
+        \end{minipage}
+    }\\[0.04cm]
+    {\fontsize{5}{6}\selectfont \color{AcademicNavy!70} Classical limit $\to$ first-gradient elasticity}
+
+    \column{0.48\textwidth}
+    \textcolor{SteelBlue}{\rule{\linewidth}{0.8pt}}\\[0.03cm]
+    {\small \textcolor{AcademicNavy}{\textbf{Pantograph-embedded chain}}}\\[0.06cm]
+    \centering
+    \includegraphics[width=\linewidth, height=1.4cm, keepaspectratio]{Figures/Page5_Fig1.png}\\[0.06cm]
+    \colorbox{gray!10}{%
+        \begin{minipage}{0.96\linewidth}
+        \centering\vspace{0.04cm}
+        {\scriptsize $\displaystyle E_B = a \sum_{i} \tfrac{\lambda_1^2}{2}\!\left(\tfrac{u_{i+1}+u_{i-1}-2u_i}{a^2}\right)^{\!2}$}
+        \vspace{0.04cm}
+        \end{minipage}
+    }\\[0.04cm]
+    {\fontsize{5}{6}\selectfont \color{AcademicNavy!70} Pantograph mechanism $\to$ second-gradient energy}
+
+\end{columns}
+
+\vspace{0.08cm}
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+\vspace{0.04cm}
+
+% ---- Bottom: combined limit + 2 figures ----
+\begin{columns}[c, totalwidth=\textwidth]
+
+    \column{0.36\textwidth}
+    \centering
+    {\scriptsize \textbf{\color{AcademicNavy} Combined continuum limit $(a\to 0)$:}}\\[0.04cm]
+    \colorbox{AcademicNavy!8}{%
+        \begin{minipage}{0.96\linewidth}
+        \centering\vspace{0.05cm}
+        {\small \color{AcademicNavy}
+        $\displaystyle E(u) = \int_0^1\!\left(f(\varepsilon) + \frac{\lambda_1^2}{2}\varepsilon'^2\right)dx$}
+        \vspace{0.05cm}
+        \end{minipage}
+    }
+
+    \column{0.60\textwidth}
+    \centering
+    {\scriptsize \textcolor{AcademicNavy}{\textbf{Improved toughness}}}\\[0.04cm]
+    \includegraphics[width=\linewidth, height=1.6cm, keepaspectratio]{figures_dr/p2.png}
+
+\end{columns}
+
+\vspace{0.04cm}
+\textcolor{AcademicNavy!25}{\rule{\linewidth}{0.3pt}}
+{\fontsize{5}{6}\selectfont \color{AcademicNavy!80}
+    Franciosi, Spagnuolo, Salman --- \textit{Contin. Mech. Thermodyn.} (2019)\enspace$\cdot$\enspace
+    Salman, Truskinovsky --- \textit{J. Mech. Phys. Solids} (2021)\enspace$\cdot$\enspace
+    Salman, Vitale, Truskinovsky --- \textit{Phys. Rev. E} (2019)
+}
+
+\end{frame}
+
+% ===========================================================
+% Slide: New Designs
+% ===========================================================
+\begin{frame}{New Designs}
+    \begin{center}
+        \colorbox{AcademicNavy!5}{%
+            \begin{minipage}{0.97\textwidth}
+                \centering\vspace{0.08cm}
+                \includegraphics[width=\textwidth, height=6.5cm, keepaspectratio]{delocal_images/Page18_Fig1.png}
+                \\[0.06cm]
+                {\scriptsize\color{gray}
+                    (a)~shear \quad
+                    (b)~uni-axial tension \quad
+                    (c)~bi-axial (hydrostatic) compression}
+                \vspace{0.06cm}
+            \end{minipage}%
+        }
+    \end{center}
+\end{frame}
+
+% ===========================================================
+% Slide: LSPM Research Evolution (from sunum.tex slide 2)
+% ===========================================================
+\begin{frame}{LSPM Research Evolution}
+    \vspace*{-0.3cm}
+    \begin{columns}[T, totalwidth=\textwidth]
+        % --- LEFT COLUMN: Spiral Timeline ---
+        \column{0.28\textwidth}
+        \centering
+        \vspace{0.5cm}
+        \begin{tikzpicture}[scale=0.7, font=\small]
+            \foreach \r in {1.0, 2.0, 3.0, 4.0} {
+                \draw[AcademicNavy!8, line width=0.3pt] (0,0) circle (\r);
+            }
+            \node[circle, fill=AcademicNavy!75, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (340:1.1) (m1) {1980};
+            \node[circle, fill=AcademicNavy!68, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (70:1.6) (m2) {1985};
+            \node[circle, fill=AcademicNavy!58, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (120:2.0) (m3) {1998};
+            \node[circle, fill=SecondaryTitle!70, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (190:3.0) (m4) {2000s};
+            \node[circle, fill=SecondaryTitle!76, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (255:3.6) (m5) {2010};
+            \node[circle, fill=AcademicNavy!45, text=white, inner sep=3.5pt, font=\tiny\bfseries]
+                at (310:4.1) (m6) {Future};
+            \draw[AcademicNavy!30, line width=0.8pt] (m1) to[bend right=15] (m2);
+            \draw[AcademicNavy!25, line width=0.8pt] (m2) to[bend right=15] (m3);
+            \draw[AcademicNavy!20, line width=0.8pt] (m3) to[bend right=15] (m4);
+            \draw[SecondaryTitle!30, line width=0.8pt] (m4) to[bend right=15] (m5);
+            \draw[AcademicNavy!20, line width=0.8pt] (m5) to[bend right=15] (m6);
+        \end{tikzpicture}
+
+        \column{0.12\textwidth}
+
+        % --- RIGHT COLUMN: Publications List ---
+        \column{0.60\textwidth}
+        \vspace{0.0cm}
+        \hspace{0.5cm}{\large \color{AcademicNavy}\textbf{Key Publications \& Directions}}
+        \vspace{0.3cm}
+
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!75} 1980s: Crystal Plasticity}
+
+        \hspace{0.5cm}{\footnotesize Franciosi, Berveiller, Zaoui --- \textit{Strain Hardening Framework}}
+
+        \vspace{0.2cm}
+
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!58} 1998: Variational Method of Damage}
+
+        \hspace{0.5cm}{\footnotesize Francfort \& Marigo --- \textit{Brittle Fracture}}
+
+        \vspace{0.2cm}
+
+        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!65} 2000s: Phase Transformations}
+
+        \hspace{0.5cm}{\footnotesize Bacroix, Brenner, Otsuka --- \textit{Transformation \& FFT}}
+
+        \vspace{0.2cm}
+
+        \hspace{0.5cm}{\footnotesize\bfseries\color{SecondaryTitle!76} 2010: Crystal Plasticity}
+
+        \hspace{0.5cm}{\footnotesize Ioanescu --- \textit{Dynamic Crystal Plasticity: An Eulerian Approach}}
+
+        \vspace{0.2cm}
+
+        \hspace{0.5cm}{\footnotesize\bfseries\color{AcademicNavy!45} Future: Emergent Directions}
+
+        \hspace{0.5cm}{\footnotesize Small-scale material behavior}
+
+        \hspace{0.5cm}{\footnotesize Meta-materials \& architectured systems}
+    \end{columns}
+
+    \vfill
+    {\centering \tiny \color{AcademicNavy!60} Plasticity \& hardening foundations $\rightarrow$ Modern computational materials science}
+\end{frame}
+
+% ===========================================================
+% Slide: Acknowledgements
+% ===========================================================
+\begin{frame}{Acknowledgements}
+    \vspace{-0.1cm}
+    \begin{columns}[t, onlytextwidth]
+
+        % --- Collaborators ---
+        \begin{column}{0.43\textwidth}
+            \begin{tikzpicture}
+                \node[fill=AcademicNavy!10, minimum width=\linewidth, minimum height=0.45cm,
+                      inner sep=0pt, anchor=west] at (0,0)
+                    {\footnotesize\bfseries\color{AcademicNavy} \faUsers\ Collaborators};
+            \end{tikzpicture}\\[0.06cm]
+            {\scriptsize
+            \begin{tabular}{@{}l@{\hspace{6pt}}l@{}}
+                L. Truskinovsky  & {\color{gray}ESPCI Paris}        \\[1pt]
+                I.~R. Ioanescu   & {\color{gray}USPN/LSPM}          \\[1pt]
+                D. Faurie        & {\color{gray}USPN/LSPM}          \\[1pt]
+                J. Weiss         & {\color{gray}ISTerre, Grenoble}  \\[1pt]
+                A. Finel         & {\color{gray}ONERA/LEM}          \\[1pt]
+                Y. Le Bouar      & {\color{gray}ONERA/LEM}          \\[1pt]
+                S. Patinet       & {\color{gray}ESPCI/CNRS}         \\[1pt]
+                S. Queyreau      & {\color{gray}USPN/LSPM}          \\[1pt]
+                M. Ghidelli      & {\color{gray}USPN/LSPM}          \\[1pt]
+                S. Forest        & {\color{gray}MINES Paris/CNRS}   \\[1pt]
+                A. Ahadi         & {\color{gray}LTH, Sweden}        \\[1pt]
+                B. Bacroix       & {\color{gray}USPN/LSPM}          \\[1pt]
+                A.-L. Baldelli   & {\color{gray}CNRS/D'Alembert}     \\[1pt]
+                G. Zanzotto      & {\color{gray}Padova Univ.}        \\[1pt]
+                S. Conti         & {\color{gray}Bonn Univ.}          \\[1pt]
+                P. Biscari       & {\color{gray}Politecnico Milano}   \\
+            \end{tabular}
+            }
+        \end{column}
+
+        % --- PhD Students ---
+        \begin{column}{0.31\textwidth}
+            \begin{tikzpicture}
+                \node[fill=AcademicNavy!10, minimum width=\linewidth, minimum height=0.45cm,
+                      inner sep=0pt, anchor=west] at (0,0)
+                    {\footnotesize\bfseries\color{AcademicNavy} \faGraduationCap\ PhD Students};
+            \end{tikzpicture}\\[0.06cm]
+            {\scriptsize
+            \begin{tabular}{@{}l@{\hspace{4pt}}r@{}}
+                R. Baggio     & {\color{gray}2019}     \\[1pt]
+                M. Spagnuolo  & {\color{gray}2019}     \\[1pt]
+                C. Baruffi    & {\color{gray}2018}     \\[1pt]
+                P. Zhang      & {\color{gray}2018}     \\[1pt]
+                J. Smiri      & {\color{gray}2025}     \\[1pt]
+                M. Aissaoui   & {\color{gray}2026}     \\[1pt]
+                P. Soyfer     & {\color{gray}ongoing}  \\[1pt]
+                G. Tejedor    & {\color{gray}ongoing}  \\[1pt]
+                E. Lundheim   & {\color{gray}ongoing}  \\
+            \end{tabular}
+            }
+        \end{column}
+
+        % --- Postdocs ---
+        \begin{column}{0.24\textwidth}
+            \begin{tikzpicture}
+                \node[fill=AcademicNavy!10, minimum width=\linewidth, minimum height=0.45cm,
+                      inner sep=0pt, anchor=west] at (0,0)
+                    {\footnotesize\bfseries\color{AcademicNavy} \faFlask\ Postdocs};
+            \end{tikzpicture}\\[0.06cm]
+            {\scriptsize
+            \begin{tabular}{@{}l@{\hspace{4pt}}r@{}}
+                A. Ask        & {\color{gray}'15--16} \\[1pt]
+                N. Gorbushin  & {\color{gray}'19--21} \\[1pt]
+                M. Degeiter   & {\color{gray}'19--22} \\[1pt]
+                M. Terzi      & {\color{gray}'21--23} \\[1pt]
+                K. Ghosh      & {\color{gray}'22--24} \\
+            \end{tabular}
+            }
+        \end{column}
+
+    \end{columns}
+
+    \vspace{0.10cm}
+
+    \colorbox{gray!10}{%
+        \begin{minipage}{\linewidth}
+            \vspace{0.05cm}
+            {\scriptsize\color{gray}
+            \textbf{Funding:}
+            ANR-FWF: Super-Glasses\ \textbullet\
+            MITI-80PRIME: BE-ST\ \textbullet\
+            ANR: MESOCRYSP\ \textbullet\
+            ANR-JCJC: ALIS\ \textbullet\
+            ANR-FWF: NANOFILM\ \textbullet\
+            Labex\ \textbullet\
+            ANR-I2T2M\ \textbullet\
+            PICS-Pologne\ \textbullet\
+            Coup de pouce-F2M
+            }
+            \vspace{0.05cm}
+        \end{minipage}%
+    }
+
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth, rounded=true, center]{block title}
+        \centering\small \textbf{Thank you!}
+    \end{beamercolorbox}
 \end{frame}
 
 \end{document}
